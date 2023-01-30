@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.vignan.vignan_placement_application"
-        minSdk 24
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -41,4 +41,12 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+
+    implementation group: 'org.apache.poi', name: 'poi', version: '5.2.3'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.3'
+    // https://mvnrepository.com/artifact/com.sun.mail/javax.mail
+    implementation 'com.sun.mail:javax.mail:1.6.0'
+
+
 }
