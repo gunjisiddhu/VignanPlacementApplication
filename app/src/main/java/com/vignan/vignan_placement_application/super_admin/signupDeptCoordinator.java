@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.vignan.vignan_placement_application.R;
 import com.vignan.vignan_placement_application.dept_cordinator.Coordinator;
@@ -34,7 +35,6 @@ public class signupDeptCoordinator extends AppCompatActivity {
                     .child(coordinator.getName())
                     .setValue(coordinator);
             Toast.makeText(getApplicationContext(), "yay! saved.", Toast.LENGTH_LONG).show();
-
         });
 
     }
