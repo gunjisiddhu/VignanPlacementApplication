@@ -1,9 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="#B2E6F6"
     tools:context=".SignUpActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:backgroundTint="@color/white"
+        android:background="@color/white"
+        android:paddingTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:textColor="#E11B1B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Vignan Placement "
+            android:textSize="42dp"
+            android:fontFamily="@font/cylburn"
+            />
+        <TextView
+            android:textColor="#E11B1B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Sign Up"
+            android:textSize="24dp"
+            android:fontFamily="@font/montserrat"
+            />
+        <EditText
+
+            android:id="@+id/otp_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="20dp"
+            android:layout_margin="40dp"
+            android:hint="Full Name"
+            android:background="@drawable/edittextdesign"
+            android:imeOptions="actionNext"
+            android:nextFocusForward="@id/otp_collegeid"
+
+            />
+
+
+
+        <EditText
+            android:id="@+id/otp_collegeid"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:hint="College ID"
+            android:background="@drawable/edittextdesign"
+
+            />
+        <EditText
+            android:id="@+id/signup_email"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:hint="Mail Address"
+            android:background="@drawable/edittextdesign"
+            android:layout_marginTop="40dp"
+            />
+        <EditText
+            android:id="@+id/signup_password"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:hint="Password"
+            android:background="@drawable/edittextdesign"
+            android:layout_marginTop="40dp"
+            />
+
+        <Spinner
+            android:id="@+id/otp_branch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:background="@drawable/edittextdesign"
+            android:layout_marginTop="40dp"
+
+            />
+
+        <Spinner
+            android:id="@+id/otp_gender"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:background="@drawable/edittextdesign"
+            android:layout_marginTop="40dp"
+
+            />
+
+        <Button
+            android:id="@+id/signup_submit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Submit"
+            android:background="@drawable/buttondesign"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="60dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:layout_marginRight="40dp"
+
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <TextView
+                android:textSize="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/b3"
+                android:text="Already Have an Account?"/>
+
+            <TextView
+                android:id="@+id/signup_signin"
+                android:textSize="19dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/b2"
+                android:text="Sign In"/>
+        </LinearLayout></LinearLayout>
+
+</LinearLayout>
