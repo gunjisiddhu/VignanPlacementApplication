@@ -15,4 +15,23 @@
         android:text="@string/upload"
         tools:ignore="VisualLintButtonSize" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/superAdmin"
+        android:text="Super Admin"
+        tools:ignore="VisualLintButtonSize" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/deptCordinator"
+        android:text="Department Cordinator"
+        tools:ignore="VisualLintButtonSize" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/student"
+        android:text="Student"
+        tools:ignore="VisualLintButtonSize" />
+
 </LinearLayout>

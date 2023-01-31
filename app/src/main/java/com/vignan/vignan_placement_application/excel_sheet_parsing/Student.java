@@ -1,4 +1,4 @@
-package com.vignan.vignan_placement_application;
+package com.vignan.vignan_placement_application.excel_sheet_parsing;
 
 public class Student {
 
