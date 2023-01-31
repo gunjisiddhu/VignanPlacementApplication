@@ -42,8 +42,11 @@ public class SuperAdminMainActivity extends AppCompatActivity {
         relativeLayout = findViewById(R.id.main_body_container);
 
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,new Home()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,new Super_Admin_Home()).commit();
         bottomNavigationView.setSelectedItemId(R.id.home);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,new Super_Admin_Profiles()).commit();
+        bottomNavigationView.setSelectedItemId(R.id.user_profile);
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -52,15 +55,15 @@ public class SuperAdminMainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (item.getItemId()){
                     case R.id.home:
-                        fragment = new Home();
+                        fragment = new Super_Admin_Home();
                         break;
                     case R.id.companies:
-                        fragment = new Companies();
+                        fragment = new Super_Admin_Companies();
                         break;
                     case R.id.company_status:
-                        fragment = new AppliedCompanyStatus();
+                        fragment = new Super_Admin_Status();
                     case R.id.user_profile:
-                        fragment = new Profile();
+                        fragment = new Super_Admin_Profiles();
                         break;
 
                 }

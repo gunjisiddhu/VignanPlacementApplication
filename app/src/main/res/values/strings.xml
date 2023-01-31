@@ -3,4 +3,18 @@
     <string name="upload">upload</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="gender">
+        <item>Select Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>other</item>
+    </string-array>
+    <string-array name="Branches">
+        <item>Select Branch</item>
+        <item>CSE</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>Civil</item>
+    </string-array>
 </resources>

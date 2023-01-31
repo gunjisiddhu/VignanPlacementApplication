@@ -40,6 +40,8 @@ public class StudentMainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,new Home()).commit();
         bottomNavigationView.setSelectedItemId(R.id.home);
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,new Profile()).commit();
+        bottomNavigationView.setSelectedItemId(R.id.user_profile);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
