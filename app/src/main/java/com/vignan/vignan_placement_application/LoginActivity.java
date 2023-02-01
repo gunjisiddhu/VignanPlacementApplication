@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
 
-                /*if(selected_user.equals("") || selected_user.equals("Select Type of User")){
+                if(selected_user.equals("") || selected_user.equals("Select Type of User")){
                     Toast.makeText(LoginActivity.this, "Please Choose User Type!", Toast.LENGTH_SHORT).show();
                     type_of_user.requestFocus();
                     return;
@@ -191,7 +191,8 @@ public class LoginActivity extends AppCompatActivity {
                                                                     startActivity(new Intent(LoginActivity.this,DeptCordinatorMainActivity.class));
                                                                 }else{
 
-                                                                    /**************************** Change Cheyyali ***************************/
+                                                                    /**************************** Change Cheyyali **************************/
+
                                                                     Toast.makeText(LoginActivity.this, "Incorrect Password!!", Toast.LENGTH_SHORT).show();
                                                                     //startActivity(new Intent(LoginActivity.this,DeptCordinatorMainActivity.class));
                                                                 }
@@ -214,14 +215,12 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                     });
                     //startActivity(new Intent(LoginActivity.this, DeptCordinatorMainActivity.class));
-                }else if(selected_user.equals("Administrator")){
+                }
+                else if(selected_user.equals("Administrator")){
                     startActivity(new Intent(LoginActivity.this, SuperAdminMainActivity.class));
-                }*/
+                }
             }
         });
-
-
-
 
     }
 }

@@ -28,10 +28,8 @@
     <string-array name="company_status">
         <item>Select Status</item>
         <item>Running</item>
-        <item>Written Round</item>
-        <item>GD Round</item>
+        <item>Written Test</item>
         <item>TR Round</item>
-        <item>MR Round</item>
         <item>HR Round</item>
     </string-array>
 </resources>
