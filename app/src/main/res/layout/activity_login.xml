@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center"
-    android:background="@drawable/login_gradient"
+    android:background="@drawable/redbg"
     tools:context=".LoginActivity">
 
 
@@ -27,31 +27,62 @@
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:orientation="vertical">
-            <EditText
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/input_email_id"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="23dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginLeft="40dp"
-                android:hint="Email"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:id="@+id/input_email_id"/>
-            <EditText
+                android:layout_height="50dp"
+                android:hint="Enter ID"
+                android:paddingLeft="20sp"
+                tools:layout_editor_absoluteX="44sp"
+                tools:layout_editor_absoluteY="168sp"
+                android:background="@drawable/change_textbox_color"
+                android:singleLine="true"
+                android:nextFocusForward="@+id/input_password"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/input_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="23dp"
+                android:layout_height="50dp"
                 android:hint="Password"
+                android:paddingLeft="20sp"
+                tools:layout_editor_absoluteX="44sp"
+                tools:layout_editor_absoluteY="168sp"
+                android:background="@drawable/change_textbox_color"
+                android:singleLine="true"
+                android:nextFocusForward="@+id/type_of_user"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
 
-                android:inputType="textPassword"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="15dp"
-                android:id="@+id/input_password"/>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:entries="@array/user_type"
+                android:id="@+id/type_of_user"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:foregroundGravity="center"
+                android:background="@drawable/change_textbox_color"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
 
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
+                android:textColor="@color/white"
                 android:background="@drawable/buttondesign"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,30 +92,38 @@
                 />
 
             <LinearLayout
-                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:gravity="right"
-                android:layout_marginRight="40dp"
-
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
+
                 <TextView
-                    android:textSize="18dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
-                    android:text="No Account?"/>
-
+                    android:text="No Account?"
+                    android:textSize="18dp" />
                 <TextView
                     android:id="@+id/signin_signup"
-                    android:textSize="19dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Sign Up"
                     android:textColor="@color/b2"
-                    android:text="Sign Up"/>
+                    android:textSize="19dp" />
+
             </LinearLayout>
+                <TextView
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:id="@+id/forgot_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Forgot Password"
+                    android:textColor="@color/b2"
+                    android:textSize="19dp" />
+
+
 
         </LinearLayout>
 
