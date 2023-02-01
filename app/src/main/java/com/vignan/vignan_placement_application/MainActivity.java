@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        startActivity(new Intent(MainActivity.this,SignUpActivity.class));
+        //startActivity(new Intent(MainActivity.this,SignUpActivity.class));
 
         superAdmin = findViewById(R.id.superAdmin);
         deptCordinator = findViewById(R.id.deptCordinator);

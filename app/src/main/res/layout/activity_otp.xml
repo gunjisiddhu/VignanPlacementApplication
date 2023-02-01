@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".OtpActivity">
 
@@ -99,13 +100,12 @@
                     android:textStyle="bold" />
 
                 <View
-
-                    android:layout_marginRight="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="5dp"
                     android:background="@drawable/border_colour_set" />
 
                 <LinearLayout
@@ -197,17 +197,16 @@
                         android:layout_height="wrap_content"
                         android:text=":"
                         android:textColor="@color/b3"/>
+
                     <TextView
                         android:id="@+id/student_mail"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_height="wrap_content"
                         android:textColor="#2B3B77"
                         android:textSize="18dp"
-                        android:text=""
-                        android:autoSizeTextType="uniform"
-                        />
+                        app:autoSizeTextType="uniform" />
 
 
                 </LinearLayout>
@@ -298,6 +297,7 @@
                 android:layout_height="0dp"
                 android:layout_width="fill_parent"
                 android:layout_weight="1" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -306,10 +306,17 @@
                 android:gravity="center"
                 android:fontFamily="monospace"
                 android:textColor="@color/black"
-                android:layout_marginBottom="30dp"
+
                 android:text="Get Your Account Activated From Department Coordinator"/>
 
-
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/cordinatorList"
+                android:layout_marginBottom="30dp"
+                android:text="Department Co-ordinators"
+                />
 
         </LinearLayout>
 

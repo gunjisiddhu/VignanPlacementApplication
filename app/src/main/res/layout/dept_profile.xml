@@ -6,23 +6,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".super_admin.Super_Admin_Profiles">
+    tools:context=".dept_cordinator.dept_profile">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.0"
+            android:layout_weight="1.2"
             android:background="#EEDBFF"
-            android:layout_marginBottom="50dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/userprofilepicture"
+                android:id="@+id/depart_Cordinator_userprofilepicture"
                 android:padding="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -31,13 +29,15 @@
                 android:src="@drawable/male" />
 
             <TextView
-                android:id="@+id/SuperAdmin_mainTextView"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/depart_Cordinator_mainTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text=""
                 android:textSize="26dp"
-                android:textStyle="bold" />
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                />
 
         </LinearLayout>
 
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"
-            android:layout_weight="0.6">
+            android:layout_weight="0.7">
             <androidx.cardview.widget.CardView
                 android:background="@color/white"
                 android:elevation="25dp"
@@ -78,7 +78,7 @@
                             />
                         <TextView
 
-                            android:id="@+id/superAdmin_username"
+                            android:id="@+id/depart_Cordinator_username"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="SiddiSaai Gunji"
@@ -88,7 +88,7 @@
                             android:textSize="17dp"
                             android:textColor="#9E9393"/>
                         <ImageView
-                            android:id="@+id/SuperAdmin_username_edit_icon"
+                            android:id="@+id/depart_Cordinator_username_edit_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:clickable="true"
@@ -125,7 +125,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Male"
-                            android:id="@+id/SuperAdmin_gender"
+                            android:id="@+id/depart_Cordinator_gender"
                             android:layout_gravity="end"
                             android:textAlignment="textEnd"
                             android:layout_weight="0.5"
@@ -135,7 +135,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:clickable="true"
-                            android:id="@+id/SuperAdmin_gender_edit_icon"
+                            android:id="@+id/depart_Cordinator_gender_edit_icon"
                             android:layout_weight="0.02"
                             android:src="@drawable/greater_than_icon"
                             />
@@ -146,25 +146,12 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="10dp"
                         android:background="@android:color/darker_gray" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                        <!--<TextView
-                            android:textSize="24dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="NAME"/>
-                        <Space
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
-                        <TextView
-                            android:textSize="24dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Siddi Saai"/>
-    -->
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -176,7 +163,7 @@
                             android:textColor="#2C2B2B"
                             />
                         <TextView
-                            android:id="@+id/SuperAdmin_mobile_number"
+                            android:id="@+id/depart_Cordinator_mobile_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="7780681762"
@@ -207,7 +194,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.05"
-            android:layout_marginBottom="90dp"
             android:gravity="center">
             <androidx.cardview.widget.CardView
                 android:background="@color/white"
@@ -242,7 +228,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/SuperAdmin_email"
+                            android:id="@+id/depart_Cordinator_email"
                             android:text="SiddiSaaigunji@gmail.com"
                             android:layout_weight="0.4"
                             android:textAlignment="viewEnd"
@@ -252,60 +238,28 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/SuperAdmin_email_edit_icon"
+                            android:id="@+id/depart_Cordinator_email_edit_icon"
                             android:layout_weight="0.1"
                             android:src="@drawable/greater_than_icon"
                             />
                     </LinearLayout>
 
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="0.2">
-            <androidx.cardview.widget.CardView
-                android:background="@color/white"
-                android:elevation="25dp"
-                app:cardCornerRadius="20dp"
-                android:backgroundTint="#FCF2FA"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:padding="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@android:color/darker_gray" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                        &lt;!&ndash;<TextView
-                            android:textSize="24dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="NAME"/>
-                        <Space
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
-                        <TextView
-                            android:textSize="24dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Siddi Saai"/>&ndash;&gt;
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Regd No"
+                            android:text="Branch"
                             android:layout_weight="0.2"
                             android:layout_gravity="start"
                             android:textAlignment="textStart"
@@ -314,20 +268,20 @@
                             android:textColor="#2C2B2B"
                             />
                         <TextView
-                            android:id="@+id/SuperAdmin_Id"
+                            android:id="@+id/depart_Cordinator_branch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="191FA04196"
+                            android:text="CSE"
                             android:layout_gravity="end"
                             android:textAlignment="textEnd"
                             android:layout_weight="0.5"
                             android:textSize="17dp"
                             android:textColor="#9E9393"/>
                         <ImageView
-                            android:id="@+id/regdno_edit_icon"
+                            android:id="@+id/depart_Cordinator_branch_edit_icon"
+                            android:clickable="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:clickable="true"
                             android:layout_weight="0.02"
                             android:src="@drawable/greater_than_icon"
                             />
@@ -341,28 +295,16 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="10dp"
                         android:background="@android:color/darker_gray" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                        &lt;!&ndash;<TextView
-                            android:textSize="24dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="NAME"/>
-                        <Space
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
-                        <TextView
-                            android:textSize="24dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Siddi Saai"/>&ndash;&gt;
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Year"
+                            android:text="Branch"
                             android:layout_weight="0.2"
                             android:layout_gravity="start"
                             android:textAlignment="textStart"
@@ -371,65 +313,18 @@
                             android:textColor="#2C2B2B"
                             />
                         <TextView
-                            android:id="@+id/year"
+                            android:id="@+id/depart_Cordinator_password"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="IV"
-                            android:layout_gravity="end"
-                            android:textAlignment="textEnd"
-                            android:layout_weight="0.5"
-                            android:textSize="17dp"
-                            android:textColor="#9E9393"/>
-
-
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@android:color/darker_gray" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        &lt;!&ndash;<TextView
-                            android:textSize="24dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="NAME"/>
-                        <Space
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
-                        <TextView
-                            android:textSize="24dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Siddi Saai"/>&ndash;&gt;
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Section"
-                            android:layout_weight="0.2"
-                            android:layout_gravity="start"
-                            android:textAlignment="textStart"
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:textColor="#2C2B2B"
-                            />
-                        <TextView
-                            android:id="@+id/section"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="A"
+                            android:text="CSE"
+                            android:inputType="textPassword"
                             android:layout_gravity="end"
                             android:textAlignment="textEnd"
                             android:layout_weight="0.5"
                             android:textSize="17dp"
                             android:textColor="#9E9393"/>
                         <ImageView
-                            android:id="@+id/section_edit_icon"
+                            android:id="@+id/depart_Cordinator_password_edit_icon"
                             android:clickable="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -446,61 +341,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.05"
-            android:gravity="center">
-            <androidx.cardview.widget.CardView
-                android:background="@color/white"
-                android:elevation="25dp"
-                app:cardCornerRadius="20dp"
-                android:backgroundTint="#FCF2FA"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:padding="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.02"
-                            android:src="@drawable/department_person_icon"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Department Co-ordinator"
-                            android:layout_weight="0.3"
-                            android:layout_gravity="start"
-                            android:textAlignment="textStart"
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:textColor="#2C2B2B"
-                            />
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:id="@+id/delete_edit_icon"
-                            android:layout_weight="0.02"
-                            android:src="@drawable/greater_than_icon"
-                            />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>-->
 
     </LinearLayout>
 
