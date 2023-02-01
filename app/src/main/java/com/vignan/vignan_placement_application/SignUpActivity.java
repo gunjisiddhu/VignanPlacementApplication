@@ -1,8 +1,10 @@
 package com.vignan.vignan_placement_application;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.vignan.vignan_placement_application.super_admin.StudentData;
 
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Random;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -112,24 +116,92 @@ public class SignUpActivity extends AppCompatActivity {
                 e_gender = gender_selected;
                 e_branch = branch_selected;
 
-                StudentData studentData = new StudentData(e_name,e_collegeid,e_password,e_mail,e_branch,e_gender);
+                StudentData studentData = new StudentData(e_name,e_collegeid,e_password,e_mail,e_branch,e_gender,"pending",getRandomNumberString());
                 verifyStudentData(studentData);
 
             }
         });
 
 
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                finish();
+            }
+        });
 
-        /*private void creatStudentProfile(){
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(e_mail,e_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+
+
+
+
+
+    }
+
+
+    private void verifyStudentData(StudentData studentData){
+        FirebaseDatabase.getInstance().getReference().child("ExcelSheetData").child(studentData.getBranch())
+                .child(studentData.getRegId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            if(snapshot != null){
+                                Toast.makeText(SignUpActivity.this, "Yay!! You have an account", Toast.LENGTH_SHORT).show();
+                                FirebaseDatabase.getInstance().getReference().child("StudentData").child(studentData.getBranch()).child(studentData.getRegId().toLowerCase(Locale.ROOT)).setValue(studentData)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    Toast.makeText(SignUpActivity.this, "Account Data Saved! Please get your account activated", Toast.LENGTH_SHORT).show();
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putParcelable("StudentData",studentData);
+                                                    bundle.putInt("flag",1);
+                                                    Intent intent = new Intent(SignUpActivity.this,OtpActivity.class);
+                                                    intent.putExtra("flag",1);
+                                                    intent.putExtra("bundle",bundle);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }
+                                        });
+                            }
+                        }else{
+                            new AlertDialog.Builder(SignUpActivity.this)
+                                    .setTitle("Error")
+                                    .setMessage("Your Data is not Saved in Database. Please Contact Department Coordinator")
+
+                                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                                    // The dialog is automatically dismissed when a dialog button is clicked.
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    })
+
+                                    // A null listener allows the button to dismiss the dialog and take no further action.
+                                    .setNegativeButton(android.R.string.no, null)
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setCancelable(false)
+                                    .show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+
+    /*private void creatStudentProfile(StudentData studentData){
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(studentData.getMail(), studentData.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        FirebaseDatabase.getInstance().getReference("DeliveryPartner").child(
+                        FirebaseDatabase.getInstance().getReference("StudentData").child(
                                 FirebaseAuth.getInstance().getCurrentUser().getUid()
-                        ).setValue(new UserData(
-                                e_name,e_password,e_mail,e_phone,e_gender,e_orders,e_money
-                        )).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        ).setValue(studentData).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(SignUpPage.this, "Success!! You Can Login Now", Toast.LENGTH_SHORT).show();
@@ -162,41 +234,13 @@ public class SignUpActivity extends AppCompatActivity {
         }*/
 
 
-        signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-                finish();
-            }
-        });
+    public static String getRandomNumberString() {
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
 
-
-
-
-
-
-
-    }
-
-
-    private void verifyStudentData(StudentData studentData){
-        FirebaseDatabase.getInstance().getReference().child("ExcelSheetData").child(studentData.getBranch())
-                .child(studentData.getRegId()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            if(snapshot != null){
-                                Toast.makeText(SignUpActivity.this, "Yay!! You have an account", Toast.LENGTH_SHORT).show();
-                            }
-                        }else{
-                            Toast.makeText(SignUpActivity.this, "Nah!! You don't have an account", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
     }
 }

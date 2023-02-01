@@ -61,11 +61,6 @@ public class StudentCordinatorListAdapter extends RecyclerView.Adapter<StudentCo
             branch = itemView.findViewById(R.id.recycler_branch);
 
         }
-
-
-
-
-
     }
 }
 

@@ -7,12 +7,11 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center"
-    android:background="#B2E6F6"
+    android:background="@drawable/redbg2"
     tools:context=".SignUpActivity">
 
     <LinearLayout
-        android:backgroundTint="@color/white"
-        android:background="@color/white"
+        android:background="@drawable/whiteboxcorner"
         android:paddingTop="40dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -51,6 +50,7 @@
             android:background="@drawable/edittextdesign"
             android:imeOptions="actionNext"
             android:nextFocusForward="@id/otp_collegeid"
+            android:singleLine="true"
 
             />
 
@@ -66,6 +66,9 @@
             android:hint="College ID"
             android:background="@drawable/edittextdesign"
 
+            android:nextFocusForward="@id/signup_email"
+            android:singleLine="true"
+
             />
         <EditText
             android:id="@+id/signup_email"
@@ -77,6 +80,9 @@
             android:hint="Mail Address"
             android:background="@drawable/edittextdesign"
             android:layout_marginTop="40dp"
+
+            android:nextFocusForward="@id/signup_password"
+            android:singleLine="true"
             />
         <EditText
             android:id="@+id/signup_password"
@@ -88,6 +94,9 @@
             android:hint="Password"
             android:background="@drawable/edittextdesign"
             android:layout_marginTop="40dp"
+
+            android:nextFocusForward="@id/otp_branch"
+            android:singleLine="true"
             />
 
         <Spinner
@@ -101,6 +110,8 @@
             android:background="@drawable/edittextdesign"
             android:layout_marginTop="40dp"
 
+            android:nextFocusForward="@id/otp_gender"
+            android:singleLine="true"
             />
 
         <Spinner
@@ -114,6 +125,8 @@
             android:background="@drawable/edittextdesign"
             android:layout_marginTop="40dp"
 
+            android:nextFocusForward="@id/signup_submit"
+            android:singleLine="true"
             />
 
         <Button

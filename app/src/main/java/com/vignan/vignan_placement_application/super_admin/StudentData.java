@@ -6,20 +6,22 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class StudentData implements Parcelable {
-    private String name,regId,password,mail,branch,gender;
-
+    private String name,regId,password,mail,branch,gender,account_status,otp;
 
     public StudentData() {
     }
 
-    public StudentData(String name, String regId, String password, String mail, String branch, String gender) {
+    public StudentData(String name, String regId, String password, String mail, String branch, String gender, String account_status, String otp) {
         this.name = name;
         this.regId = regId;
         this.password = password;
         this.mail = mail;
         this.branch = branch;
         this.gender = gender;
+        this.account_status = account_status;
+        this.otp = otp;
     }
+
 
     protected StudentData(Parcel in) {
         name = in.readString();
@@ -28,6 +30,8 @@ public class StudentData implements Parcelable {
         mail = in.readString();
         branch = in.readString();
         gender = in.readString();
+        account_status = in.readString();
+        otp = in.readString();
     }
 
     public static final Creator<StudentData> CREATOR = new Creator<StudentData>() {
@@ -90,6 +94,22 @@ public class StudentData implements Parcelable {
         this.gender = gender;
     }
 
+    public String getAccount_status() {
+        return account_status;
+    }
+
+    public void setAccount_status(String account_status) {
+        this.account_status = account_status;
+    }
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
     @Override
     public String toString() {
         return "StudentData{" +
@@ -99,6 +119,8 @@ public class StudentData implements Parcelable {
                 ", mail='" + mail + '\'' +
                 ", branch='" + branch + '\'' +
                 ", gender='" + gender + '\'' +
+                ", account_status='" + account_status + '\'' +
+                ", otp='" + otp + '\'' +
                 '}';
     }
 
@@ -115,5 +137,7 @@ public class StudentData implements Parcelable {
         parcel.writeString(mail);
         parcel.writeString(branch);
         parcel.writeString(gender);
+        parcel.writeString(account_status);
+        parcel.writeString(otp);
     }
 }

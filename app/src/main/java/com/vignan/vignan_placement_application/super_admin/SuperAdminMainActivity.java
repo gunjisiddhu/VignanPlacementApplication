@@ -45,8 +45,8 @@ public class SuperAdminMainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,new Super_Admin_Home()).commit();
         bottomNavigationView.setSelectedItemId(R.id.home);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,new Super_Admin_Profiles()).commit();
-        bottomNavigationView.setSelectedItemId(R.id.user_profile);
+        /*getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,new Super_Admin_Profiles()).commit();
+        bottomNavigationView.setSelectedItemId(R.id.user_profile);*/
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
