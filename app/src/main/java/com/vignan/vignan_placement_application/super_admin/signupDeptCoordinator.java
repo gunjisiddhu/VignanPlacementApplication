@@ -1,5 +1,6 @@
 package com.vignan.vignan_placement_application.super_admin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -8,6 +9,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.vignan.vignan_placement_application.R;
@@ -17,7 +21,7 @@ public class signupDeptCoordinator extends AppCompatActivity {
 
     Spinner gender,branch;
     Button save;
-    EditText name,mail,phoneNummber;
+    EditText name,mail,phoneNummber,username;
 
 
     @Override
@@ -29,11 +33,30 @@ public class signupDeptCoordinator extends AppCompatActivity {
 
         save.setOnClickListener(view -> {
             Coordinator coordinator = getCoordinatorData();
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(coordinator.getMail(), coordinator.getPassword())
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                coordinator.setAuthId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                FirebaseDatabase.getInstance().getReference().child("Coordinators")
+                                        .child(coordinator.getBranch())
+                                        .child(coordinator.getUsername())
+                                        .setValue(coordinator).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
 
-            FirebaseDatabase.getInstance().getReference().child("Coordinators")
-                    .child(coordinator.getBranch())
-                    .child(coordinator.getName())
-                    .setValue(coordinator);
+                                            }
+                                        });
+
+
+                            }else{
+                                Toast.makeText(signupDeptCoordinator.this, ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+
             Toast.makeText(getApplicationContext(), "yay! saved.", Toast.LENGTH_LONG).show();
         });
 
@@ -50,10 +73,10 @@ public class signupDeptCoordinator extends AppCompatActivity {
         coordinator.setName(name.getText().toString());
         coordinator.setMail(mail.getText().toString());
         coordinator.setMobileNumber(phoneNummber.getText().toString());
-        coordinator.setPassword("1234");
+        coordinator.setPassword("123456");
         coordinator.setBranch(branch.getSelectedItem().toString());
         coordinator.setGender(gender.getSelectedItem().toString());
-
+        coordinator.setUsername(username.getText().toString());
         return coordinator;
     }
 
@@ -65,5 +88,6 @@ public class signupDeptCoordinator extends AppCompatActivity {
         mail = findViewById(R.id.coordinator_email);
         phoneNummber = findViewById(R.id.coordinator_mobile_number);
         save = findViewById(R.id.cooridnator_submit);
+        username = findViewById(R.id.coordinator_username);
     }
 }

@@ -6,12 +6,12 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class StudentData implements Parcelable {
-    private String name,regId,password,mail,branch,gender,account_status,otp;
+    private String name,regId,password,mail,branch,gender,account_status,otp,authId;
 
     public StudentData() {
     }
 
-    public StudentData(String name, String regId, String password, String mail, String branch, String gender, String account_status, String otp) {
+    public StudentData(String name, String regId, String password, String mail, String branch, String gender, String account_status, String otp, String authId) {
         this.name = name;
         this.regId = regId;
         this.password = password;
@@ -20,8 +20,8 @@ public class StudentData implements Parcelable {
         this.gender = gender;
         this.account_status = account_status;
         this.otp = otp;
+        this.authId = authId;
     }
-
 
     protected StudentData(Parcel in) {
         name = in.readString();
@@ -32,6 +32,7 @@ public class StudentData implements Parcelable {
         gender = in.readString();
         account_status = in.readString();
         otp = in.readString();
+        authId = in.readString();
     }
 
     public static final Creator<StudentData> CREATOR = new Creator<StudentData>() {
@@ -110,6 +111,14 @@ public class StudentData implements Parcelable {
         this.otp = otp;
     }
 
+    public String getAuthId() {
+        return authId;
+    }
+
+    public void setAuthId(String authId) {
+        this.authId = authId;
+    }
+
     @Override
     public String toString() {
         return "StudentData{" +
@@ -121,6 +130,7 @@ public class StudentData implements Parcelable {
                 ", gender='" + gender + '\'' +
                 ", account_status='" + account_status + '\'' +
                 ", otp='" + otp + '\'' +
+                ", authId='" + authId + '\'' +
                 '}';
     }
 
@@ -139,5 +149,6 @@ public class StudentData implements Parcelable {
         parcel.writeString(gender);
         parcel.writeString(account_status);
         parcel.writeString(otp);
+        parcel.writeString(authId);
     }
 }

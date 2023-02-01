@@ -24,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.vignan.vignan_placement_application.dept_cordinator.Coordinator;
 import com.vignan.vignan_placement_application.dept_cordinator.DeptCordinatorMainActivity;
 import com.vignan.vignan_placement_application.student.StudentMainActivity;
 import com.vignan.vignan_placement_application.super_admin.StudentData;
@@ -116,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                                             finish();
                                         }else if(studentData.getAccount_status().equalsIgnoreCase("activated")){
                                             String email = studentData.getMail();
-                                            FirebaseAuth.getInstance().signInWithEmailAndPassword(email,studentData.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                            FirebaseAuth.getInstance().signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                                     if (!task.isSuccessful())
@@ -166,8 +167,50 @@ public class LoginActivity extends AppCompatActivity {
 
 
                     //startActivity(new Intent(LoginActivity.this, StudentMainActivity.class));
-                }else if(selected_user.equals("Department Coordinator")){
-                    startActivity(new Intent(LoginActivity.this, DeptCordinatorMainActivity.class));
+                }
+                else if(selected_user.equals("Department Coordinator")){
+                    String username = mail.getText().toString();
+                    String pass = password.getText().toString();
+
+                    FirebaseDatabase.getInstance().getReference().child("Coordinators")
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if(snapshot.exists()){
+                                                int flag = 0;
+                                                for(DataSnapshot branches:snapshot.getChildren()){
+                                                    if(branches.hasChild(username)){
+                                                        Coordinator coordinator = branches.child(username).getValue(Coordinator.class);
+                                                        FirebaseAuth.getInstance().signInWithEmailAndPassword(coordinator.getMail(),pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                if(task.isSuccessful()){
+                                                                    startActivity(new Intent(LoginActivity.this,DeptCordinatorMainActivity.class));
+                                                                }else{
+
+                                                                    /**************************** Change Cheyyali ***************************/
+                                                                    Toast.makeText(LoginActivity.this, "Incorrect Password!!", Toast.LENGTH_SHORT).show();
+                                                                    //startActivity(new Intent(LoginActivity.this,DeptCordinatorMainActivity.class));
+                                                                }
+                                                            }
+                                                        });
+                                                        flag = 1;
+                                                        break;
+                                                    }
+                                                }
+                                                
+                                                if(flag == 0){
+                                                    Toast.makeText(LoginActivity.this, "No Data Matched From Database!!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                    //startActivity(new Intent(LoginActivity.this, DeptCordinatorMainActivity.class));
                 }else if(selected_user.equals("Administrator")){
                     startActivity(new Intent(LoginActivity.this, SuperAdminMainActivity.class));
                 }

@@ -1,25 +1,55 @@
 package com.vignan.vignan_placement_application.dept_cordinator;
 
-public class Coordinator {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private String name;
+import androidx.annotation.NonNull;
+
+public class Coordinator implements Parcelable {
+
+    private String name,authId;
     private String mail;
     private String mobileNumber;
     private String branch;
     private String gender;
-    private String password;
-    public Coordinator(String name, String mail, String mobileNumber, String branch, String gender, String password) {
+    private String password,username;
 
+    public Coordinator(String name, String authId, String mail, String mobileNumber, String branch, String gender, String password, String username) {
         this.name = name;
+        this.authId = authId;
         this.mail = mail;
         this.mobileNumber = mobileNumber;
         this.branch = branch;
         this.gender = gender;
         this.password = password;
+        this.username = username;
     }
 
     public Coordinator() {
     }
+
+    protected Coordinator(Parcel in) {
+        name = in.readString();
+        authId = in.readString();
+        mail = in.readString();
+        mobileNumber = in.readString();
+        branch = in.readString();
+        gender = in.readString();
+        password = in.readString();
+        username = in.readString();
+    }
+
+    public static final Creator<Coordinator> CREATOR = new Creator<Coordinator>() {
+        @Override
+        public Coordinator createFromParcel(Parcel in) {
+            return new Coordinator(in);
+        }
+
+        @Override
+        public Coordinator[] newArray(int size) {
+            return new Coordinator[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -27,6 +57,14 @@ public class Coordinator {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAuthId() {
+        return authId;
+    }
+
+    public void setAuthId(String authId) {
+        this.authId = authId;
     }
 
     public String getMail() {
@@ -67,5 +105,44 @@ public class Coordinator {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return "Coordinator{" +
+                "name='" + name + '\'' +
+                ", authId='" + authId + '\'' +
+                ", mail='" + mail + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", branch='" + branch + '\'' +
+                ", gender='" + gender + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(authId);
+        parcel.writeString(mail);
+        parcel.writeString(mobileNumber);
+        parcel.writeString(branch);
+        parcel.writeString(gender);
+        parcel.writeString(password);
+        parcel.writeString(username);
     }
 }

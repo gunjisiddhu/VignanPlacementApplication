@@ -28,6 +28,7 @@
             android:textSize="24dp"
             android:fontFamily="@font/montserrat"
             />
+
         <EditText
             android:id="@+id/coordinator_name"
             android:layout_width="match_parent"
@@ -42,6 +43,19 @@
             />
 
         <EditText
+            android:id="@+id/coordinator_username"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:hint="Username"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edittextdesign"
+            />
+
+
+        <EditText
             android:id="@+id/coordinator_email"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -49,6 +63,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:hint="Mail Address"
+            android:layout_marginTop="40dp"
             android:inputType="textEmailAddress"
             android:background="@drawable/edittextdesign"
             />

@@ -41,7 +41,7 @@ public class DeptCordinatorMainActivity extends AppCompatActivity {
         relativeLayout = findViewById(R.id.main_body_container);
 
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,new Home()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,new dept_home()).commit();
         bottomNavigationView.setSelectedItemId(R.id.home);
 
 
@@ -51,15 +51,13 @@ public class DeptCordinatorMainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (item.getItemId()){
                     case R.id.home:
-                        fragment = new Home();
+                        fragment = new dept_home();
                         break;
                     case R.id.companies:
-                        fragment = new Companies();
+                        fragment = new dept_approve_list();
                         break;
-                    case R.id.company_status:
-                        fragment = new AppliedCompanyStatus();
                     case R.id.user_profile:
-                        fragment = new Profile();
+                        fragment = new dept_profile();
                         break;
 
                 }

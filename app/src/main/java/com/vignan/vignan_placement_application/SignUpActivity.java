@@ -116,7 +116,7 @@ public class SignUpActivity extends AppCompatActivity {
                 e_gender = gender_selected;
                 e_branch = branch_selected;
 
-                StudentData studentData = new StudentData(e_name,e_collegeid,e_password,e_mail,e_branch,e_gender,"pending",getRandomNumberString());
+                StudentData studentData = new StudentData(e_name,e_collegeid,e_password,e_mail,e_branch,e_gender,"pending",getRandomNumberString(),"not Assigned");
                 verifyStudentData(studentData);
 
             }
