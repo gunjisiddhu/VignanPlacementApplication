@@ -3,17 +3,16 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/department_coordinator_cardView"
-    android:backgroundTint="@color/b1"
-    app:cardCornerRadius="50dp"
+    android:backgroundTint="#FBD7DB"
+    app:cardCornerRadius="30dp"
     android:layout_marginBottom="5dp"
     android:padding="20dp"
     android:layout_height="wrap_content">
 
         <LinearLayout
-            android:padding="20dp"
+            android:padding="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:orientation="vertical">
 
             <LinearLayout

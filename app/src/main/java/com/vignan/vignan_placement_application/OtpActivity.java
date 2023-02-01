@@ -2,26 +2,27 @@ package com.vignan.vignan_placement_application;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.vignan.vignan_placement_application.student.StudentCoordinators;
 import com.vignan.vignan_placement_application.super_admin.StudentData;
 
 public class OtpActivity extends AppCompatActivity {
 
 
     TextView name,email,password,branch,otp,regId;
+    Button listOfCordinators;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
 
-        name = findViewById(R.id.student_name);
-        regId = findViewById(R.id.student_regId);
-        email = findViewById(R.id.student_mail);
-        password = findViewById(R.id.student_password);
-        branch = findViewById(R.id.student_branch);
-        otp = findViewById(R.id.otp_generated);
+
+        linkingFields();
 
 
         int flag = getIntent().getIntExtra("flag",-1);
@@ -30,9 +31,27 @@ public class OtpActivity extends AppCompatActivity {
             setValues();
         }
 
+        listOfCordinators.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), StudentCoordinators.class));
+            finish();
+        });
+
+    }
+
+    private void linkingFields() {
+
+        name = findViewById(R.id.student_name);
+        regId = findViewById(R.id.student_regId);
+        email = findViewById(R.id.student_mail);
+        password = findViewById(R.id.student_password);
+        branch = findViewById(R.id.student_branch);
+        otp = findViewById(R.id.otp_generated);
+        listOfCordinators = findViewById(R.id.cordinatorList);
+
     }
 
     void setValues(){
+
         Bundle bundle = getIntent().getBundleExtra("bundle");
         StudentData studentData = bundle.getParcelable("StudentData");
         name.setText(studentData.getName());
@@ -41,6 +60,7 @@ public class OtpActivity extends AppCompatActivity {
         branch.setText(studentData.getBranch());
         otp.setText(studentData.getOtp());
         regId.setText(studentData.getRegId());
+
 
     }
 }

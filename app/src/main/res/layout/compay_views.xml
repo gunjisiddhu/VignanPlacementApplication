@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="210dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#FBD7DB"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    app:cardCornerRadius="30dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Epam Systems Private Limited."
+        android:gravity="center"
+        android:fontFamily="@font/fredoka"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/border_colour_set" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Status"
+            android:textSize="20dp"
+            android:paddingStart="20dp"
+            android:layout_marginTop="80dp"/>
+        <TextView
+            android:id="@+id/superAdmin_companyStatus_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textAlignment="viewEnd"
+            android:text="Running"
+            android:textSize="20dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="80dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="50dp"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="CTC"
+            android:textSize="20dp"
+            android:paddingStart="20dp"
+            android:layout_marginTop="80dp"/>
+        <TextView
+            android:id="@+id/superAdmin_companyctc_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:textAlignment="viewEnd"
+            android:text="8-12lpa"
+            android:textSize="20dp"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="80dp"/>
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/company_details_fetching"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View More"
+        android:fontFamily="@font/fredoka"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="170dp"
+        android:paddingRight="40dp"
+        android:textAlignment="viewEnd"/>
+
+
+</androidx.cardview.widget.CardView>

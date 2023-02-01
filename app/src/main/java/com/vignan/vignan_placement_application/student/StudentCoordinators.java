@@ -40,9 +40,9 @@ public class StudentCoordinators extends AppCompatActivity {
 
 
 
-        /*cordinatorsList.add(new StudentCordinatorHelperClass("shasank","shasank@gmail.com","7780681762","CSE"));
-        cordinatorsList.add(new StudentCordinatorHelperClass("ravii","ravi@gmail.com","7780681762","CSE"));
-        cordinatorsList.add(new StudentCordinatorHelperClass("hemanth","hemanth@gmail.com","7780681762","CSE"));*/
+        /*cordinatorsList.add(new StudentCordinatorHelperClass("shasank","shasank@gmail.com","7780681762","CSE","Male","1234"));
+        cordinatorsList.add(new StudentCordinatorHelperClass("ravii","ravi@gmail.com","7780681762","CSE","Male","1234"));
+        cordinatorsList.add(new StudentCordinatorHelperClass("hemanth","hemanth@gmail.com","7780681762","CSE","Male","1234"));*/
 
         adapter = new StudentCordinatorListAdapter((ArrayList<StudentCordinatorHelperClass>) cordinatorsList);
         studentCordinatorRecyclerView.setAdapter(adapter);
