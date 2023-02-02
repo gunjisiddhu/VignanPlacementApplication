@@ -1,4 +1,4 @@
-package com.vignan.vignan_placement_application;
+package com.vignan.vignan_placement_application.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.vignan.vignan_placement_application.student.StudentCoordinators;
-
-import org.apache.poi.poifs.property.Parent;
+import com.vignan.vignan_placement_application.R;
 
 import java.util.ArrayList;
 

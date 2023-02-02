@@ -1,4 +1,4 @@
-package com.vignan.vignan_placement_application;
+package com.vignan.vignan_placement_application.adapters;
 
 import android.os.Parcel;
 import android.os.Parcelable;

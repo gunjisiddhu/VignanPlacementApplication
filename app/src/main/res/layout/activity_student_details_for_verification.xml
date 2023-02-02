@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".OtpActivity">
+    tools:context=".StudentDetailsForVerification">
 
 
     <LinearLayout
@@ -64,15 +64,6 @@
             android:textSize="25dp"
             android:fontFamily="@font/fredoka"
             android:textColor="@color/black"
-            />
-        <TextView
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="PENDING"
-            android:textSize="25dp"
-            android:fontFamily="@font/fredoka"
             />
 
         <LinearLayout
@@ -243,40 +234,7 @@
                         android:textSize="18dp" />
 
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        android:textColor="#2B3B77"
-                        android:textSize="18dp"
-                        android:text="Password"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=":"
-                        android:textColor="@color/b3"/>
-
-                    <TextView
-                        android:id="@+id/student_password"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text=""
-                        android:textColor="#2B3B77"
-                        android:textSize="18dp" />
-                </LinearLayout>
-                <TextView
+                <EditText
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="5dp"
                     android:layout_gravity="center"
@@ -286,13 +244,21 @@
                     android:textColor="@color/b2"
                     android:textSize="28dp"
                     android:layout_marginLeft="5dp"
-                    android:text="OTP"
+                    android:hint="OTP"
                     android:layout_marginBottom="10dp"
                     android:textStyle="bold" />
 
 
 
             </LinearLayout>
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/activate_student_account"
+                android:layout_marginBottom="30dp"
+                android:text="Activate Account"
+                />
             <TextView
                 android:layout_height="0dp"
                 android:layout_width="fill_parent"
@@ -302,21 +268,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:gravity="center"
                 android:fontFamily="monospace"
                 android:textColor="@color/black"
 
-                android:text="Get Your Account Activated From Department Coordinator"/>
+                android:text="Please Activate Account by giving OTP"/>
 
-            <Button
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:id="@+id/cordinatorList"
-                android:layout_marginBottom="30dp"
-                android:text="Department Co-ordinators"
-                />
 
         </LinearLayout>
 

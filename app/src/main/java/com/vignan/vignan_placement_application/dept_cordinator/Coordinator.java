@@ -7,14 +7,12 @@ import androidx.annotation.NonNull;
 
 public class Coordinator implements Parcelable {
 
-    private String name,authId;
-    private String mail;
-    private String mobileNumber;
-    private String branch;
-    private String gender;
-    private String password,username;
+    private String name,authId,mail,mobileNumber,branch,gender,password,username,accountStatus;
 
-    public Coordinator(String name, String authId, String mail, String mobileNumber, String branch, String gender, String password, String username) {
+    public Coordinator() {
+    }
+
+    public Coordinator(String name, String authId, String mail, String mobileNumber, String branch, String gender, String password, String username, String accountStatus) {
         this.name = name;
         this.authId = authId;
         this.mail = mail;
@@ -23,9 +21,7 @@ public class Coordinator implements Parcelable {
         this.gender = gender;
         this.password = password;
         this.username = username;
-    }
-
-    public Coordinator() {
+        this.accountStatus = accountStatus;
     }
 
     protected Coordinator(Parcel in) {
@@ -37,6 +33,7 @@ public class Coordinator implements Parcelable {
         gender = in.readString();
         password = in.readString();
         username = in.readString();
+        accountStatus = in.readString();
     }
 
     public static final Creator<Coordinator> CREATOR = new Creator<Coordinator>() {
@@ -50,6 +47,21 @@ public class Coordinator implements Parcelable {
             return new Coordinator[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "Coordinator{" +
+                "name='" + name + '\'' +
+                ", authId='" + authId + '\'' +
+                ", mail='" + mail + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", branch='" + branch + '\'' +
+                ", gender='" + gender + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", accountStatus='" + accountStatus + '\'' +
+                '}';
+    }
 
     public String getName() {
         return name;
@@ -115,18 +127,12 @@ public class Coordinator implements Parcelable {
         this.username = username;
     }
 
-    @Override
-    public String toString() {
-        return "Coordinator{" +
-                "name='" + name + '\'' +
-                ", authId='" + authId + '\'' +
-                ", mail='" + mail + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                ", branch='" + branch + '\'' +
-                ", gender='" + gender + '\'' +
-                ", password='" + password + '\'' +
-                ", username='" + username + '\'' +
-                '}';
+    public String getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(String accountStatus) {
+        this.accountStatus = accountStatus;
     }
 
     @Override
@@ -144,5 +150,6 @@ public class Coordinator implements Parcelable {
         parcel.writeString(gender);
         parcel.writeString(password);
         parcel.writeString(username);
+        parcel.writeString(accountStatus);
     }
 }

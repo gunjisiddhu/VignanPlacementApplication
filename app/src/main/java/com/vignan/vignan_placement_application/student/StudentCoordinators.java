@@ -7,13 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.google.firebase.database.FirebaseDatabase;
 import com.vignan.vignan_placement_application.R;
-import com.vignan.vignan_placement_application.StudentCordinatorHelperClass;
-import com.vignan.vignan_placement_application.StudentCordinatorListAdapter;
+import com.vignan.vignan_placement_application.adapters.StudentCordinatorHelperClass;
+import com.vignan.vignan_placement_application.adapters.StudentCordinatorListAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -22,8 +23,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.vignan.vignan_placement_application.LoginActivity;
+import com.vignan.vignan_placement_application.OtpActivity;
 import com.vignan.vignan_placement_application.R;
+import com.vignan.vignan_placement_application.StudentDetailsForVerification;
 import com.vignan.vignan_placement_application.adapters.StudentApproveListAdapter;
+import com.vignan.vignan_placement_application.adapters.StudentListOnClick;
 import com.vignan.vignan_placement_application.super_admin.StudentData;
 
 import java.util.ArrayList;
@@ -34,7 +39,7 @@ import java.util.HashSet;
 import java.util.List;
 
 
-public class dept_approve_list extends Fragment implements SearchView.OnQueryTextListener{
+public class dept_approve_list extends Fragment implements SearchView.OnQueryTextListener, StudentListOnClick {
 
     View root;
     String authId,currentBranch;
@@ -64,7 +69,7 @@ public class dept_approve_list extends Fragment implements SearchView.OnQueryTex
 
 
         studentList = new ArrayList<>();
-        studentApproveListAdapter = new StudentApproveListAdapter(getContext(),R.layout.item_student_approve_list_row,studentList);
+        studentApproveListAdapter = new StudentApproveListAdapter(getContext(),R.layout.item_student_approve_list_row,studentList,this);
         listView = root.findViewById(R.id.FacultylistView);
         listView.setAdapter(studentApproveListAdapter);
         listView.setTextFilterEnabled(false);
@@ -84,10 +89,6 @@ public class dept_approve_list extends Fragment implements SearchView.OnQueryTex
 
         searchView = root.findViewById(R.id.searchViewForFreeFaculty);
         Resultcount = root.findViewById(R.id.ResultCountForFreeFaculty);
-
-
-
-
 
         return root;
     }
@@ -189,5 +190,18 @@ public class dept_approve_list extends Fragment implements SearchView.OnQueryTex
         }
         Resultcount.setText(StudentApproveListAdapter.getCountOfList()+"");
         return true;
+    }
+
+    @Override
+    public void getStudentDetails(StudentData studentData) {
+        System.out.println(studentData.toString());
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("StudentData",studentData);
+        Intent intent = new Intent(getContext(), StudentDetailsForVerification.class);
+        intent.putExtra("flag",1);
+        intent.putExtra("bundle",bundle);
+        startActivity(intent);
+        //288961
+
     }
 }

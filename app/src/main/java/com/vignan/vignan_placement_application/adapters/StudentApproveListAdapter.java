@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.vignan.vignan_placement_application.R;
+import com.vignan.vignan_placement_application.dept_cordinator.dept_approve_list;
 import com.vignan.vignan_placement_application.super_admin.StudentData;
 
 import java.util.ArrayList;
@@ -20,12 +21,13 @@ public class StudentApproveListAdapter extends ArrayAdapter<StudentData> {
     ArrayList<StudentData> list,orig;
     Context context;
     static int count = 0;
-
-    public StudentApproveListAdapter(@NonNull Context context, int resource,ArrayList<StudentData> list) {
+    StudentListOnClick studentListOnClick;
+    public StudentApproveListAdapter(@NonNull Context context, int resource,ArrayList<StudentData> list,StudentListOnClick studentListOnClick) {
         super(context, R.layout.item_student_approve_list_row,list);
         this.context = context;
         this.list = list;
         this.count = list.size();
+        this.studentListOnClick = studentListOnClick;
     }
 
     public static int getCountOfList(){
@@ -74,6 +76,14 @@ public class StudentApproveListAdapter extends ArrayAdapter<StudentData> {
         TextView t1,t2;
         t1 = v.findViewById(R.id.free_facult_id);
         t2 = v.findViewById(R.id.free_faculty_name);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(position<list.size()){
+                    studentListOnClick.getStudentDetails(list.get(position));
+                }
+            }
+        });
 
         if (position<list.size()) {
             StudentData f = list.get(position);
@@ -83,3 +93,4 @@ public class StudentApproveListAdapter extends ArrayAdapter<StudentData> {
         return v;
     }
 }
+

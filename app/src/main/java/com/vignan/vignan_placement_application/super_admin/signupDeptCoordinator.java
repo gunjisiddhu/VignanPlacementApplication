@@ -33,28 +33,40 @@ public class signupDeptCoordinator extends AppCompatActivity {
 
         save.setOnClickListener(view -> {
             Coordinator coordinator = getCoordinatorData();
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(coordinator.getMail(), coordinator.getPassword())
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+
+            FirebaseDatabase.getInstance().getReference().child("Coordinators").child(coordinator.getBranch()).child(coordinator.getUsername())
+                    .setValue(coordinator).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(signupDeptCoordinator.this, "Done Creating Account now you can Login!", Toast.LENGTH_SHORT).show();
+                                finish();
+                                overridePendingTransition(0, 0);
+                                startActivity(getIntent());
+                                overridePendingTransition(0, 0);
+
+                            }else{
+                                Toast.makeText(signupDeptCoordinator.this, "Error Creating Account!!"+task.getException().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+
+
+            /*FirebaseAuth.getInstance().createUserWithEmailAndPassword(coordinator.getMail(), coordinator.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 coordinator.setAuthId(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                FirebaseDatabase.getInstance().getReference().child("Coordinators")
-                                        .child(coordinator.getBranch())
-                                        .child(coordinator.getUsername())
-                                        .setValue(coordinator).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
 
-                                            }
-                                        });
 
 
                             }else{
                                 Toast.makeText(signupDeptCoordinator.this, ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
-                    });
+                    });*/
 
 
             Toast.makeText(getApplicationContext(), "yay! saved.", Toast.LENGTH_LONG).show();
@@ -70,13 +82,16 @@ public class signupDeptCoordinator extends AppCompatActivity {
     private Coordinator getCoordinatorData() {
         Coordinator coordinator = new Coordinator();
 
+        //name,authId,mail,mobileNumber,branch,gender,password,username,accountStatus
         coordinator.setName(name.getText().toString());
+        coordinator.setAuthId("");
         coordinator.setMail(mail.getText().toString());
         coordinator.setMobileNumber(phoneNummber.getText().toString());
-        coordinator.setPassword("123456");
         coordinator.setBranch(branch.getSelectedItem().toString());
         coordinator.setGender(gender.getSelectedItem().toString());
+        coordinator.setPassword("123456");
         coordinator.setUsername(username.getText().toString());
+        coordinator.setAccountStatus("acivated_creation_pending");
         return coordinator;
     }
 

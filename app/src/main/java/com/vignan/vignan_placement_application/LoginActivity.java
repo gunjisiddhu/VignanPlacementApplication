@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -29,6 +28,9 @@ import com.vignan.vignan_placement_application.dept_cordinator.DeptCordinatorMai
 import com.vignan.vignan_placement_application.student.StudentMainActivity;
 import com.vignan.vignan_placement_application.super_admin.StudentData;
 import com.vignan.vignan_placement_application.super_admin.SuperAdminMainActivity;
+import com.vignan.vignan_placement_application.super_admin.signupDeptCoordinator;
+
+import org.apache.poi.ss.formula.functions.Log;
 
 import java.util.Locale;
 
@@ -90,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                //startActivity(new Intent(getApplicationContext(),MainActivity.class));
 
                 if(selected_user.equals("") || selected_user.equals("Select Type of User")){
                     Toast.makeText(LoginActivity.this, "Please Choose User Type!", Toast.LENGTH_SHORT).show();
@@ -100,15 +102,15 @@ public class LoginActivity extends AppCompatActivity {
                 else if(selected_user.equals("Student")){
                     String username = mail.getText().toString();
                     String pass = password.getText().toString();
-
                     FirebaseDatabase.getInstance().getReference().child("StudentData").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if(snapshot.exists()){
                                 int flag = 0;
                                 for(DataSnapshot branches:snapshot.getChildren()){
-                                    if(branches.hasChild(username.toLowerCase(Locale.ROOT))){
-                                        StudentData studentData = branches.child(username.toLowerCase(Locale.ROOT)).getValue(StudentData.class);
+                                    if(branches.hasChild(username)){
+                                        StudentData studentData = branches.child(username).getValue(StudentData.class);
+                                        System.out.println("Account Dorkindi!!!!");
                                         if(studentData.getAccount_status().equalsIgnoreCase("pending")){
                                             Toast.makeText(LoginActivity.this, "Please get your account activated", Toast.LENGTH_SHORT).show();
                                             Bundle bundle = new Bundle();
@@ -118,7 +120,8 @@ public class LoginActivity extends AppCompatActivity {
                                             intent.putExtra("bundle",bundle);
                                             startActivity(intent);
                                             finish();
-                                        }else if(studentData.getAccount_status().equalsIgnoreCase("activated")){
+                                        }
+                                        else if(studentData.getAccount_status().equalsIgnoreCase("activated")){
                                             String email = studentData.getMail();
                                             FirebaseAuth.getInstance().signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                 @Override
@@ -147,6 +150,35 @@ public class LoginActivity extends AppCompatActivity {
                                                 }
                                             });
                                         }
+                                        else if(studentData.getAccount_status().equalsIgnoreCase("acivated_creation_pending")){
+                                            if(pass.equals(studentData.getPassword())){
+                                                FirebaseAuth.getInstance().createUserWithEmailAndPassword(studentData.getMail(),studentData.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                                        if(task.isSuccessful()){
+                                                            studentData.setAuthId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                                            studentData.setAccount_status("activated");
+                                                            FirebaseDatabase.getInstance().getReference().child("StudentData").child(studentData.getBranch()).child(studentData.getRegId()).setValue(studentData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    Toast.makeText(LoginActivity.this, "Success!!", Toast.LENGTH_SHORT).show();
+                                                                    startActivity(new Intent(getApplicationContext(),StudentMainActivity.class));
+                                                                    finish();
+                                                                }
+                                                            });
+
+                                                        }else{
+                                                            Toast.makeText(LoginActivity.this, ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
+                                            }else{
+                                                Toast.makeText(LoginActivity.this, "Please Enter Correct Password!!", Toast.LENGTH_SHORT).show();
+                                            }
+
+
+
+                                        }
                                         flag = 1;
                                     }
                                 }
@@ -163,12 +195,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
                     });
-
-
-
-
-
-
                     //startActivity(new Intent(LoginActivity.this, StudentMainActivity.class));
                 }
                 else if(selected_user.equals("Department Coordinator")){
@@ -184,6 +210,8 @@ public class LoginActivity extends AppCompatActivity {
                                                 for(DataSnapshot branches:snapshot.getChildren()){
                                                     if(branches.hasChild(username)){
                                                         Coordinator coordinator = branches.child(username).getValue(Coordinator.class);
+                                                        if(coordinator.getAccountStatus().equals("activated")){
+
                                                         FirebaseAuth.getInstance().signInWithEmailAndPassword(coordinator.getMail(),pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                             @Override
                                                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -198,6 +226,34 @@ public class LoginActivity extends AppCompatActivity {
                                                                 }
                                                             }
                                                         });
+                                                        }
+                                                        else{
+                                                            if(coordinator.getUsername().equals(mail.getText().toString().trim()) && coordinator.getPassword().equals(password.getText().toString().trim())){
+                                                            FirebaseAuth.getInstance().createUserWithEmailAndPassword(coordinator.getMail(), coordinator.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                    if(task.isSuccessful()){
+                                                                        coordinator.setAuthId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                                                        coordinator.setAccountStatus("activated");
+                                                                        FirebaseDatabase.getInstance().getReference().child("Coordinators").child(coordinator.getBranch()).child(coordinator.getUsername()).setValue(coordinator).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                            @Override
+                                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                                startActivity(new Intent(LoginActivity.this,DeptCordinatorMainActivity.class));
+                                                                            }
+                                                                        });
+
+
+
+                                                                    }else{
+                                                                        Toast.makeText(LoginActivity.this, ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                }
+                                                            });}
+                                                            else{
+                                                                Toast.makeText(LoginActivity.this, "Id & Password Combination Doesn't Match", Toast.LENGTH_SHORT).show();
+                                                            }
+
+                                                        }
                                                         flag = 1;
                                                         break;
                                                     }
