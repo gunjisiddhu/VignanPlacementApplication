@@ -1,31 +1,40 @@
 package com.vignan.vignan_placement_application.super_admin;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.vignan.vignan_placement_application.R;
+import com.vignan.vignan_placement_application.adapters.CompanyDisplayAdapter;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Super_Admin_Companies extends Fragment {
 
     View root;
     ImageView add;
+
+    RecyclerView CompanyViewRecyclerView;
+
+
+    RecyclerView.Adapter companyViewadapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +43,8 @@ public class Super_Admin_Companies extends Fragment {
 
         linkingFields();
 
+        featureRecycler();
+
         add.setOnClickListener(view -> {
             startActivity(new Intent(getContext(),CompanyInsertion.class));
         });
@@ -41,9 +52,50 @@ public class Super_Admin_Companies extends Fragment {
         return root;
     }
 
+    private void featureRecycler() {
+
+        CompanyViewRecyclerView.setHasFixedSize(true);
+        CompanyViewRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        ArrayList<Company> companyArrayList = new ArrayList<>();
+
+        FirebaseDatabase.getInstance().getReference().child("Companies").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Log.e("data :",dataSnapshot.getValue(Company.class).toString());
+                    Company company = dataSnapshot.getValue(Company.class);
+                    companyArrayList.add(company);
+                    companyViewadapter = new CompanyDisplayAdapter(companyArrayList);
+                    CompanyViewRecyclerView.setAdapter(companyViewadapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "No Records Found", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        /*ArrayList<String> branches = new ArrayList<>();
+        branches.add("CSE");
+        branches.add("ECE");
+
+        companyArrayList.add(new Company("epam","8-12lap","20Feb2023","safafsd","running","asdjkfh askdgjh aksdh aksdh  asd",branches));
+        companyArrayList.add(new Company("epam","8-12lap","20Feb2023","safafsd","running","asdjkfh askdgjh aksdh aksdh  asd",branches));
+        companyArrayList.add(new Company("epam","8-12lap","20Feb2023","safafsd","running","asdjkfh askdgjh aksdh aksdh  asd",branches));
+        companyArrayList.add(new Company("epam","8-12lap","20Feb2023","safafsd","running","asdjkfh askdgjh aksdh aksdh  asd",branches));
+        companyArrayList.add(new Company("epam","8-12lap","20Feb2023","safafsd","running","asdjkfh askdgjh aksdh aksdh  asd",branches));
+*/
+
+
+
+    }
+
     private void linkingFields() {
 
         add = root.findViewById(R.id.add_company);
+        CompanyViewRecyclerView = root.findViewById(R.id.companies_display_recyclerView);
     }
 
 

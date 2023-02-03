@@ -29,6 +29,7 @@ public class Company {
         this.status = status;
     }
 
+
     public Company(String companyName, String ctc, String dateOfStart, String uniqueId, String status, String description, ArrayList<String> branches) {
         this.companyName = companyName;
         this.ctc = ctc;

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="210dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/company_card_view"
     android:backgroundTint="#FBD7DB"
     android:orientation="vertical"
     android:layout_marginTop="20dp"
@@ -11,6 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/superAdmin_comapanyName_display"
         android:text="Epam Systems Private Limited."
         android:gravity="center"
         android:fontFamily="@font/fredoka"

@@ -25,6 +25,7 @@
         <item>Department Coordinator</item>
         <item>Administrator</item>
     </string-array>
+
     <string-array name="company_status">
         <item>Select Status</item>
         <item>Running</item>

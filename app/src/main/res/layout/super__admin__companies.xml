@@ -13,5 +13,12 @@
         android:id="@+id/add_company"
         android:src="@drawable/baseline_add_24"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/companies_display_recyclerView"
+        android:layout_marginBottom="80dp"
+        />
+
 
 </LinearLayout>
