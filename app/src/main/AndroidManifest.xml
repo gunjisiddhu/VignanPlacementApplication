@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Vignan_Placement_Application"
         tools:targetApi="31">
         <activity
+            android:name=".super_admin.UploadingPlacedSudents"
+            android:exported="false" />
+        <activity
             android:name=".StudentDetailsForVerification"
             android:exported="false" />
         <activity

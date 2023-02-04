@@ -1,7 +1,9 @@
-package com.vignan.vignan_placement_application.excel_sheet_parsing;
+package com.vignan.vignan_placement_application.super_admin;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -10,16 +12,23 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.vignan.vignan_placement_application.R;
+import com.vignan.vignan_placement_application.excel_sheet_parsing.ExcelParsing;
+import com.vignan.vignan_placement_application.excel_sheet_parsing.Student;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -34,34 +43,57 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
+public class UploadingPlacedSudents extends AppCompatActivity {
 
-public class ExcelParsing extends AppCompatActivity {
-
-    Button browse,save;
+    ExcelParsing parsing;
+    Button browse, unkownlistOfStudentsSave;
     String extension="";
-    List<Student> StudentData = new ArrayList<>();
+    ListView listOfStudentsView;
+    ArrayAdapter<ArrayList<String>> listOfStudentsAdapter;
+    Company respectiveCompany;
+    List<ArrayList<String>> placedStudentDetails;
+    ArrayList<Student> selectedStudentsToSave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_excel_parsing);
+        setContentView(R.layout.activity_uploading_placed_sudents);
+        selectedStudentsToSave = new ArrayList<>();
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            respectiveCompany  =  extras.getParcelable("Company Details");
+        }
+
+        linkingFields();
+
         askPermissionAndBrowseFile();
-        browse = findViewById(R.id.Browse);
 
         browse.setOnClickListener(view -> permissions());
-
-        save = findViewById(R.id.save);
-        save.setOnClickListener(view ->{
-            for(Student student : StudentData) {
-
-                FirebaseDatabase.getInstance().getReference().child("ExcelSheetData").child(student.getBranch())
-                        .child(student.getRegdNo()).setValue(student);
-            }
-            Toast.makeText(getApplicationContext(), "yay! Data Saved", Toast.LENGTH_SHORT).show();
+        unkownlistOfStudentsSave.setOnClickListener(view ->{
+            saveToFirebase();
         });
 
+    }
 
+    private void saveToFirebase() {
+        FirebaseDatabase.getInstance().getReference().child("CompletedCompanies")
+                .child(respectiveCompany.getUniqueId()).setValue(respectiveCompany);
+
+        for(Student student : selectedStudentsToSave) {
+            FirebaseDatabase.getInstance().getReference().child("CompletedCompanies")
+                    .child(respectiveCompany.getUniqueId()).child("SelectedStudents").child(student.getRegdNo()).setValue(student);
+        }
+
+        Toast.makeText(getApplicationContext(), "yay saved", Toast.LENGTH_SHORT).show();
+    }
+
+    private void linkingFields() {
+        browse = findViewById(R.id.uploadPlacedStudents_button);
+        unkownlistOfStudentsSave = findViewById(R.id.saveStudents);
+        listOfStudentsView = findViewById(R.id.listOfStudents);
+        browse = findViewById(R.id.uploadPlacedStudents_button);
     }
 
     @SuppressWarnings("deprecation")
@@ -173,25 +205,9 @@ public class ExcelParsing extends AppCompatActivity {
         FileInputStream file = new FileInputStream(new File(FileLocation));
         XSSFWorkbook workbook = new XSSFWorkbook(file);
 
-        XSSFSheet sheet = workbook.getSheet("Student Data");
+        XSSFSheet sheet = workbook.getSheet("Sheet1");
 
-        /*for (int i = 0; i < sheet.getNumMergedRegions(); i++) {
-
-            CellRangeAddress c = sheet.getMergedRegion(i);
-            String val=sheet.getRow(c.getFirstRow()).getCell(c.getFirstColumn()).getStringCellValue();
-            int firstCol=c.getFirstColumn();
-            int lastCol=c.getLastColumn();
-            int startRow=c.getFirstRow();
-            int lastRow=c.getLastRow();
-
-            for(int x=startRow;x<=lastRow;x+=1)
-                for(int y=firstCol;y<=lastCol;y+=1)
-
-                    sheet.getRow(x).getCell(y).setCellValue(val);
-
-        }*/
-
-        List<ArrayList<String>> StudentDetails = new ArrayList<>();
+        placedStudentDetails = new ArrayList<ArrayList<String>>();
 
         Iterator<Row> rowIterator = sheet.iterator();
         Row row = rowIterator.next();
@@ -201,6 +217,7 @@ public class ExcelParsing extends AppCompatActivity {
 
             Iterator<Cell> cellIterator = row.cellIterator();
             ArrayList<String> data = new ArrayList<>();
+            ArrayList<String> details = new ArrayList<>();
             while(cellIterator.hasNext()) {
 
                 Cell cell = cellIterator.next();
@@ -208,113 +225,49 @@ public class ExcelParsing extends AppCompatActivity {
                     cell.setCellType(CellType.STRING);
                 data.add(cell.getStringCellValue());
             }
-            StudentDetails.add(data);
+            details.add(data.get(0).toLowerCase());
+            details.add(data.get(data.size()-1));
+
+            placedStudentDetails.add(details);
+
 
         }
-        
-        for(ArrayList<String> student : StudentDetails) {
-            if(student.size()==5)
-                StudentData.add(dataVerification(student));
+
+        for(ArrayList<String> student : placedStudentDetails) {
+            System.out.println(student);
         }
+
+        VerifyStudents();
 
 
 
     }
 
-    private Student dataVerification(ArrayList<String> student) {
-        
-        Student studentdata = new Student();
+    private void VerifyStudents() {
 
-        if(isEmail(student.get(0)))
-            studentdata.setEmail(student.get(0));
-        else
-            studentdata.setEmail("None");
+        FirebaseDatabase.getInstance().getReference().child("ExcelSheetData").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-        if(isRegisterNumber(student.get(1)))
-            studentdata.setRegdNo(student.get(1).toLowerCase());
-        else
-            studentdata.setRegdNo("None");
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-        if(isName(student.get(2)))
-            studentdata.setName(student.get(2));
-        else
-            studentdata.setName("None");
+                        for(ArrayList<String> studentId : placedStudentDetails) {
+                            if(studentId.contains(dataSnapshot1.getKey()))
+                                selectedStudentsToSave.add(dataSnapshot1.getValue(Student.class));
+                        }
+                    }
+                }
 
-        if (isMobileNumber(student.get(3)))
-            studentdata.setMobNumber(student.get(3));
-        else
-            studentdata.setMobNumber("None");
-
-        try {
-
-            if(isBranch(student.get(4)))
-                studentdata.setBranch(student.get(4));
-            else
-                studentdata.setBranch("None");
-
-
-        }catch (Exception e) {
-            if(isBranch(student.get(3)))
-                studentdata.setBranch(student.get(3));
-            else
-                studentdata.setBranch("None");
-        }
-
-        return studentdata;
-    }
-
-    private boolean isBranch(String branch) {
-        return true;
-    }
-
-    private boolean isMobileNumber(String number) {
-        char[] mobile = number.toCharArray();
-        for(Character ele : mobile) {
-            if(isNumber(ele)) {
-               continue;
-            }else {
-                return false;
             }
-        }
-        return true;
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
-    private boolean isNumber(Character ele) {
-        if(Character.isDigit(ele))
-            return true;
-        else
-            return false;
-    }
-
-    private boolean isName(String name) {
-
-        if(isNotName(name))
-            return true;
-        else
-            return false;
-    }
-
-    private boolean isNotName(String name) {
-        return !name.isEmpty();
-    }
-
-    private boolean isRegisterNumber(String regdno) {
-        if(regdno.contains("F") || regdno.contains("f"))
-            return true;
-        else
-            return false;
-    }
-
-    private boolean isEmail(String email) {
-
-        boolean result  = true;
-        try {
-            InternetAddress emailAddr = new InternetAddress(email);
-            emailAddr.validate();
-        } catch (AddressException ex) {
-            result = false;
-        }
-        return result;
-    }
 
 }

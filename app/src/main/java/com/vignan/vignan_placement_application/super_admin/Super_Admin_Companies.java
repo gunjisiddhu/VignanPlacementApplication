@@ -107,7 +107,7 @@ public class Super_Admin_Companies extends Fragment implements CompanyDisplayAda
     @Override
     public void onClickListener(Company company) {
         Intent intent  = new Intent(getContext(),adminCompanyDisplay.class);
-        intent.putExtra("company",company);
+        intent.putExtra("Company Details",company);
         startActivity(intent);
     }
 }

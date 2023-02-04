@@ -2,7 +2,9 @@ package com.vignan.vignan_placement_application.super_admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,43 +19,48 @@ public class adminCompanyDisplay extends AppCompatActivity {
 
     TextView companyName,ctc,status,desc,time;
     ArrayList<String> listOfBranches;
-    TextView c_branches;
+    TextView branches;
+    Button save;
     Company company;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_company_display);
 
-        company = getIntent().getParcelableExtra("company");
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+           company  =  extras.getParcelable("Company Details");
+        }
+
 
         linkingFields();
         setValues();
+        save.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(),UploadingPlacedSudents.class);
+            intent.putExtra("Company Details",company);
+            startActivity(intent);
+
+        });
 
     }
 
     private void setValues() {
 
-        if(company!=null){
-            companyName.setText(company.getCompanyName());
-            ctc.setText(company.getCompanyName());
-            status.setText(company.getCompanyName());
-            desc.setText(company.getCompanyName());
-            time.setText(company.getCompanyName());
-            String branches = "";
-            for(String branch:company.getBranches())
-                branches+=branch+" ,";
-            c_branches.setText(branches+"");
-        }
+        companyName.setText(company.getCompanyName());
+        ctc.setText(company.getCtc());
+        status.setText(company.getStatus());
+        desc.setText(company.getDescription());
+        time.setText(company.getDateOfStart().substring(0,11));
+        System.out.println(company.getBranches()+"----------");
+        String data = "";
+        for(String branch : company.getBranches())
+            if(branch.equals(company.getBranches().size()-1))
+                data = data+".";
+            else
+                data = data+branch+", ";
 
-
-
-        companyName.setText(MyCompany.companyName);
-        ctc.setText(MyCompany.ctc);
-        status.setText(MyCompany.status);
-        desc.setText(MyCompany.description);
-        time.setText(MyCompany.dateOfStart);
-
-
+        branches.setText(data);
     }
 
     private void linkingFields() {
@@ -64,6 +71,7 @@ public class adminCompanyDisplay extends AppCompatActivity {
         desc = findViewById(R.id.admin_company_description);
         time = findViewById(R.id.admin_company_startDate);
         listOfBranches = new ArrayList<>();
-        c_branches = findViewById(R.id.admin_branchesList);
+        branches = findViewById(R.id.admin_branchesList);
+        save = findViewById(R.id.admin_company_manage_button);
     }
 }
