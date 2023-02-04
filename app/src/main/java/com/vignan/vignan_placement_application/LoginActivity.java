@@ -1,9 +1,12 @@
 package com.vignan.vignan_placement_application;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,10 +44,31 @@ public class LoginActivity extends AppCompatActivity {
     String selected_user;
     androidx.appcompat.widget.AppCompatButton submit;
     TextView signup,forgotpassword;
+    final String MY_PREFS_NAME = "status";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+
+
+
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        if(prefs.getBoolean("isLoggedIn",false)){
+            String userType = prefs.getString("user", "No name defined");
+            if(userType.equals("Student")){
+                startActivity(new Intent(LoginActivity.this,StudentMainActivity.class));
+
+            }else if(userType.equals("Coordinator")){
+                startActivity(new Intent(LoginActivity.this,DeptCordinatorMainActivity.class));
+            }else if(userType.equals("Administrator")){
+                startActivity(new Intent(LoginActivity.this,SuperAdminMainActivity.class));
+            }
+
+            finish();
+        }
+
 
 
 
@@ -119,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                                             intent.putExtra("flag",1);
                                             intent.putExtra("bundle",bundle);
                                             startActivity(intent);
-                                            finish();
+                                            //finish();
                                         }
                                         else if(studentData.getAccount_status().equalsIgnoreCase("activated")){
                                             String email = studentData.getMail();
@@ -143,6 +167,20 @@ public class LoginActivity extends AppCompatActivity {
                                                             Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
                                                         }
                                                     }else{
+
+
+                                                        //sharedPreferences
+                                                        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                                        editor.putString("user", "Student");
+                                                        editor.putBoolean("isLoggedIn", true);
+                                                        editor.apply();
+
+
+
+
+
+
+
                                                         Toast.makeText(LoginActivity.this, "Success!!", Toast.LENGTH_SHORT).show();
                                                         startActivity(new Intent(getApplicationContext(),StudentMainActivity.class));
                                                         finish();
@@ -162,6 +200,15 @@ public class LoginActivity extends AppCompatActivity {
                                                                 @Override
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     Toast.makeText(LoginActivity.this, "Success!!", Toast.LENGTH_SHORT).show();
+                                                                    //Shared Preferences
+                                                                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                                                    editor.putString("user", "Student");
+                                                                    editor.putBoolean("isLoggedIn", true);
+                                                                    editor.apply();
+
+
+
+
                                                                     startActivity(new Intent(getApplicationContext(),StudentMainActivity.class));
                                                                     finish();
                                                                 }
@@ -216,6 +263,15 @@ public class LoginActivity extends AppCompatActivity {
                                                             @Override
                                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                                 if(task.isSuccessful()){
+
+
+                                                                    //Shared Prefernce
+                                                                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                                                    editor.putString("user", "Coordinator");
+                                                                    editor.putBoolean("isLoggedIn", true);
+                                                                    editor.apply();
+
+
                                                                     startActivity(new Intent(LoginActivity.this,DeptCordinatorMainActivity.class));
                                                                 }else{
 
@@ -238,6 +294,15 @@ public class LoginActivity extends AppCompatActivity {
                                                                         FirebaseDatabase.getInstance().getReference().child("Coordinators").child(coordinator.getBranch()).child(coordinator.getUsername()).setValue(coordinator).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                             @Override
                                                                             public void onComplete(@NonNull Task<Void> task) {
+
+
+                                                                                //Shared Preference
+                                                                                SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                                                                editor.putString("user", "Coordinator");
+                                                                                editor.putBoolean("isLoggedIn", true);
+                                                                                editor.apply();
+
+
                                                                                 startActivity(new Intent(LoginActivity.this,DeptCordinatorMainActivity.class));
                                                                             }
                                                                         });
@@ -278,5 +343,29 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+        new AlertDialog.Builder(LoginActivity.this)
+                .setTitle("Warning!")
+                .setMessage("Are you sure want to exit?")
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setCancelable(false)
+                .show();
     }
 }

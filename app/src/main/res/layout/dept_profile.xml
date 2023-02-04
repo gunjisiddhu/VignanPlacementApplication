@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -325,6 +326,41 @@
                             android:textColor="#9E9393"/>
                         <ImageView
                             android:id="@+id/depart_Cordinator_password_edit_icon"
+                            android:clickable="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.02"
+                            android:src="@drawable/greater_than_icon"
+                            />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@android:color/darker_gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Logout"
+                            android:layout_weight="0.2"
+                            android:layout_gravity="start"
+                            android:textAlignment="textStart"
+                            android:textStyle="bold"
+                            android:textSize="20dp"
+                            android:textColor="@color/b2"
+                            />
+                        <ImageView
+                            android:id="@+id/department_cordinator_logut"
                             android:clickable="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

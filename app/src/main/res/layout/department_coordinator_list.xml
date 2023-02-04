@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/department_coordinator_cardView"
-    android:backgroundTint="#FBD7DB"
+    android:backgroundTint="#FFFFFF"
+    app:cardBackgroundColor="@color/light_purple"
     app:cardCornerRadius="30dp"
     android:layout_marginBottom="5dp"
     android:padding="20dp"
@@ -49,7 +50,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@android:color/darker_gray" />
+                android:background="@color/b2" />
 
             <LinearLayout
                 android:layout_width="match_parent"

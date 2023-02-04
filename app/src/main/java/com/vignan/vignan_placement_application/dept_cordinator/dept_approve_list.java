@@ -156,7 +156,7 @@ public class dept_approve_list extends Fragment implements SearchView.OnQueryTex
 
 
     private void sendToPrint(){
-
+        Resultcount.setText(StudentApproveListAdapter.getCountOfList()+"");
         studentApproveListAdapter.notifyDataSetChanged();
         Resultcount.setText(StudentApproveListAdapter.getCountOfList()+"");
         setupSearchView();

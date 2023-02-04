@@ -5,34 +5,36 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-public class StudentCordinatorHelperClass implements Parcelable {
+import com.vignan.vignan_placement_application.dept_cordinator.Coordinator;
 
-    private String name;
-    private String mail;
-    private String mobileNumber;
-    private String branch;
-    private String gender;
-    private String password;
+public class StudentCordinatorHelperClass implements Parcelable {
+    private String name,authId,mail,mobileNumber,branch,gender,password,username,accountStatus;
 
     public StudentCordinatorHelperClass() {
     }
 
-    public StudentCordinatorHelperClass(String name, String mail, String mobileNumber, String branch, String gender, String password) {
+    public StudentCordinatorHelperClass(String name, String authId, String mail, String mobileNumber, String branch, String gender, String password, String username, String accountStatus) {
         this.name = name;
+        this.authId = authId;
         this.mail = mail;
         this.mobileNumber = mobileNumber;
         this.branch = branch;
         this.gender = gender;
         this.password = password;
+        this.username = username;
+        this.accountStatus = accountStatus;
     }
 
     protected StudentCordinatorHelperClass(Parcel in) {
         name = in.readString();
+        authId = in.readString();
         mail = in.readString();
         mobileNumber = in.readString();
         branch = in.readString();
         gender = in.readString();
         password = in.readString();
+        username = in.readString();
+        accountStatus = in.readString();
     }
 
     public static final Creator<StudentCordinatorHelperClass> CREATOR = new Creator<StudentCordinatorHelperClass>() {
@@ -47,12 +49,35 @@ public class StudentCordinatorHelperClass implements Parcelable {
         }
     };
 
+    @Override
+    public String toString() {
+        return "Coordinator{" +
+                "name='" + name + '\'' +
+                ", authId='" + authId + '\'' +
+                ", mail='" + mail + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", branch='" + branch + '\'' +
+                ", gender='" + gender + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", accountStatus='" + accountStatus + '\'' +
+                '}';
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAuthId() {
+        return authId;
+    }
+
+    public void setAuthId(String authId) {
+        this.authId = authId;
     }
 
     public String getMail() {
@@ -95,16 +120,20 @@ public class StudentCordinatorHelperClass implements Parcelable {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "StudentCordinatorHelperClass{" +
-                "name='" + name + '\'' +
-                ", mail='" + mail + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                ", branch='" + branch + '\'' +
-                ", gender='" + gender + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(String accountStatus) {
+        this.accountStatus = accountStatus;
     }
 
     @Override
@@ -115,10 +144,13 @@ public class StudentCordinatorHelperClass implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeString(name);
+        parcel.writeString(authId);
         parcel.writeString(mail);
         parcel.writeString(mobileNumber);
         parcel.writeString(branch);
         parcel.writeString(gender);
         parcel.writeString(password);
+        parcel.writeString(username);
+        parcel.writeString(accountStatus);
     }
 }

@@ -17,18 +17,35 @@ public class adminCompanyDisplay extends AppCompatActivity {
 
     TextView companyName,ctc,status,desc,time;
     ArrayList<String> listOfBranches;
-    ListView branches;
-
+    TextView c_branches;
+    Company company;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_company_display);
 
+        company = getIntent().getParcelableExtra("company");
+
         linkingFields();
         setValues();
+
     }
 
     private void setValues() {
+
+        if(company!=null){
+            companyName.setText(company.getCompanyName());
+            ctc.setText(company.getCompanyName());
+            status.setText(company.getCompanyName());
+            desc.setText(company.getCompanyName());
+            time.setText(company.getCompanyName());
+            String branches = "";
+            for(String branch:company.getBranches())
+                branches+=branch+" ,";
+            c_branches.setText(branches+"");
+        }
+
+
 
         companyName.setText(MyCompany.companyName);
         ctc.setText(MyCompany.ctc);
@@ -47,6 +64,6 @@ public class adminCompanyDisplay extends AppCompatActivity {
         desc = findViewById(R.id.admin_company_description);
         time = findViewById(R.id.admin_company_startDate);
         listOfBranches = new ArrayList<>();
-        branches = findViewById(R.id.admin_branchesList);
+        c_branches = findViewById(R.id.admin_branchesList);
     }
 }

@@ -1,5 +1,6 @@
 package com.vignan.vignan_placement_application.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,13 @@ import java.util.ArrayList;
 public class CompanyDisplayAdapter extends RecyclerView.Adapter<CompanyDisplayAdapter.CompanyViewHolder> {
 
     ArrayList<Company> companyArrayList;
+    Context context;
+    CompanyOnClick companyOnClick;
 
-    public CompanyDisplayAdapter(ArrayList<Company> companyArrayList) {
+    public CompanyDisplayAdapter(ArrayList<Company> companyArrayList,Context context,CompanyOnClick company) {
         this.companyArrayList = companyArrayList;
+        this.context = context;
+        this.companyOnClick = company;
     }
 
     @NonNull
@@ -36,6 +41,17 @@ public class CompanyDisplayAdapter extends RecyclerView.Adapter<CompanyDisplayAd
         holder.companyName.setText(company.getCompanyName());
         holder.companyStatus.setText(company.getStatus());
         holder.companyCTC.setText(company.getCtc());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                companyOnClick.onClickListener(company);
+            }
+        });
+
+
+
+
     }
 
     @Override
@@ -59,4 +75,11 @@ public class CompanyDisplayAdapter extends RecyclerView.Adapter<CompanyDisplayAd
     }
 
 
+    public interface CompanyOnClick{
+        void onClickListener(Company company);
+    }
+
+
+
 }
+

@@ -60,5 +60,7 @@ public class StudentCordinatorListAdapter extends RecyclerView.Adapter<StudentCo
 
         }
     }
+
+
 }
 

@@ -1,8 +1,13 @@
 package com.vignan.vignan_placement_application.super_admin;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
-public class Company {
+public class Company implements Parcelable {
 
     private String companyName;
     private String ctc;
@@ -12,6 +17,28 @@ public class Company {
     private String status;
     private String description;
     private ArrayList<String> branches;
+
+    protected Company(Parcel in) {
+        companyName = in.readString();
+        ctc = in.readString();
+        dateOfStart = in.readString();
+        uniqueId = in.readString();
+        status = in.readString();
+        description = in.readString();
+        branches = in.createStringArrayList();
+    }
+
+    public static final Creator<Company> CREATOR = new Creator<Company>() {
+        @Override
+        public Company createFromParcel(Parcel in) {
+            return new Company(in);
+        }
+
+        @Override
+        public Company[] newArray(int size) {
+            return new Company[size];
+        }
+    };
 
     public String getUniqueId() {
         return uniqueId;
@@ -98,4 +125,19 @@ public class Company {
         this.branches = branches;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(companyName);
+        parcel.writeString(ctc);
+        parcel.writeString(dateOfStart);
+        parcel.writeString(uniqueId);
+        parcel.writeString(status);
+        parcel.writeString(description);
+        parcel.writeStringList(branches);
+    }
 }

@@ -62,6 +62,7 @@ public class SuperAdminMainActivity extends AppCompatActivity {
                         break;
                     case R.id.company_status:
                         fragment = new Super_Admin_Status();
+                        break;
                     case R.id.user_profile:
                         fragment = new Super_Admin_Profiles();
                         break;

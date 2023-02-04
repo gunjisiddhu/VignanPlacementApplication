@@ -24,16 +24,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.vignan.vignan_placement_application.R;
 import com.vignan.vignan_placement_application.adapters.CompanyDisplayAdapter;
 
+
 import java.util.ArrayList;
 
-public class Super_Admin_Companies extends Fragment {
+public class Super_Admin_Companies extends Fragment implements CompanyDisplayAdapter.CompanyOnClick {
 
     View root;
     ImageView add;
 
     RecyclerView CompanyViewRecyclerView;
 
-
+    ArrayList<Company> companyArrayList;
     RecyclerView.Adapter companyViewadapter;
 
     @Override
@@ -44,6 +45,10 @@ public class Super_Admin_Companies extends Fragment {
         linkingFields();
 
         featureRecycler();
+        companyArrayList = new ArrayList<>();
+        companyViewadapter = new CompanyDisplayAdapter(companyArrayList,getContext(),this);
+        CompanyViewRecyclerView.setAdapter(companyViewadapter);
+
 
         add.setOnClickListener(view -> {
             startActivity(new Intent(getContext(),CompanyInsertion.class));
@@ -56,7 +61,7 @@ public class Super_Admin_Companies extends Fragment {
 
         CompanyViewRecyclerView.setHasFixedSize(true);
         CompanyViewRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        ArrayList<Company> companyArrayList = new ArrayList<>();
+
 
         FirebaseDatabase.getInstance().getReference().child("Companies").addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,9 +70,9 @@ public class Super_Admin_Companies extends Fragment {
                     Log.e("data :",dataSnapshot.getValue(Company.class).toString());
                     Company company = dataSnapshot.getValue(Company.class);
                     companyArrayList.add(company);
-                    companyViewadapter = new CompanyDisplayAdapter(companyArrayList);
-                    CompanyViewRecyclerView.setAdapter(companyViewadapter);
+
                 }
+                companyViewadapter.notifyDataSetChanged();
             }
 
             @Override
@@ -99,4 +104,10 @@ public class Super_Admin_Companies extends Fragment {
     }
 
 
+    @Override
+    public void onClickListener(Company company) {
+        Intent intent  = new Intent(getContext(),adminCompanyDisplay.class);
+        intent.putExtra("company",company);
+        startActivity(intent);
+    }
 }

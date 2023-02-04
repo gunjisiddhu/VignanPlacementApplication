@@ -161,7 +161,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                     intent.putExtra("flag",1);
                                                     intent.putExtra("bundle",bundle);
                                                     startActivity(intent);
-                                                    finish();
+                                                    //finish();
                                                 }
                                             }
                                         });
@@ -232,6 +232,8 @@ public class SignUpActivity extends AppCompatActivity {
             });
 
         }*/
+
+
 
 
     public static String getRandomNumberString() {
