@@ -91,9 +91,8 @@ public class Super_Admin_Companies extends Fragment implements CompanyDisplayAda
         companyArrayList.add(new Company("epam","8-12lap","20Feb2023","safafsd","running","asdjkfh askdgjh aksdh aksdh  asd",branches));
         companyArrayList.add(new Company("epam","8-12lap","20Feb2023","safafsd","running","asdjkfh askdgjh aksdh aksdh  asd",branches));
         companyArrayList.add(new Company("epam","8-12lap","20Feb2023","safafsd","running","asdjkfh askdgjh aksdh aksdh  asd",branches));
+
 */
-
-
 
     }
 

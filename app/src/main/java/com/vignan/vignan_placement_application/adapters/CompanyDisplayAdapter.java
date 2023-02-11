@@ -4,9 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vignan.vignan_placement_application.R;
@@ -19,6 +21,7 @@ public class CompanyDisplayAdapter extends RecyclerView.Adapter<CompanyDisplayAd
     ArrayList<Company> companyArrayList;
     Context context;
     CompanyOnClick companyOnClick;
+    CardView cardView;
 
     public CompanyDisplayAdapter(ArrayList<Company> companyArrayList,Context context,CompanyOnClick company) {
         this.companyArrayList = companyArrayList;
@@ -42,6 +45,7 @@ public class CompanyDisplayAdapter extends RecyclerView.Adapter<CompanyDisplayAd
         holder.companyStatus.setText(company.getStatus());
         holder.companyCTC.setText(company.getCtc());
 
+        holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(),R.anim.companies_scrolling_animation));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +67,7 @@ public class CompanyDisplayAdapter extends RecyclerView.Adapter<CompanyDisplayAd
     static class CompanyViewHolder extends RecyclerView.ViewHolder {
 
         TextView companyName,companyStatus,companyCTC;
+        CardView cardView;
 
         public CompanyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,7 +75,7 @@ public class CompanyDisplayAdapter extends RecyclerView.Adapter<CompanyDisplayAd
             companyName = itemView.findViewById(R.id.superAdmin_comapanyName_display);
             companyStatus = itemView.findViewById(R.id.superAdmin_companyStatus_edit);
             companyCTC = itemView.findViewById(R.id.superAdmin_companyctc_edit);
-
+            cardView = itemView.findViewById(R.id.company_card_view);
         }
     }
 

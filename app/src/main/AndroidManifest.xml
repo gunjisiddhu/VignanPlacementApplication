@@ -16,8 +16,11 @@
         android:theme="@style/Theme.Vignan_Placement_Application"
         tools:targetApi="31">
         <activity
-            android:name=".super_admin.UploadingPlacedSudents"
+            android:name=".super_admin.statusChanging"
             android:exported="false" />
+        <activity
+            android:name=".super_admin.UploadingPlacedSudents"
+            android:exported="false"></activity>
         <activity
             android:name=".StudentDetailsForVerification"
             android:exported="false" />
@@ -26,7 +29,7 @@
             android:exported="true" />
         <activity
             android:name=".super_admin.CompanyInsertion"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".ForgotPassword"
             android:exported="false" />
@@ -41,13 +44,7 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".student.StudentMainActivity"
             android:exported="false" />
@@ -59,7 +56,13 @@
             android:exported="false" />
         <activity
             android:name=".super_admin.SuperAdminMainActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".excel_sheet_parsing.ExcelParsing"
             android:exported="false" />
