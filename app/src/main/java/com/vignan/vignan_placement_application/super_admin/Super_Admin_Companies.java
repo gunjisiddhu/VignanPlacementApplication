@@ -1,9 +1,12 @@
 package com.vignan.vignan_placement_application.super_admin;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +29,7 @@ import com.vignan.vignan_placement_application.adapters.CompanyDisplayAdapter;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Super_Admin_Companies extends Fragment implements CompanyDisplayAdapter.CompanyOnClick {
 
@@ -33,9 +37,12 @@ public class Super_Admin_Companies extends Fragment implements CompanyDisplayAda
     ImageView add;
 
     RecyclerView CompanyViewRecyclerView;
+    SearchView searchView;
+    ImageView filter;
+    String selectedfiled="";
 
     ArrayList<Company> companyArrayList;
-    RecyclerView.Adapter companyViewadapter;
+    CompanyDisplayAdapter companyViewadapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,8 +61,78 @@ public class Super_Admin_Companies extends Fragment implements CompanyDisplayAda
             startActivity(new Intent(getContext(),CompanyInsertion.class));
         });
 
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterCompaines(newText);
+                return true;
+            }
+        });
+
+        filter.setOnClickListener(view ->{
+
+            String[] feilds = {"Company name","CTC"};
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+            alertDialog.setTitle("Search Filters");
+            alertDialog.setSingleChoiceItems(feilds, 0, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                         selectedfiled = feilds[i];
+                    Toast.makeText(getContext(), feilds[i]+"Selected option", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            alertDialog.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            alertDialog.show();
+
+        });
+
+
         return root;
     }
+
+    private void filterCompaines(String searchedCompany) {
+
+        ArrayList<Company> filterCompany = new ArrayList<>();
+        if(selectedfiled.isBlank() || selectedfiled.contains("name")) {
+            for (Company company : companyArrayList) {
+                if (company.getCompanyName().toLowerCase().contains(searchedCompany.toLowerCase())) {
+                    filterCompany.add(company);
+                }
+            }
+        }else {
+            for (Company company : companyArrayList) {
+                if (company.getCtc().toLowerCase().contains(searchedCompany.toLowerCase())) {
+                    filterCompany.add(company);
+                }
+            }
+        }
+
+        if(filterCompany.isEmpty()) {
+            Toast.makeText(getContext(), "No Records Found", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            companyViewadapter.filteredCompanies(filterCompany);
+        }
+    }
+
 
     private void featureRecycler() {
 
@@ -100,6 +177,9 @@ public class Super_Admin_Companies extends Fragment implements CompanyDisplayAda
 
         add = root.findViewById(R.id.add_company);
         CompanyViewRecyclerView = root.findViewById(R.id.companies_display_recyclerView);
+        searchView = root.findViewById(R.id.search_for_company_details);
+        filter = root.findViewById(R.id.filter_icon);
+
     }
 
 

@@ -6,9 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Company implements Parcelable {
 
@@ -23,7 +21,7 @@ public class Company implements Parcelable {
 
     private ArrayList<String> appliedStudentsList,writtenStudentsList,TRStudentsList,HRStudentsList;
 
-    private ArrayList<placedStudents> finalQualifiedList;
+    private ArrayList<PlacedStudents> finalQualifiedList;
 
     @Override
     public boolean equals(@Nullable Object obj) {
@@ -46,7 +44,7 @@ public class Company implements Parcelable {
         writtenStudentsList = in.createStringArrayList();
         TRStudentsList = in.createStringArrayList();
         HRStudentsList = in.createStringArrayList();
-        finalQualifiedList = in.createTypedArrayList(placedStudents.CREATOR);
+        finalQualifiedList = in.createTypedArrayList(PlacedStudents.CREATOR);
     }
 
     public static final Creator<Company> CREATOR = new Creator<Company>() {
@@ -178,15 +176,15 @@ public class Company implements Parcelable {
         this.HRStudentsList = HRStudentsList;
     }
 
-    public ArrayList<placedStudents> getFinalQualifiedList() {
+    public ArrayList<PlacedStudents> getFinalQualifiedList() {
         return finalQualifiedList;
     }
 
-    public void setFinalQualifiedList(ArrayList<placedStudents> finalQualifiedList) {
+    public void setFinalQualifiedList(ArrayList<PlacedStudents> finalQualifiedList) {
         this.finalQualifiedList = finalQualifiedList;
     }
 
-    public Company(String companyName, String ctc, String dateOfStart, String endOfHiring, String uniqueId, String status, String description, ArrayList<String> branches, ArrayList<String> appliedStudentsList, ArrayList<String> writtenStudentsList, ArrayList<String> TRStudentsList, ArrayList<String> HRStudentsList, ArrayList<placedStudents> finalQualifiedList) {
+    public Company(String companyName, String ctc, String dateOfStart, String endOfHiring, String uniqueId, String status, String description, ArrayList<String> branches, ArrayList<String> appliedStudentsList, ArrayList<String> writtenStudentsList, ArrayList<String> TRStudentsList, ArrayList<String> HRStudentsList, ArrayList<PlacedStudents> finalQualifiedList) {
         this.companyName = companyName;
         this.ctc = ctc;
         this.dateOfStart = dateOfStart;
