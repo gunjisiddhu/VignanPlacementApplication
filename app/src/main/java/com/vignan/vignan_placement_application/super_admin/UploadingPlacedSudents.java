@@ -79,12 +79,10 @@ public class UploadingPlacedSudents extends AppCompatActivity {
     }
 
     private void saveToFirebase() {
-
         respectiveCompany.setFinalQualifiedList(finalVerifiedList);
 
         FirebaseDatabase.getInstance().getReference().child("Companies").child(respectiveCompany.getUniqueId())
                         .setValue(respectiveCompany);
-
 
         Toast.makeText(getApplicationContext(), "yay saved", Toast.LENGTH_SHORT).show();
     }

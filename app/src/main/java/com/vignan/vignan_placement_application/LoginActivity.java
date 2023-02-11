@@ -174,6 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 FirebaseDatabase.getInstance().getReference().child("StudentData").child("NEED_TO_BE_CREATED").child(studentData.getRegdNum()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
+                                                        studentData.setAuthId(FirebaseAuth.getInstance().getUid());
                                                         FirebaseDatabase.getInstance().getReference().child("StudentData").child("ACTIVATED").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).setValue(studentData).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                     @Override
                                                                     public void onComplete(@NonNull Task<Void> task) {
@@ -262,119 +263,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
 
-
-
-                    /*FirebaseDatabase.getInstance().getReference().child("StudentData").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.exists()){
-                                int flag = 0;
-                                for(DataSnapshot branches:snapshot.getChildren()){
-                                    if(branches.hasChild(username)){
-                                        StudentData studentData = branches.child(username).getValue(StudentData.class);
-                                        System.out.println("Account Dorkindi!!!!");
-                                        if(studentData.getAccount_status().equalsIgnoreCase("pending")){
-                                            Toast.makeText(LoginActivity.this, "Please get your account activated", Toast.LENGTH_SHORT).show();
-                                            Bundle bundle = new Bundle();
-                                            bundle.putParcelable("StudentData",studentData);
-                                            Intent intent = new Intent(LoginActivity.this,OtpActivity.class);
-                                            intent.putExtra("flag",1);
-                                            intent.putExtra("bundle",bundle);
-                                            startActivity(intent);
-                                            //finish();
-                                        }
-                                        else if(studentData.getAccount_status().equalsIgnoreCase("activated")){
-                                            String email = studentData.getMail();
-                                            FirebaseAuth.getInstance().signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                                    if (!task.isSuccessful())
-                                                    {
-                                                        try
-                                                        {
-                                                            throw task.getException();
-                                                        }
-                                                        catch (FirebaseAuthInvalidCredentialsException wrongPassword)
-                                                        {
-                                                            Toast.makeText(LoginActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
-                                                            password.requestFocus();
-                                                            password.setError("Enter Correct Password!");
-                                                        }
-                                                        catch (Exception e)
-                                                        {
-                                                            Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }else{
-
-
-                                                        //sharedPreferences
-                                                        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-                                                        editor.putString("user", "Student");
-                                                        editor.putBoolean("isLoggedIn", true);
-                                                        editor.apply();
-
-                                                        Toast.makeText(LoginActivity.this, "Success!!", Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(getApplicationContext(),StudentMainActivity.class));
-                                                        finish();
-                                                    }
-                                                }
-                                            });
-                                        }
-                                        else if(studentData.getAccount_status().equalsIgnoreCase("acivated_creation_pending")){
-                                            if(pass.equals(studentData.getPassword())){
-                                                FirebaseAuth.getInstance().createUserWithEmailAndPassword(studentData.getMail(),studentData.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                                        if(task.isSuccessful()){
-                                                            studentData.setAuthId(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                                            studentData.setAccount_status("activated");
-                                                            FirebaseDatabase.getInstance().getReference().child("StudentData").child(studentData.getBranch()).child(studentData.getRegId()).setValue(studentData).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                    Toast.makeText(LoginActivity.this, "Success!!", Toast.LENGTH_SHORT).show();
-                                                                    //Shared Preferences
-                                                                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-                                                                    editor.putString("user", "Student");
-                                                                    editor.putBoolean("isLoggedIn", true);
-                                                                    editor.apply();
-
-
-
-
-                                                                    startActivity(new Intent(getApplicationContext(),StudentMainActivity.class));
-                                                                    finish();
-                                                                }
-                                                            });
-
-                                                        }else{
-                                                            Toast.makeText(LoginActivity.this, ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }
-                                                });
-                                            }else{
-                                                Toast.makeText(LoginActivity.this, "Please Enter Correct Password!!", Toast.LENGTH_SHORT).show();
-                                            }
-
-
-
-                                        }
-                                        flag = 1;
-                                    }
-                                }
-                                if(flag == 0){
-
-                                }
-                            }else{
-
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                    //startActivity(new Intent(LoginActivity.this, StudentMainActivity.class));*/
                 } else if (selected_user.equals("Department Coordinator")) {
 
 

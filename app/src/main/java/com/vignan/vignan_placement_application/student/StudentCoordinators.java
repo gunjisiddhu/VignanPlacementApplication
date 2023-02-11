@@ -33,7 +33,6 @@ public class StudentCoordinators extends AppCompatActivity {
         setContentView(R.layout.activity_student_coordinators);
         c_branch = getIntent().getStringExtra("Branch");
         linkingFields();
-
         featureRecycler();
 
     }
@@ -54,7 +53,7 @@ public class StudentCoordinators extends AppCompatActivity {
     }
 
     private void retreiveData() {
-        FirebaseDatabase.getInstance().getReference().child("Coordinators").child(c_branch).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Coordinators").child("ACTIVATED").orderByChild("branch").equalTo(c_branch).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snap:snapshot.getChildren()){

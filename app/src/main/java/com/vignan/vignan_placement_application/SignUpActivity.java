@@ -150,7 +150,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private StudentData createNewStudentData(String e_name, String e_collegeid, String e_password, String e_mail, String e_branch, String e_gender, String pending, String randomNumberString, String not_assigned) {
 
-        return new StudentData(e_collegeid,e_name,e_gender,e_mail,e_branch,"IV",e_password,"Day Scholar","Need To Fill","Need To Fill","Need To Fill","Need To Fill","Need To Fill","Need To Fill",new ArrayList<>(),new ArrayList<>());
+        return new StudentData(e_collegeid,e_name,e_gender,e_mail,"9966033888","pending",e_branch,"IV",e_password,"Day Scholar","Need To Fill","Need To Fill","Need To Fill","Need To Fill","Need To Fill","Need To Fill",new ArrayList<>(),new ArrayList<>());
     }
 
 

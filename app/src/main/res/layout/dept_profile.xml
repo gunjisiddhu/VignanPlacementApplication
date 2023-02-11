@@ -19,7 +19,7 @@
             android:layout_weight="1.2"
             android:background="#EEDBFF"
             android:orientation="vertical">
-
++
             <ImageView
                 android:id="@+id/depart_Cordinator_userprofilepicture"
                 android:padding="30dp"
