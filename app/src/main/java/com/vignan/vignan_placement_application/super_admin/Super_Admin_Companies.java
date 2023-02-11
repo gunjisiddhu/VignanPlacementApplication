@@ -66,6 +66,7 @@ public class Super_Admin_Companies extends Fragment implements CompanyDisplayAda
         FirebaseDatabase.getInstance().getReference().child("Companies").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                companyArrayList.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Log.e("data :",dataSnapshot.getValue(Company.class).toString());
                     Company company = dataSnapshot.getValue(Company.class);

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="10dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -27,7 +28,7 @@
                 android:padding="15dp">
 
                 <ImageView
-                    android:id="@+id/student_profile_pic"
+                    android:id="@+id/ImageViewInProfile"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:src="@drawable/male_new" />
@@ -41,16 +42,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/student_profile_name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/ubuntu"
                     android:gravity="center"
                     android:text="Siddi Saai Gunji"
-                    android:textSize="34dp" />
+                    android:textSize="28dp" />
 
                 <TextView
-                    android:id="@+id/student_profile_regdNum"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/fredoka"
@@ -80,11 +79,9 @@
                     android:layout_width="wrap_content"
                     android:src="@drawable/mail" />
                 <TextView
-                    android:textSize="18dp"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="gunjisiddhu@gmail.com"
-                    android:id="@+id/student_profile_mail"/>
+                    android:text="gunjisiddhu@gmail.com"/>
             </LinearLayout>
 
             <LinearLayout
@@ -99,11 +96,9 @@
                     android:layout_width="wrap_content"
                     android:src="@drawable/call" />
                 <TextView
-                    android:textSize="18dp"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="9966033888"
-                    android:id="@+id/student_profile_phone"/>
+                    android:text="9966033888"/>
 
             </LinearLayout>
 
@@ -128,10 +123,9 @@
         android:layout_weight="1.5">
 
         <LinearLayout
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_marginBottom="70dp"
+            android:layout_marginBottom="10dp"
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
@@ -171,7 +165,6 @@
                             android:layout_weight="1.5"
                             android:paddingRight="5dp"
                             android:text="Male"
-                            android:id="@+id/student_profile_gender"
                             android:fontFamily="@font/gothic"
                             android:textAlignment="textEnd"
                             android:textColor="@color/b3"
@@ -210,7 +203,6 @@
                             android:layout_weight="1.5"
                             android:paddingEnd="20dp"
                             android:text="CSE"
-                            android:id="@+id/student_profile_branch"
                             android:fontFamily="@font/gothic"
                             android:textAlignment="textEnd"
                             android:textColor="@color/b3"
@@ -250,7 +242,6 @@
                             android:layout_weight="1.5"
                             android:paddingEnd="20dp"
                             android:text="IV"
-                            android:id="@+id/student_profile_year"
                             android:fontFamily="@font/gothic"
                             android:textAlignment="textEnd"
                             android:textColor="@color/b3"
@@ -289,7 +280,6 @@
                             android:layout_weight="1.5"
                             android:paddingEnd="20dp"
                             android:text="Day Scholar"
-                            android:id="@+id/student_profile_stay"
                             android:fontFamily="@font/gothic"
                             android:textAlignment="textEnd"
                             android:textColor="@color/b3"
@@ -342,7 +332,6 @@
                             android:layout_weight="1.5"
                             android:paddingRight="5dp"
                             android:text="0"
-                            android:id="@+id/student_profile_backlogs"
                             android:fontFamily="@font/gothic"
                             android:textAlignment="textEnd"
                             android:textColor="@color/b3"
@@ -382,7 +371,6 @@
                             android:layout_weight="1.5"
                             android:paddingEnd="20dp"
                             android:text="90.12"
-                            android:id="@+id/student_profile_curr_agg"
                             android:fontFamily="@font/gothic"
                             android:textAlignment="textEnd"
                             android:textColor="@color/b3"
@@ -422,7 +410,6 @@
                             android:layout_weight="1.5"
                             android:paddingEnd="20dp"
                             android:text="10.0"
-                            android:id="@+id/student_profile_intermarks"
                             android:fontFamily="@font/gothic"
                             android:textAlignment="textEnd"
                             android:textColor="@color/b3"
@@ -461,7 +448,6 @@
                             android:layout_weight="1.5"
                             android:paddingEnd="20dp"
                             android:text="10.0"
-                            android:id="@+id/student_profile_ssc_marks"
                             android:fontFamily="@font/gothic"
                             android:textAlignment="textEnd"
                             android:textColor="@color/b3"
@@ -513,21 +499,11 @@
                             android:layout_weight="1.5"
                             android:paddingRight="5dp"
                             android:text="123456"
-                            android:id="@+id/student_profile_password"
                             android:fontFamily="@font/gothic"
                             android:textAlignment="textEnd"
                             android:textColor="@color/b3"
                             android:textStyle="bold"
                             android:textSize="19dp" />
-
-                        <ImageView
-                            android:id="@+id/student_profile_password_change"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:layout_weight="0.02"
-                            android:src="@drawable/edit"
-                            />
 
                     </LinearLayout>
 
@@ -562,21 +538,11 @@
                             android:layout_weight="1.5"
                             android:paddingEnd="20dp"
                             android:text="1234567812345678"
-                            android:id="@+id/student_profile_aadhar"
                             android:fontFamily="@font/gothic"
                             android:textAlignment="textEnd"
                             android:textColor="@color/b3"
                             android:textStyle="bold"
                             android:textSize="19dp" />
-
-                        <ImageView
-                            android:id="@+id/student_profile_aadhar_change"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:layout_weight="0.02"
-                            android:src="@drawable/edit"
-                            />
 
 
                     </LinearLayout>
@@ -612,21 +578,12 @@
                             android:paddingEnd="20dp"
                             android:textAllCaps="true"
                             android:text="DDGPG62AC"
-                            android:id="@+id/student_profile_pan_card"
                             android:fontFamily="@font/gothic"
                             android:textAlignment="textEnd"
                             android:textColor="@color/b3"
                             android:textStyle="bold"
                             android:textSize="19dp" />
 
-                        <ImageView
-                            android:id="@+id/student_profile_pan_change"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:layout_weight="0.02"
-                            android:src="@drawable/edit"
-                            />
 
                     </LinearLayout>
 
@@ -668,7 +625,6 @@
                             android:textSize="20dp"
                             />
                         <TextView
-                            android:id="@+id/student_profile_placed_companies_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
@@ -692,7 +648,6 @@
                         android:background="#97151D3B" />
 
                     <ListView
-                        android:id="@+id/student_profile_listView_placed"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:divider="@null"
@@ -733,7 +688,6 @@
                             android:textSize="20dp"
                             />
                         <TextView
-                            android:id="@+id/student_profile_attempt_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
@@ -757,88 +711,10 @@
                         android:background="#97151D3B" />
 
                     <ListView
-                        android:id="@+id/student_profile_ListView_attmpt"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:divider="@null"
                         android:entries="@array/Branches"/>
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="25dp"
-                app:cardCornerRadius="20dp">
-
-                <LinearLayout
-                    android:background="@drawable/profile_gradient"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <LinearLayout
-                        android:id="@+id/student_department_edit_icon"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:fontFamily="@font/fredoka"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:text="Department Coordinators"
-                            android:layout_weight="1"
-                            android:textStyle="bold"
-                            android:textAlignment="textStart"
-                            android:textColor="@color/black"
-                            android:textSize="20dp"
-                            />
-                       <ImageView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:src="@drawable/greater_than_icon" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="#97151D3B" />
-
-                    <LinearLayout
-                        android:id="@+id/department_cordinator_logut"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:fontFamily="@font/fredoka"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:text="Logout"
-                            android:layout_weight="1"
-                            android:textStyle="bold"
-                            android:textAlignment="textStart"
-                            android:textColor="@color/b2"
-                            android:textSize="20dp"
-                            />
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/greater_than_icon" />
-
-                    </LinearLayout>
-
-
-
-
                 </LinearLayout>
 
 
@@ -853,99 +729,3 @@
 
 
 </LinearLayout>
-
-
-    <!--
-
-    <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.05"
-                android:layout_marginBottom="90dp"
-                android:gravity="center">
-                <androidx.cardview.widget.CardView
-                    android:background="@color/white"
-                    android:elevation="25dp"
-                    app:cardCornerRadius="20dp"
-                    android:backgroundTint="#FBD7DB"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:padding="20dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.02"
-                                android:src="@drawable/department_person_icon"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Department Co-ordinator"
-                                android:id="@+id/student_department"
-                                android:layout_weight="0.3"
-                                android:layout_gravity="start"
-                                android:textAlignment="textStart"
-                                android:textStyle="bold"
-                                android:textSize="20dp"
-                                android:textColor="#2C2B2B"
-                                />
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:clickable="true"
-                                android:id="@+id/student_department_edit_icon"
-                                android:layout_weight="0.02"
-                                android:src="@drawable/greater_than_icon"
-                                />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="10dp"
-                            android:background="@android:color/darker_gray" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Logout"
-                                android:layout_weight="0.2"
-                                android:layout_gravity="start"
-                                android:textAlignment="textStart"
-                                android:textStyle="bold"
-                                android:textSize="20dp"
-                                android:textColor="@color/b2"
-                                />
-                            <ImageView
-                                android:id="@+id/department_cordinator_logut"
-                                android:clickable="true"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.02"
-                                android:src="@drawable/greater_than_icon"
-                                />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-    -->

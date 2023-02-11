@@ -78,12 +78,10 @@ public class UploadingPlacedSudents extends AppCompatActivity {
     }
 
     private void saveToFirebase() {
-        FirebaseDatabase.getInstance().getReference().child("CompletedCompanies")
-                .child(respectiveCompany.getUniqueId()).setValue(respectiveCompany);
+        FirebaseDatabase.getInstance().getReference().child("CompletedCompanies").child(respectiveCompany.getUniqueId()).setValue(respectiveCompany);
 
         for(Student student : selectedStudentsToSave) {
-            FirebaseDatabase.getInstance().getReference().child("CompletedCompanies")
-                    .child(respectiveCompany.getUniqueId()).child("SelectedStudents").child(student.getRegdNo()).setValue(student);
+            FirebaseDatabase.getInstance().getReference().child("CompletedCompanies").child(respectiveCompany.getUniqueId()).child("SelectedStudents").child(student.getRegdNo()).setValue(student);
         }
 
         Toast.makeText(getApplicationContext(), "yay saved", Toast.LENGTH_SHORT).show();

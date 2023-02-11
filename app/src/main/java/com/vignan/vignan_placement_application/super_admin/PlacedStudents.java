@@ -5,31 +5,31 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-public class placedStudents implements Parcelable {
+public class PlacedStudents implements Parcelable {
 
     private String regdno,salary;
 
 
-    protected placedStudents(Parcel in) {
+    protected PlacedStudents(Parcel in) {
         regdno = in.readString();
         salary = in.readString();
     }
 
-    public static final Creator<placedStudents> CREATOR = new Creator<placedStudents>() {
+    public static final Creator<PlacedStudents> CREATOR = new Creator<PlacedStudents>() {
         @Override
-        public placedStudents createFromParcel(Parcel in) {
-            return new placedStudents(in);
+        public PlacedStudents createFromParcel(Parcel in) {
+            return new PlacedStudents(in);
         }
 
         @Override
-        public placedStudents[] newArray(int size) {
-            return new placedStudents[size];
+        public PlacedStudents[] newArray(int size) {
+            return new PlacedStudents[size];
         }
     };
 
     @Override
     public String toString() {
-        return "placedStudents{" +
+        return "PlacedStudents{" +
                 "regdno='" + regdno + '\'' +
                 ", salary='" + salary + '\'' +
                 '}';
@@ -51,10 +51,10 @@ public class placedStudents implements Parcelable {
         this.salary = salary;
     }
 
-    public placedStudents() {
+    public PlacedStudents() {
     }
 
-    public placedStudents(String regdno, String salary) {
+    public PlacedStudents(String regdno, String salary) {
         this.regdno = regdno;
         this.salary = salary;
     }
