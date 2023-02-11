@@ -98,18 +98,15 @@ public class dept_profile extends Fragment {
         if(FirebaseAuth.getInstance().getCurrentUser().getUid() == null)
             getActivity().finish();
         else{
-            FirebaseDatabase.getInstance().getReference().child("Coordinators").addListenerForSingleValueEvent(new ValueEventListener() {
+            FirebaseDatabase.getInstance().getReference().child("Coordinators").child("ACTIVATED").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot branches: snapshot.getChildren()){
-                        for(DataSnapshot students: branches.getChildren()){
-                            Coordinator studentData = students.getValue(Coordinator.class);
+
+                            Coordinator studentData = snapshot.getValue(Coordinator.class);
                             if(studentData.getAuthId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid().toString())){
                                 assignDataToViews(studentData);
                             }
                         }
-                    }
-                }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {

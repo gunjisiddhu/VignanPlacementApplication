@@ -3,14 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp"
     android:orientation="vertical"
+    android:background="@drawable/gradient_fill_subtle"
     tools:context=".super_admin.Super_Admin_Home">
 
     <Button
+        android:layout_margin="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/add_dept_coordinator"
         android:text="add department co-ordinator"/>
+
+    <SearchView
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchViewForStudents"
+        />
+
+    <ListView
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/branchesListDisplay"
+        android:divider="#D54D6A"
+        android:paddingLeft="20dp"
+        android:dividerHeight="0.1sp"/>
 
 </LinearLayout>

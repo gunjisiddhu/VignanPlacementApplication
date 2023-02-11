@@ -48,13 +48,13 @@ public class StudentApproveListAdapter extends ArrayAdapter<StudentData> {
                 if (constraint != null) {
                     if (orig != null && orig.size() > 0) {
                         for (final StudentData g : orig) {
-                            if (g.getRegId().toLowerCase().contains(constraint.toString()))
+                            if (g.getRegdNum().toLowerCase().contains(constraint.toString()))
                                 results.add(g);
                         }
                     }
                     System.out.println("*******************************************");
                     for(StudentData i:results)
-                        System.out.println(i.getRegId());
+                        System.out.println(i.getRegdNum());
                     count = results.size();
                     oReturn.values = results;
                 }
@@ -87,8 +87,8 @@ public class StudentApproveListAdapter extends ArrayAdapter<StudentData> {
 
         if (position<list.size()) {
             StudentData f = list.get(position);
-            t1.setText(f.getRegId());
-            t2.setText(f.getName());
+            t1.setText(f.getRegdNum());
+            t2.setText(f.getFullName());
         }
         return v;
     }

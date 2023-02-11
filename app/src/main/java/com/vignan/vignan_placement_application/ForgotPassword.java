@@ -36,7 +36,7 @@ public class ForgotPassword extends AppCompatActivity {
 
         _username = findViewById(R.id.forogotpass_username);
         submit = findViewById(R.id.forgotpass_button);
-        reference = FirebaseDatabase.getInstance().getReference("StudentData");
+        reference = FirebaseDatabase.getInstance().getReference("StudentData").child("ACTIVATED");
         mAuth = FirebaseAuth.getInstance();
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -48,10 +48,10 @@ public class ForgotPassword extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         int flag =1;
-                        for(DataSnapshot branches:snapshot.getChildren()){
-                            for(DataSnapshot students:branches.getChildren()){
+
+                            for(DataSnapshot students:snapshot.getChildren()){
                                 StudentData studentData = students.getValue(StudentData.class);
-                                if(studentData.getMail().equalsIgnoreCase(username)){
+                                if(studentData.getE_mail().equalsIgnoreCase(username)){
                                     flag = 0;
                                     mAuth.sendPasswordResetEmail(username).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
@@ -60,12 +60,12 @@ public class ForgotPassword extends AppCompatActivity {
                                                         Toast.makeText(ForgotPassword.this, "Password Link Send to E-Mail Successfully!", Toast.LENGTH_SHORT).show();
                                                     }
                                                     else{
-                                                        Toast.makeText(ForgotPassword.this, "User Doesn't Exist! 11", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(ForgotPassword.this, "User Doesn't Exist!", Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
                                             });
                                 }
-                            }
+
                         }
                         if(flag == 1){
                             Toast.makeText(ForgotPassword.this, "user doesn't Exist!", Toast.LENGTH_SHORT).show();

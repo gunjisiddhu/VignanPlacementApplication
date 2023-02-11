@@ -3,6 +3,7 @@ package com.vignan.vignan_placement_application.student;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -11,11 +12,23 @@ import android.widget.RelativeLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.vignan.vignan_placement_application.R;
+import com.vignan.vignan_placement_application.dept_cordinator.dept_approve_list;
+import com.vignan.vignan_placement_application.dept_cordinator.dept_home;
+import com.vignan.vignan_placement_application.dept_cordinator.dept_profile;
 
 public class StudentMainActivity extends AppCompatActivity {
 
     com.google.android.material.bottomnavigation.BottomNavigationView bottomNavigationView;
     RelativeLayout relativeLayout;
+
+
+    final Fragment fragment11 = new Home();
+    final Fragment fragment22 = new Companies();
+    final Fragment fragment33 = new AppliedCompanyStatus();
+    final Fragment fragment44 = new Profile();
+    final FragmentManager fm = getSupportFragmentManager();
+    Fragment active = fragment11;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +50,15 @@ public class StudentMainActivity extends AppCompatActivity {
         relativeLayout = findViewById(R.id.main_body_container);
 
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,new Home()).commit();
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setOnNavigationItemReselectedListener(item -> { });
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,new Profile()).commit();
-        bottomNavigationView.setSelectedItemId(R.id.user_profile);
+
+        fm.beginTransaction().add(R.id.main_body_container, fragment44, "4").hide(fragment44).commit();
+        fm.beginTransaction().add(R.id.main_body_container, fragment33, "3").hide(fragment33).commit();
+        fm.beginTransaction().add(R.id.main_body_container, fragment22, "2").hide(fragment22).commit();
+        fm.beginTransaction().add(R.id.main_body_container,fragment11, "1").commit();
+
+        bottomNavigationView.setOnNavigationItemReselectedListener(item -> { });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -49,19 +66,23 @@ public class StudentMainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (item.getItemId()){
                     case R.id.home:
-                        fragment = new Home();
+                        fm.beginTransaction().hide(active).show(fragment11).commit();
+                        active = fragment11;
                         break;
                     case R.id.companies:
-                        fragment = new Companies();
+                        fm.beginTransaction().hide(active).show(fragment22).commit();
+                        active = fragment22;
                         break;
                     case R.id.company_status:
-                        fragment = new AppliedCompanyStatus();
+                        fm.beginTransaction().hide(active).show(fragment33).commit();
+                        active = fragment33;
                     case R.id.user_profile:
-                        fragment = new Profile();
+                        fm.beginTransaction().hide(active).show(fragment44).commit();
+                        active = fragment44;
                         break;
 
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,fragment).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.main_body_container,fragment).commit();
 
                 return true;
             }

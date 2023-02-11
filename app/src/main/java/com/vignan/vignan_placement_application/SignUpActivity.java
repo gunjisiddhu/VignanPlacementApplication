@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,6 +29,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.vignan.vignan_placement_application.student.StudentCreationPOJO;
 import com.vignan.vignan_placement_application.super_admin.StudentData;
 
 import java.util.ArrayList;
@@ -109,14 +111,18 @@ public class SignUpActivity extends AppCompatActivity {
                 String e_name,e_collegeid,e_password,e_mail,e_gender,e_branch;
                 long e_orders,e_money;
 
-                e_name = name.getText().toString();
-                e_password = password.getText().toString();
-                e_collegeid = collegeid.getText().toString();
-                e_mail = mail.getText().toString();
-                e_gender = gender_selected;
-                e_branch = branch_selected;
+                //Need To add checking mechanism
 
-                StudentData studentData = new StudentData(e_name,e_collegeid,e_password,e_mail,e_branch,e_gender,"pending",getRandomNumberString(),"not Assigned");
+                e_name = name.getText().toString().trim();
+                e_password = password.getText().toString().trim();
+                e_collegeid = collegeid.getText().toString().toLowerCase().trim();
+                e_mail = mail.getText().toString().trim();
+                e_gender = gender_selected.trim();
+                e_branch = branch_selected.trim();
+
+
+
+                StudentData studentData = createNewStudentData(e_name,e_collegeid,e_password,e_mail,e_branch,e_gender,"pending",getRandomNumberString(),"not Assigned");
                 verifyStudentData(studentData);
 
             }
@@ -139,58 +145,70 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    //regdNum,fullName, section,branch, year, password,  hostelOrDayScholar,tenthMarks, interMarks, overallGrade, backlogCount, aadharCard, panCard, List<String> qualifiedCompanies, List<String> appliedCompany
+    // regdNum,fullName,gender,e_mail,branch,year,password,hostelOrDayScholar,tenthMarks,interMarks,overallGrade,backlogCount,aadharCard,panCard;
+
+    private StudentData createNewStudentData(String e_name, String e_collegeid, String e_password, String e_mail, String e_branch, String e_gender, String pending, String randomNumberString, String not_assigned) {
+
+        return new StudentData(e_collegeid,e_name,e_gender,e_mail,e_branch,"IV",e_password,"Day Scholar","Need To Fill","Need To Fill","Need To Fill","Need To Fill","Need To Fill","Need To Fill",new ArrayList<>(),new ArrayList<>());
+    }
+
 
     private void verifyStudentData(StudentData studentData){
-        FirebaseDatabase.getInstance().getReference().child("ExcelSheetData").child(studentData.getBranch())
-                .child(studentData.getRegId()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            if(snapshot != null){
-                                Toast.makeText(SignUpActivity.this, "Yay!! You have an account", Toast.LENGTH_SHORT).show();
-                                FirebaseDatabase.getInstance().getReference().child("StudentData").child(studentData.getBranch()).child(studentData.getRegId().toLowerCase(Locale.ROOT)).setValue(studentData)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful()){
-                                                    Toast.makeText(SignUpActivity.this, "Account Data Saved! Please get your account activated", Toast.LENGTH_SHORT).show();
-                                                    Bundle bundle = new Bundle();
-                                                    bundle.putParcelable("StudentData",studentData);
-                                                    bundle.putInt("flag",1);
-                                                    Intent intent = new Intent(SignUpActivity.this,OtpActivity.class);
-                                                    intent.putExtra("flag",1);
-                                                    intent.putExtra("bundle",bundle);
-                                                    startActivity(intent);
-                                                    //finish();
-                                                }
-                                            }
-                                        });
-                            }
-                        }else{
-                            new AlertDialog.Builder(SignUpActivity.this)
-                                    .setTitle("Error")
-                                    .setMessage("Your Data is not Saved in Database. Please Contact Department Coordinator")
+        FirebaseDatabase.getInstance().getReference().child("ExcelSheetData").child(studentData.getBranch()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    if(snapshot.hasChild(studentData.getRegdNum())){
+                        StudentData firebaseData = snapshot.child(studentData.getRegdNum()).getValue(StudentData.class);
+                        Toast.makeText(SignUpActivity.this, "User Data is saved in Firebase!!", Toast.LENGTH_SHORT).show();
+                        saveStudentDetails(studentData);
 
-                                    // Specifying a listener allows you to take an action before dismissing the dialog.
-                                    // The dialog is automatically dismissed when a dialog button is clicked.
-                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                        }
-                                    })
-
-                                    // A null listener allows the button to dismiss the dialog and take no further action.
-                                    .setNegativeButton(android.R.string.no, null)
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .setCancelable(false)
-                                    .show();
-                        }
+                    }else{
+                        new AlertDialog.Builder(SignUpActivity.this)
+                                .setTitle("Error!!")
+                                .setMessage("Your data is not saved in database, Please Contact Department Coordinator")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, null)
+                                .setIcon(R.drawable.baseline_grass_24)
+                                .setCancelable(false)
+                                .show();
                     }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void saveStudentDetails(StudentData studentData) {
+        FirebaseDatabase.getInstance().getReference().child("StudentData").child("NEED_TO_BE_ACTIVATED").child(studentData.getRegdNum()).setValue(studentData).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                String generateOtp = getRandomNumberString();
+                FirebaseDatabase.getInstance().getReference().child("StudentOTPData").child(studentData.getRegdNum()).setValue(generateOtp).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
+                    public void onComplete(@NonNull Task<Void> task) {
+                        StudentCreationPOJO studentCreationPOJO = new StudentCreationPOJO(studentData.getFullName(),studentData.getRegdNum(), studentData.getPassword(), studentData.getE_mail(), studentData.getBranch(), studentData.getGender(),"NEED_TO_BE_ACTIVATED",generateOtp,"NOTCreated" );
+                        //String name, String regId, String password, String mail, String branch, String gender, String account_status, String otp, String authId
+                        Toast.makeText(SignUpActivity.this, "Please get your account activated from coordinator", Toast.LENGTH_SHORT).show();
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("StudentData",studentCreationPOJO);
+                        Intent intent = new Intent(SignUpActivity.this,OtpActivity.class);
+                        intent.putExtra("flag",1);
+                        intent.putExtra("bundle",bundle);
+                        startActivity(intent);
                     }
                 });
+            }
+        });
+
     }
 
 

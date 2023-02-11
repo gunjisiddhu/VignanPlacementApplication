@@ -17,7 +17,6 @@ public class Company implements Parcelable {
     private String dateOfStart;
     private String endOfHiring;
     private String uniqueId;
-
     private String status;
     private String description;
     private ArrayList<String> branches;

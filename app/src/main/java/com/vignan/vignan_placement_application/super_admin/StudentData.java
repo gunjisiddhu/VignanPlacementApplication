@@ -5,34 +5,74 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.util.List;
+import java.util.Objects;
+
 public class StudentData implements Parcelable {
-    private String name,regId,password,mail,branch,gender,account_status,otp,authId;
+    private String regdNum,fullName,gender,e_mail,branch,year,password,hostelOrDayScholar,tenthMarks,interMarks,overallGrade,backlogCount,aadharCard,panCard;
+    List<String> qualifiedCompanies,appliedCompany;
+
+    @Override
+    public String toString() {
+        return "StudentData{" +
+                "regdNum='" + regdNum + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", e_mail='" + e_mail + '\'' +
+                ", branch='" + branch + '\'' +
+                ", year='" + year + '\'' +
+                ", password='" + password + '\'' +
+                ", hostelOrDayScholar='" + hostelOrDayScholar + '\'' +
+                ", tenthMarks='" + tenthMarks + '\'' +
+                ", interMarks='" + interMarks + '\'' +
+                ", overallGrade='" + overallGrade + '\'' +
+                ", backlogCount='" + backlogCount + '\'' +
+                ", aadharCard='" + aadharCard + '\'' +
+                ", panCard='" + panCard + '\'' +
+                ", qualifiedCompanies=" + qualifiedCompanies +
+                ", appliedCompany=" + appliedCompany +
+                '}';
+    }
 
     public StudentData() {
     }
 
-    public StudentData(String name, String regId, String password, String mail, String branch, String gender, String account_status, String otp, String authId) {
-        this.name = name;
-        this.regId = regId;
-        this.password = password;
-        this.mail = mail;
-        this.branch = branch;
+    public StudentData(String regdNum, String fullName, String gender, String e_mail, String branch, String year, String password, String hostelOrDayScholar, String tenthMarks, String interMarks, String overallGrade, String backlogCount, String aadharCard, String panCard, List<String> qualifiedCompanies, List<String> appliedCompany) {
+        this.regdNum = regdNum;
+        this.fullName = fullName;
         this.gender = gender;
-        this.account_status = account_status;
-        this.otp = otp;
-        this.authId = authId;
+        this.e_mail = e_mail;
+        this.branch = branch;
+        this.year = year;
+        this.password = password;
+        this.hostelOrDayScholar = hostelOrDayScholar;
+        this.tenthMarks = tenthMarks;
+        this.interMarks = interMarks;
+        this.overallGrade = overallGrade;
+        this.backlogCount = backlogCount;
+        this.aadharCard = aadharCard;
+        this.panCard = panCard;
+        this.qualifiedCompanies = qualifiedCompanies;
+        this.appliedCompany = appliedCompany;
     }
 
     protected StudentData(Parcel in) {
-        name = in.readString();
-        regId = in.readString();
-        password = in.readString();
-        mail = in.readString();
-        branch = in.readString();
+        regdNum = in.readString();
+        fullName = in.readString();
         gender = in.readString();
-        account_status = in.readString();
-        otp = in.readString();
-        authId = in.readString();
+        e_mail = in.readString();
+        branch = in.readString();
+        year = in.readString();
+        password = in.readString();
+        hostelOrDayScholar = in.readString();
+        tenthMarks = in.readString();
+        interMarks = in.readString();
+        overallGrade = in.readString();
+        backlogCount = in.readString();
+        aadharCard = in.readString();
+        panCard = in.readString();
+        qualifiedCompanies = in.createStringArrayList();
+        appliedCompany = in.createStringArrayList();
     }
 
     public static final Creator<StudentData> CREATOR = new Creator<StudentData>() {
@@ -47,44 +87,20 @@ public class StudentData implements Parcelable {
         }
     };
 
-    public String getName() {
-        return name;
+    public String getRegdNum() {
+        return regdNum;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRegdNum(String regdNum) {
+        this.regdNum = regdNum;
     }
 
-    public String getRegId() {
-        return regId;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setRegId(String regId) {
-        this.regId = regId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getBranch() {
-        return branch;
-    }
-
-    public void setBranch(String branch) {
-        this.branch = branch;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getGender() {
@@ -95,43 +111,108 @@ public class StudentData implements Parcelable {
         this.gender = gender;
     }
 
-    public String getAccount_status() {
-        return account_status;
+    public String getE_mail() {
+        return e_mail;
     }
 
-    public void setAccount_status(String account_status) {
-        this.account_status = account_status;
+    public void setE_mail(String e_mail) {
+        this.e_mail = e_mail;
     }
 
-    public String getOtp() {
-        return otp;
+    public String getBranch() {
+        return branch;
     }
 
-    public void setOtp(String otp) {
-        this.otp = otp;
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 
-    public String getAuthId() {
-        return authId;
+    public String getYear() {
+        return year;
     }
 
-    public void setAuthId(String authId) {
-        this.authId = authId;
+    public void setYear(String year) {
+        this.year = year;
     }
 
-    @Override
-    public String toString() {
-        return "StudentData{" +
-                "name='" + name + '\'' +
-                ", regId='" + regId + '\'' +
-                ", password='" + password + '\'' +
-                ", mail='" + mail + '\'' +
-                ", branch='" + branch + '\'' +
-                ", gender='" + gender + '\'' +
-                ", account_status='" + account_status + '\'' +
-                ", otp='" + otp + '\'' +
-                ", authId='" + authId + '\'' +
-                '}';
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getHostelOrDayScholar() {
+        return hostelOrDayScholar;
+    }
+
+    public void setHostelOrDayScholar(String hostelOrDayScholar) {
+        this.hostelOrDayScholar = hostelOrDayScholar;
+    }
+
+    public String getTenthMarks() {
+        return tenthMarks;
+    }
+
+    public void setTenthMarks(String tenthMarks) {
+        this.tenthMarks = tenthMarks;
+    }
+
+    public String getInterMarks() {
+        return interMarks;
+    }
+
+    public void setInterMarks(String interMarks) {
+        this.interMarks = interMarks;
+    }
+
+    public String getOverallGrade() {
+        return overallGrade;
+    }
+
+    public void setOverallGrade(String overallGrade) {
+        this.overallGrade = overallGrade;
+    }
+
+    public String getBacklogCount() {
+        return backlogCount;
+    }
+
+    public void setBacklogCount(String backlogCount) {
+        this.backlogCount = backlogCount;
+    }
+
+    public String getAadharCard() {
+        return aadharCard;
+    }
+
+    public void setAadharCard(String aadharCard) {
+        this.aadharCard = aadharCard;
+    }
+
+    public String getPanCard() {
+        return panCard;
+    }
+
+    public void setPanCard(String panCard) {
+        this.panCard = panCard;
+    }
+
+    public List<String> getQualifiedCompanies() {
+        return qualifiedCompanies;
+    }
+
+    public void setQualifiedCompanies(List<String> qualifiedCompanies) {
+        this.qualifiedCompanies = qualifiedCompanies;
+    }
+
+    public List<String> getAppliedCompany() {
+        return appliedCompany;
+    }
+
+    public void setAppliedCompany(List<String> appliedCompany) {
+        this.appliedCompany = appliedCompany;
     }
 
     @Override
@@ -141,14 +222,21 @@ public class StudentData implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeString(regId);
-        parcel.writeString(password);
-        parcel.writeString(mail);
-        parcel.writeString(branch);
+        parcel.writeString(regdNum);
+        parcel.writeString(fullName);
         parcel.writeString(gender);
-        parcel.writeString(account_status);
-        parcel.writeString(otp);
-        parcel.writeString(authId);
+        parcel.writeString(e_mail);
+        parcel.writeString(branch);
+        parcel.writeString(year);
+        parcel.writeString(password);
+        parcel.writeString(hostelOrDayScholar);
+        parcel.writeString(tenthMarks);
+        parcel.writeString(interMarks);
+        parcel.writeString(overallGrade);
+        parcel.writeString(backlogCount);
+        parcel.writeString(aadharCard);
+        parcel.writeString(panCard);
+        parcel.writeStringList(qualifiedCompanies);
+        parcel.writeStringList(appliedCompany);
     }
 }

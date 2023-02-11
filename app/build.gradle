@@ -49,4 +49,15 @@ dependencies {
     implementation 'com.sun.mail:javax.mail:1.6.0'
 
 
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+
+
+    //Notification
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.google.firebase:firebase-messaging:23.0.6'
+    implementation 'com.google.firebase:firebase-core:21.0.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+
+
 }

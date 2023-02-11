@@ -35,12 +35,12 @@ public class signupDeptCoordinator extends AppCompatActivity {
             Coordinator coordinator = getCoordinatorData();
 
 
-            FirebaseDatabase.getInstance().getReference().child("Coordinators").child(coordinator.getBranch()).child(coordinator.getUsername())
+            FirebaseDatabase.getInstance().getReference().child("Coordinators").child("NEED_TO_BE_CREATED").child(coordinator.getUsername())
                     .setValue(coordinator).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(signupDeptCoordinator.this, "Done Creating Account now you can Login!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(signupDeptCoordinator.this, "Done Creating Account now they can Login!", Toast.LENGTH_SHORT).show();
                                 finish();
                                 overridePendingTransition(0, 0);
                                 startActivity(getIntent());

@@ -13,27 +13,48 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.vignan.vignan_placement_application.adapters.LoadingDialog;
 import com.vignan.vignan_placement_application.student.StudentCoordinators;
+import com.vignan.vignan_placement_application.student.StudentCreationPOJO;
 import com.vignan.vignan_placement_application.super_admin.StudentData;
 
 public class StudentDetailsForVerification extends AppCompatActivity {
 
     TextView name,email,branch,otp,regId;
     EditText current_otp;
+    String actual_otp;
     Button activate_account;
-    StudentData studentData;
+    StudentCreationPOJO studentData;
+    StudentData originalData;
+
+
+    LoadingDialog loadingDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_details_for_verification);
 
+        loadingDialog = new LoadingDialog(this);
+        loadingDialog.load();
+
+
         linkingFields();
+        Bundle bundle = getIntent().getBundleExtra("bundle");
+        originalData = bundle.getParcelable("OriginalData");
+        studentData = bundle.getParcelable("StudentData");
         setValues();
+
+
+
 
         activate_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseDatabase.getInstance().getReference().child("");
                 String otp = current_otp.getText().toString().trim();
                 if(otp.equals("")){
                     current_otp.setError("Please Enter OTP");
@@ -41,18 +62,31 @@ public class StudentDetailsForVerification extends AppCompatActivity {
                     return;
                 }
                 System.out.println(otp+"   "+studentData.getOtp());
-                if(otp.equals(studentData.getOtp())){
-                    studentData.setAccount_status("acivated_creation_pending");
-                    FirebaseDatabase.getInstance().getReference().child("StudentData").child(studentData.getBranch()).child(studentData.getRegId()).setValue(studentData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                if(otp.equals(actual_otp)){
+
+                    loadingDialog.load();
+
+                    FirebaseDatabase.getInstance().getReference().child("StudentData").child("NEED_TO_BE_ACTIVATED").child(originalData.getRegdNum()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(StudentDetailsForVerification.this, "Account Created!! Now Student Can Login", Toast.LENGTH_SHORT).show();
+                                FirebaseDatabase.getInstance().getReference().child("StudentData").child("NEED_TO_BE_CREATED").child(originalData.getRegdNum()).setValue(originalData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        loadingDialog.dismisss();
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(StudentDetailsForVerification.this, "Account Activated!!, Student Can Login Now!!", Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Toast.makeText(StudentDetailsForVerification.this, "Error Activatin Account!!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }else{
-                                Toast.makeText(StudentDetailsForVerification.this, "Error!!"+task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(StudentDetailsForVerification.this, "Error In Retreiving And Chaning Data!!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
+
                 }else{
                     Toast.makeText(StudentDetailsForVerification.this, "Wrong OTP!! Please Enter correct OTP", Toast.LENGTH_SHORT).show();
                 }
@@ -80,14 +114,23 @@ public class StudentDetailsForVerification extends AppCompatActivity {
 
     void setValues(){
 
-        Bundle bundle = getIntent().getBundleExtra("bundle");
-        StudentData studentData = bundle.getParcelable("StudentData");
-        this.studentData = studentData;
         name.setText(studentData.getName());
         email.setText(studentData.getMail());
         branch.setText(studentData.getBranch());
         regId.setText(studentData.getRegId());
 
+        FirebaseDatabase.getInstance().getReference().child("StudentOTPData").child(studentData.getRegId()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                actual_otp = snapshot.getValue(String.class);
+                loadingDialog.dismisss();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 }

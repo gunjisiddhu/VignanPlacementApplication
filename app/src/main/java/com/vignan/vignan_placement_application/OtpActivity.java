@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.vignan.vignan_placement_application.student.StudentCoordinators;
+import com.vignan.vignan_placement_application.student.StudentCreationPOJO;
 import com.vignan.vignan_placement_application.super_admin.StudentData;
 
 public class OtpActivity extends AppCompatActivity {
@@ -53,7 +54,7 @@ public class OtpActivity extends AppCompatActivity {
     void setValues(){
 
         Bundle bundle = getIntent().getBundleExtra("bundle");
-        StudentData studentData = bundle.getParcelable("StudentData");
+        StudentCreationPOJO studentData = bundle.getParcelable("StudentData");
         name.setText(studentData.getName());
         email.setText(studentData.getMail());
         password.setText(studentData.getPassword());

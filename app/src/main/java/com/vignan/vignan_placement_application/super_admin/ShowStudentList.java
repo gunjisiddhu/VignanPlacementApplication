@@ -1,34 +1,32 @@
-package com.vignan.vignan_placement_application.dept_cordinator;
-
-import android.os.Bundle;
+package com.vignan.vignan_placement_application.super_admin;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.content.Intent;
+import android.os.Bundle;
 import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vignan.vignan_placement_application.R;
+import com.vignan.vignan_placement_application.StudentDetailsForVerification;
 import com.vignan.vignan_placement_application.adapters.StudentApproveListAdapter;
 import com.vignan.vignan_placement_application.adapters.StudentListOnClick;
-import com.vignan.vignan_placement_application.super_admin.StudentData;
+import com.vignan.vignan_placement_application.student.StudentCreationPOJO;
+
+import org.apache.xmlbeans.impl.soap.Text;
 
 import java.util.ArrayList;
 
-public class dept_home extends Fragment implements SearchView.OnQueryTextListener, StudentListOnClick {
+public class ShowStudentList extends AppCompatActivity implements SearchView.OnQueryTextListener, StudentListOnClick {
 
-    View root;
+
     String branch;
     ArrayList<StudentData> studentDataArrayList;
     StudentApproveListAdapter studentApproveListAdapter;
@@ -37,59 +35,27 @@ public class dept_home extends Fragment implements SearchView.OnQueryTextListene
     TextView Resultcount,branchName;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_show_student_list);
 
-        root = inflater.inflate(R.layout.dept_home, container, false);
-
-
-        Resultcount = root.findViewById(R.id.ResultCountForStudentNames);
-        branchName = root.findViewById(R.id.branch_display);
-
-
+        Resultcount = findViewById(R.id.ResultCountForStudentNames);
+        branchName = findViewById(R.id.branch_display);
+        branch = getIntent().getStringExtra("branch");
+        branchName.setText(branch+" Department");
 
 
 
         studentDataArrayList = new ArrayList<>();
 
-        studentApproveListAdapter = new StudentApproveListAdapter(getContext(),R.layout.item_student_approve_list_row,studentDataArrayList,this);
-        listView = root.findViewById(R.id.studentNameListView);
-        searchView = root.findViewById(R.id.searchViewInStudentDisplay);
+        studentApproveListAdapter = new StudentApproveListAdapter(getApplicationContext(),R.layout.item_student_approve_list_row,studentDataArrayList,this);
+        listView = findViewById(R.id.studentNameListView);
+        searchView = findViewById(R.id.searchViewInStudentDisplay);
         listView.setAdapter(studentApproveListAdapter);
         setupSearchView();
 
 
-        getCurrentBranch();
-
-
-
-
-        return root;
-    }
-
-    private void getCurrentBranch(){
-        FirebaseDatabase.getInstance().getReference().child("Coordinators").child("ACTIVATED").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-
-                Coordinator coordinator = snapshot.getValue(Coordinator.class);
-
-
-                if (coordinator != null) {
-                    branch = coordinator.getBranch();
-                    branchName.setText(branch+" Department");
-                    getDataFromFirebase();
-                } else {
-                    Toast.makeText(getContext(), "Error Finding Your Data!!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        getDataFromFirebase();
     }
 
     private void getDataFromFirebase() {

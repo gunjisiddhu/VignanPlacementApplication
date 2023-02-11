@@ -32,9 +32,10 @@ public class Profile extends Fragment {
 
     View root;
     String current_branch;
-    ImageView name,gender,email,regdno,branch,cordinatorbutton,logout;
-    TextView uname,ugender,uemail,uregno,ubranch;
+    ImageView name, gender, email, regdno, branch, cordinatorbutton, logout;
+    TextView uname, ugender, uemail, uregno, ubranch;
     final String MY_PREFS_NAME = "status";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,15 +45,14 @@ public class Profile extends Fragment {
         linkingFields();
         System.out.println(FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
         cordinatorbutton.setOnClickListener(view -> {
-            if(!current_branch.equals("")){
-            Intent intent = new Intent(getContext(),StudentCoordinators.class);
-            intent.putExtra("Branch",current_branch);
-            startActivity(intent);}
-            else{
+            if (!current_branch.equals("")) {
+                Intent intent = new Intent(getContext(), StudentCoordinators.class);
+                intent.putExtra("Branch", current_branch);
+                startActivity(intent);
+            } else {
                 Toast.makeText(getContext(), "Please Wait Until Data is Retreived!", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -103,20 +103,20 @@ public class Profile extends Fragment {
         branch = root.findViewById(R.id.student_branch_edit_icon);
         cordinatorbutton = root.findViewById(R.id.student_department_edit_icon);
 
-        if(FirebaseAuth.getInstance().getCurrentUser().getUid() == null)
+        if (FirebaseAuth.getInstance().getCurrentUser().getUid() == null)
             getActivity().finish();
-        else{
-            FirebaseDatabase.getInstance().getReference().child("StudentData").addListenerForSingleValueEvent(new ValueEventListener() {
+        else {
+            FirebaseDatabase.getInstance().getReference().child("StudentData").child("ACTIVATED").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot branches: snapshot.getChildren()){
-                        for(DataSnapshot students: branches.getChildren()){
-                            StudentData studentData = students.getValue(StudentData.class);
-                            if(studentData.getAuthId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid().toString())){
-                                assignDataToViews(studentData);
-                            }
-                        }
-                    }
+
+
+                    StudentData studentData = snapshot.getValue(StudentData.class);
+
+                        assignDataToViews(studentData);
+
+
+
                 }
 
                 @Override
@@ -129,10 +129,10 @@ public class Profile extends Fragment {
     }
 
     private void assignDataToViews(StudentData studentData) {
-        uname.setText(studentData.getName());
+        uname.setText(studentData.getFullName());
         ugender.setText(studentData.getGender());
-        uemail.setText(studentData.getMail());
-        uregno.setText(studentData.getRegId());
+        uemail.setText(studentData.getE_mail());
+        uregno.setText(studentData.getRegdNum());
         ubranch.setText(studentData.getBranch());
         current_branch = studentData.getBranch();
     }

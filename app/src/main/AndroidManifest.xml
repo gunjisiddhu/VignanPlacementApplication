@@ -19,6 +19,9 @@
             android:name=".super_admin.statusChanging"
             android:exported="false" />
         <activity
+            android:name=".super_admin.ShowStudentList"
+            android:exported="false" />
+        <activity
             android:name=".super_admin.UploadingPlacedSudents"
             android:exported="false"></activity>
         <activity
