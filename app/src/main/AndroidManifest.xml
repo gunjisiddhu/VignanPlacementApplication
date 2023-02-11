@@ -65,8 +65,7 @@
             android:exported="false" />
         <activity
             android:name=".super_admin.SuperAdminMainActivity"
-            android:exported="true">
-
+            android:exported="false">
         </activity>
         <activity
             android:name=".excel_sheet_parsing.ExcelParsing"

@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:padding="30dp"
+    android:padding="20dp"
     android:background="#B2E6F6"
     tools:context=".super_admin.signupDeptCoordinator">
 
     <LinearLayout
         android:backgroundTint="@color/white"
-        android:background="@color/white"
-        android:padding="20dp"
+        android:background ="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -29,7 +28,7 @@
             android:fontFamily="@font/montserrat"
             />
 
-        <EditText
+ <!--       <EditText
             android:id="@+id/coordinator_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -39,10 +38,27 @@
             android:background="@drawable/edittextdesign"
             android:imeOptions="actionNext"
             android:nextFocusForward="@id/otp_collegeid"
+            />-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/coordinator_name"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingLeft="20dp"
+                android:layout_margin="40dp"
+                android:hint="Full Name"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@id/otp_collegeid"
+                />
 
-        <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+<!--        <EditText
             android:id="@+id/coordinator_username"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -52,10 +68,27 @@
             android:hint="Username"
             android:inputType="textEmailAddress"
             android:background="@drawable/edittextdesign"
-            />
+            />-->
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/coordinator_username"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingLeft="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:hint="Username"
+                android:inputType="textEmailAddress"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <EditText
             android:id="@+id/coordinator_email"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -66,8 +99,28 @@
             android:layout_marginTop="40dp"
             android:inputType="textEmailAddress"
             android:background="@drawable/edittextdesign"
-            />
-        <EditText
+            />-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/coordinator_email"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingLeft="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:hint="Mail Address"
+                android:layout_marginTop="40dp"
+                android:inputType="textEmailAddress"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <EditText
             android:id="@+id/coordinator_mobile_number"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -78,7 +131,27 @@
             android:hint="MobileNumber"
             android:inputType="phone"
             android:background="@drawable/edittextdesign"
-            />
+            />-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/coordinator_mobile_number"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingLeft="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="40dp"
+                android:hint="MobileNumber"
+                android:inputType="phone"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Spinner
             android:id="@+id/coordinator_gender"

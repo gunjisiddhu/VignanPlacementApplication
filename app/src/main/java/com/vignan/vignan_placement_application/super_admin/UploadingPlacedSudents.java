@@ -3,7 +3,6 @@ package com.vignan.vignan_placement_application.super_admin;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -17,7 +16,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -41,7 +39,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class UploadingPlacedSudents extends AppCompatActivity {
 
@@ -51,14 +48,18 @@ public class UploadingPlacedSudents extends AppCompatActivity {
     ListView listOfStudentsView;
     ArrayAdapter<ArrayList<String>> listOfStudentsAdapter;
     Company respectiveCompany;
-    List<ArrayList<String>> placedStudentDetails;
+    ArrayList<PlacedStudents> placedStudentDetails,finalVerifiedList;
     ArrayList<Student> selectedStudentsToSave;
+
+
+    //list view create cheyalii for displaying regdno and salary
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uploading_placed_sudents);
         selectedStudentsToSave = new ArrayList<>();
+        finalVerifiedList = new ArrayList<>();
 
 
         Bundle extras = getIntent().getExtras();
@@ -78,11 +79,10 @@ public class UploadingPlacedSudents extends AppCompatActivity {
     }
 
     private void saveToFirebase() {
-        FirebaseDatabase.getInstance().getReference().child("CompletedCompanies").child(respectiveCompany.getUniqueId()).setValue(respectiveCompany);
+        respectiveCompany.setFinalQualifiedList(finalVerifiedList);
 
-        for(Student student : selectedStudentsToSave) {
-            FirebaseDatabase.getInstance().getReference().child("CompletedCompanies").child(respectiveCompany.getUniqueId()).child("SelectedStudents").child(student.getRegdNo()).setValue(student);
-        }
+        FirebaseDatabase.getInstance().getReference().child("Companies").child(respectiveCompany.getUniqueId())
+                        .setValue(respectiveCompany);
 
         Toast.makeText(getApplicationContext(), "yay saved", Toast.LENGTH_SHORT).show();
     }
@@ -205,13 +205,14 @@ public class UploadingPlacedSudents extends AppCompatActivity {
 
         XSSFSheet sheet = workbook.getSheet("Sheet1");
 
-        placedStudentDetails = new ArrayList<ArrayList<String>>();
+        placedStudentDetails = new ArrayList<PlacedStudents>();
 
         Iterator<Row> rowIterator = sheet.iterator();
         Row row = rowIterator.next();
         while(rowIterator.hasNext()) {
 
             row = rowIterator.next();
+            PlacedStudents placedStudent = new PlacedStudents();
 
             Iterator<Cell> cellIterator = row.cellIterator();
             ArrayList<String> data = new ArrayList<>();
@@ -225,15 +226,15 @@ public class UploadingPlacedSudents extends AppCompatActivity {
             }
             details.add(data.get(0).toLowerCase());
             details.add(data.get(data.size()-1));
-
-            placedStudentDetails.add(details);
-
+            String name = data.get(0).toLowerCase();
+            String salary = data.get(data.size()-1);
+            placedStudentDetails.add(new PlacedStudents(name,salary));
 
         }
-
-        for(ArrayList<String> student : placedStudentDetails) {
+/*
+        for(PlacedStudents student : placedStudentDetails) {
             System.out.println(student);
-        }
+        }*/
 
         VerifyStudents();
 
@@ -248,12 +249,11 @@ public class UploadingPlacedSudents extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-
-                        for(ArrayList<String> studentId : placedStudentDetails) {
-                            if(studentId.contains(dataSnapshot1.getKey()))
-                                selectedStudentsToSave.add(dataSnapshot1.getValue(Student.class));
-                        }
+                    for(DataSnapshot students : dataSnapshot.getChildren()) {
+                        for(PlacedStudents student : placedStudentDetails)
+                            if(students.getKey().equals(student.getRegdno()))
+                                //System.out.println(student);
+                                finalVerifiedList.add(student);
                     }
                 }
 

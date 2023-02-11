@@ -40,65 +40,114 @@
             android:textSize="24dp"
             android:fontFamily="@font/montserrat"
             />
-        <EditText
 
-            android:id="@+id/otp_name"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingLeft="20dp"
-            android:layout_margin="40dp"
-            android:hint="Full Name"
-            android:background="@drawable/edittextdesign"
-            android:imeOptions="actionNext"
-            android:nextFocusForward="@id/otp_collegeid"
-            android:singleLine="true"
+            android:layout_height="wrap_content"
+            >
 
-            />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/otp_name"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingLeft="20dp"
+                android:layout_margin="40dp"
+                android:hint="Full Name"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@id/otp_collegeid"
+                android:singleLine="true"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-
-        <EditText
-            android:id="@+id/otp_collegeid"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField2"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingLeft="20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:hint="College ID"
-            android:background="@drawable/edittextdesign"
+            android:layout_height="wrap_content">
 
-            android:nextFocusForward="@id/signup_email"
-            android:singleLine="true"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/otp_collegeid"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingLeft="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:hint="College ID"
+                android:nextFocusForward="@id/signup_email"
+                android:singleLine="true"
+                />
 
-            />
-        <EditText
-            android:id="@+id/signup_email"
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField3"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingLeft="20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:hint="Mail Address"
-            android:background="@drawable/edittextdesign"
-            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content">
 
-            android:nextFocusForward="@id/signup_password"
-            android:singleLine="true"
-            />
-        <EditText
-            android:id="@+id/signup_password"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signup_email"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingLeft="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:hint="Mail Address"
+                android:layout_marginTop="40dp"
+                android:nextFocusForward="@id/signup_password"
+                android:singleLine="true"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField5"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingLeft="20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:hint="Password"
-            android:background="@drawable/edittextdesign"
-            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content">
 
-            android:nextFocusForward="@id/otp_branch"
-            android:singleLine="true"
-            />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signup_password"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingLeft="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:hint="Password"
+                android:layout_marginTop="40dp"
+                android:nextFocusForward="@id/otp_branch"
+                android:singleLine="true"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signup_mobile_number"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingLeft="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:hint="Mobile Number"
+                android:layout_marginTop="40dp"
+                android:nextFocusForward="@id/otp_branch"
+                android:singleLine="true"
+                android:inputType="phone"
+                android:maxLength="10"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Spinner
             android:id="@+id/otp_branch"

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vignan.vignan_placement_application.R;
 import com.vignan.vignan_placement_application.super_admin.Company;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CompanyDisplayAdapter extends RecyclerView.Adapter<CompanyDisplayAdapter.CompanyViewHolder> {
@@ -23,6 +24,10 @@ public class CompanyDisplayAdapter extends RecyclerView.Adapter<CompanyDisplayAd
     CompanyOnClick companyOnClick;
     CardView cardView;
 
+    public void filteredCompanies(ArrayList<Company> filteredCompanies) {
+        this.companyArrayList = filteredCompanies;
+        notifyDataSetChanged();
+    }
     public CompanyDisplayAdapter(ArrayList<Company> companyArrayList,Context context,CompanyOnClick company) {
         this.companyArrayList = companyArrayList;
         this.context = context;
