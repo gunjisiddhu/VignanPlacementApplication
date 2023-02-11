@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    
+    android:padding="30dp"
+    tools:context=".super_admin.statusChanging">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/companyName_display"
+        android:text=""
+        android:fontFamily="@font/fredoka"
+        android:textSize="35dp"/>
+    
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:entries="@array/company_status"
+        android:id="@+id/status_changing"
+        android:layout_marginTop="60dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="browse"
+        android:id="@+id/browse_file"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:fontFamily="@font/fredoka"
+        android:id="@+id/listOfStudents_statusChanging"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/uploadList_atStatusChanging"
+        android:text="upload"/>
+</LinearLayout>

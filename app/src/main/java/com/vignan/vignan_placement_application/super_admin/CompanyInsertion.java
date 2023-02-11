@@ -1,5 +1,6 @@
 package com.vignan.vignan_placement_application.super_admin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -14,7 +15,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.vignan.vignan_placement_application.R;
 
 import java.util.ArrayList;
@@ -29,6 +33,7 @@ public class CompanyInsertion extends AppCompatActivity  implements RemoveItemsF
     Calendar serverTime;
     CompanyAddingListAdapter companyAddingListAdapter;
 
+    boolean isCompanyPresent= false;
     String companyUniqueId;
     Button save;
     ArrayList<String> addedBranches;
@@ -36,12 +41,15 @@ public class CompanyInsertion extends AppCompatActivity  implements RemoveItemsF
 
     Spinner branches,status;
 
+    Company newCompany;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_insertion);
 
         addedBranches = new ArrayList<>();
+        newCompany = new Company();
 
         linkingFields();
 
@@ -96,13 +104,34 @@ public class CompanyInsertion extends AppCompatActivity  implements RemoveItemsF
 
             companyUniqueId = UUID.randomUUID().toString();
             companyUniqueId = companyUniqueId.replaceAll("[-+.^:, ]","");
-            Company company = new Company(companyNamefield.getText().toString(),ctcField.getText().toString(),
+
+            newCompany = new Company(companyNamefield.getText().toString(),ctcField.getText().toString(),
                     serverTime.getTime().toString(),companyUniqueId,status.getSelectedItem().toString(),description.getText().toString(),addedBranches);
-            System.out.println(company+" :: "+companyUniqueId);
-            FirebaseDatabase.getInstance().getReference()
-                    .child("Companies")
-                    .child(company.getUniqueId()).setValue(company);
-            Toast.makeText(getApplicationContext(), "yay! Company Saved", Toast.LENGTH_LONG).show();
+
+            FirebaseDatabase.getInstance().getReference().child("Companies").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot companies : snapshot.getChildren()) {
+                        Company companyDetails = companies.getValue(Company.class);
+                        if(companyDetails.equals(newCompany)) {
+                            isCompanyPresent = true;
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+            if(!isCompanyPresent) {
+                FirebaseDatabase.getInstance().getReference()
+                        .child("Companies")
+                        .child(newCompany.getUniqueId()).setValue(newCompany);
+                Toast.makeText(getApplicationContext(), "yay! Company Saved", Toast.LENGTH_LONG).show();
+            }
         });
 
 

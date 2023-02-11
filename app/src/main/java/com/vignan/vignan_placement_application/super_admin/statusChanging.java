@@ -14,6 +14,8 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,8 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vignan.vignan_placement_application.R;
-import com.vignan.vignan_placement_application.excel_sheet_parsing.ExcelParsing;
-import com.vignan.vignan_placement_application.excel_sheet_parsing.Student;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -39,63 +39,80 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-public class UploadingPlacedSudents extends AppCompatActivity {
+public class statusChanging extends AppCompatActivity {
 
-    ExcelParsing parsing;
-    Button browse, unkownlistOfStudentsSave;
+    ListView studentsList;
     String extension="";
-    ListView listOfStudentsView;
-    Company respectiveCompany;
-    ArrayList<placedStudents> placedStudentsDetails,finalVerifiedList;
-
+    Button browse,save;
+    Spinner status;
+    TextView companyname;
+    Company company;
+    ArrayList<String> extractedData,finalVerifiedList;
+    String statusFromSpinner="";
     ArrayAdapter adapter;
+
+    ArrayList<String> writtenTest_Selected_List,TR_Selected_List,HR_Selected_List;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_uploading_placed_sudents);
+        setContentView(R.layout.activity_status_changing);
 
-        placedStudentsDetails = new ArrayList<>();
-        finalVerifiedList = new ArrayList<>();
+        linkingFields();
+        askPermissionAndBrowseFile();
+
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            respectiveCompany  =  extras.getParcelable("Company Details");
+            company  =  extras.getParcelable("Company Details");
         }
 
-        linkingFields();
+        companyname.setText(company.getCompanyName());
 
-        askPermissionAndBrowseFile();
-
-        browse.setOnClickListener(view -> permissions());
-        unkownlistOfStudentsSave.setOnClickListener(view ->{
-            saveToFirebase();
+        browse.setOnClickListener(view -> {
+            if(statusFromSpinner.equals("Running"))
+                Toast.makeText(getApplicationContext(), "Select Appropriate Option", Toast.LENGTH_SHORT).show();
+            else
+                permissions();
         });
 
-       /* adapter = new ArrayAdapter<>(this,R.layout.final_qualified_students_list_item, finalVerifiedList);
-        listOfStudentsView.setAdapter(adapter);*/
+
+        //student profiles lo kuda update avaliii
+
+        save.setOnClickListener(view -> {
+            statusFromSpinner = status.getSelectedItem().toString();
+
+            if(statusFromSpinner.equals("Written Test")) {
+
+                writtenTest_Selected_List.addAll(finalVerifiedList);
+                company.setWrittenStudentsList(writtenTest_Selected_List);
+
+            }else if(statusFromSpinner.equals("TR Round")) {
+
+                TR_Selected_List.addAll(finalVerifiedList);
+                company.setTRStudentsList(TR_Selected_List);
+
+            }else if(statusFromSpinner.equals("HR Round")) {
+
+                HR_Selected_List.addAll(finalVerifiedList);
+                company.setHRStudentsList(HR_Selected_List);
+
+            }else if(statusFromSpinner.isEmpty() || statusFromSpinner.equals("Running"))
+                Toast.makeText(getApplicationContext(), "Select Appropriate Option", Toast.LENGTH_SHORT).show();
+
+            FirebaseDatabase.getInstance().getReference().child("Companies")
+                    .child(company.getUniqueId()).setValue(company);
+            Toast.makeText(getApplicationContext(), "yay data saved.", Toast.LENGTH_SHORT).show();
+
+
+        });
+
+
 
 
     }
 
-    private void saveToFirebase() {
-
-        respectiveCompany.setFinalQualifiedList(finalVerifiedList);
-        FirebaseDatabase.getInstance().getReference().child("Companies")
-                .child(respectiveCompany.getUniqueId()).setValue(respectiveCompany);
-        Toast.makeText(getApplicationContext(), "yay saved", Toast.LENGTH_SHORT).show();
-    }
-
-    private void linkingFields() {
-        browse = findViewById(R.id.uploadPlacedStudents_button);
-        unkownlistOfStudentsSave = findViewById(R.id.saveStudents);
-        listOfStudentsView = findViewById(R.id.listOfStudents);
-        browse = findViewById(R.id.uploadPlacedStudents_button);
-    }
-
-    @SuppressWarnings("deprecation")
     public void permissions() {
         String[] mimetypes =
                 { "application/vnd.ms-excel",
@@ -199,15 +216,14 @@ public class UploadingPlacedSudents extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void ExtractData(String FileLocation) throws IOException {
-
-        FileInputStream file = new FileInputStream(new File(FileLocation));
+    private void ExtractData(String filePath) throws IOException{
+        FileInputStream file = new FileInputStream(new File(filePath));
         XSSFWorkbook workbook = new XSSFWorkbook(file);
 
-        XSSFSheet sheet = workbook.getSheet("Sheet1");
+        XSSFSheet sheet = workbook.getSheetAt(1);
 
 
-
+        ArrayList<ArrayList<String>> details = new ArrayList<>();
         Iterator<Row> rowIterator = sheet.iterator();
         Row row = rowIterator.next();
 
@@ -216,44 +232,33 @@ public class UploadingPlacedSudents extends AppCompatActivity {
             row = rowIterator.next();
 
             Iterator<Cell> cellIterator = row.cellIterator();
-            ArrayList<String> data = new ArrayList<>();
-            ArrayList<String> details = new ArrayList<>();
             while(cellIterator.hasNext()) {
 
                 Cell cell = cellIterator.next();
                 if(cell.getCellType().equals(CellType.NUMERIC))
                     cell.setCellType(CellType.STRING);
-                data.add(cell.getStringCellValue());
+                extractedData.add(cell.getStringCellValue().toLowerCase());
             }
 
-            String name = data.get(0).toLowerCase();
-            String salary = data.get(data.size()-1);
-            placedStudentsDetails.add(new placedStudents(name,salary));
-
         }
-
-        /*for( placedStudents student : placedStudentsDetails) {
-            System.out.println(student);
-        }*/
-        VerifyStudents();
-
-
+        verifyStudents(extractedData);
 
     }
 
-    private void VerifyStudents() {
-
+    private void verifyStudents(ArrayList<String> qualifiedList) {
         FirebaseDatabase.getInstance().getReference().child("ExcelSheetData").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     for(DataSnapshot students : dataSnapshot.getChildren()) {
-                        for(placedStudents student : placedStudentsDetails)
-                            if(students.getKey().equals(student.getRegdno()))
-                                finalVerifiedList.add(student);
+                        if (qualifiedList.contains(students.getKey())) {
+                            finalVerifiedList.add(students.getKey());
+                        }
                     }
                 }
+                adapter = new ArrayAdapter<String>(statusChanging.this,R.layout.students_regdno_items_list, finalVerifiedList);
+                studentsList.setAdapter(adapter);
 
             }
 
@@ -262,8 +267,23 @@ public class UploadingPlacedSudents extends AppCompatActivity {
 
             }
         });
-
     }
 
 
+    private void linkingFields() {
+        companyname = findViewById(R.id.companyName_display);
+        status = findViewById(R.id.status_changing);
+        browse = findViewById(R.id.browse_file);
+        studentsList = findViewById(R.id.listOfStudents_statusChanging);
+        save = findViewById(R.id.uploadList_atStatusChanging);
+
+        extractedData = new ArrayList<>();
+        finalVerifiedList = new ArrayList<>();
+        writtenTest_Selected_List = new ArrayList<>();
+        TR_Selected_List = new ArrayList<>();
+        HR_Selected_List = new ArrayList<>();
+
+
+
+    }
 }

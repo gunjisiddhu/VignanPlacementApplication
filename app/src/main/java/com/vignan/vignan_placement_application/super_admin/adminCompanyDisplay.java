@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 
-import com.vignan.vignan_placement_application.MyCompany;
 import com.vignan.vignan_placement_application.R;
 
 import java.util.ArrayList;
@@ -41,6 +39,12 @@ public class adminCompanyDisplay extends AppCompatActivity {
             intent.putExtra("Company Details",company);
             startActivity(intent);
 
+        });
+
+        status.setOnClickListener(view ->{
+            Intent intent = new Intent(getApplicationContext(), statusChanging.class);
+            intent.putExtra("Company Details",company);
+            startActivity(intent);
         });
 
     }
