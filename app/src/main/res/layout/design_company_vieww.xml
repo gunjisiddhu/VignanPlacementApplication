@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@drawable/gradient_fill_subtle"
-    tools:context=".super_admin.adminCompanyDisplay">
-
+    android:background="@drawable/gradient_fill_subtle">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -239,7 +235,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.05"
-                android:id="@+id/written_test_count"
                 android:text="0"
                 android:textSize="20dp"/>
 
@@ -277,7 +272,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.05"
-                android:id="@+id/tr_count"
                 android:text="0"
                 android:textSize="20dp"/>
 
@@ -315,7 +309,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.05"
-                android:id="@+id/hr_count"
                 android:text="0"
                 android:textSize="20dp"/>
 
@@ -356,258 +349,4 @@
 
     </LinearLayout>
 
-
-
-
-
 </androidx.core.widget.NestedScrollView>
-
-    <!--<View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginTop="200dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/darker_gray" />-->
-
-
-<!--
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:padding="10dp"
-android:orientation="vertical">
-
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:backgroundTint="#FBD7DB"
-    android:orientation="vertical"
-    app:cardCornerRadius="30dp"
-    >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/admin_company_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Epam Systems Private Limited"
-            android:gravity="center"
-            android:textSize="25dp"
-            android:textAllCaps="true"
-            android:fontFamily="@font/fredoka"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/border_colour_set" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Status"
-            android:fontFamily="@font/fredoka"
-            android:textSize="20dp"
-            android:paddingStart="25dp"
-            />
-        <TextView
-            android:id="@+id/admin_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingRight="25dp"
-            android:fontFamily="@font/fredoka"
-            android:paddingStart="25dp"
-            android:textStyle="bold"
-            android:text="Running"
-            android:textSize="45dp"
-            />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/darker_gray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="CTC"
-            android:fontFamily="@font/fredoka"
-            android:textSize="20dp"
-            android:paddingStart="25dp"
-            />
-        <TextView
-            android:id="@+id/admin_ctc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:fontFamily="@font/fredoka"
-            android:paddingRight="25dp"
-            android:text="8Lpa"
-            android:textStyle="bold"
-            android:paddingStart="25dp"
-            android:textSize="45dp"
-            />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="340dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/darker_gray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Branches"
-            android:fontFamily="@font/fredoka"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:paddingStart="25dp"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:fontFamily="@font/fredoka"
-            android:id="@+id/admin_branchesList"/>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="540dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/darker_gray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="550dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/fredoka"
-            android:text="Starts on"
-            android:textSize="20dp"
-            android:paddingStart="25dp"
-            />
-        <TextView
-            android:id="@+id/admin_company_startDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="25dp"
-            android:fontFamily="@font/fredoka"
-            android:text="Mon 25th Jan 2023"
-            android:textStyle="bold"
-            android:textSize="40dp"
-            />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="640dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/darker_gray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="650dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:textSize="20dp"
-            android:fontFamily="@font/fredoka"
-            android:paddingStart="25dp"
-            />
-
-        <TextView
-            android:id="@+id/admin_company_description"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:fontFamily="@font/fredoka"
-            android:paddingLeft="25dp"
-            android:text="This is for Testing, Hello EPAM,TCS,HEXAWARE,WABTEC,GLOBAL LOGIC,DRAWINBOX"
-            android:textAlignment="viewStart"
-            android:textSize="30dp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="950dp">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Done"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="end"
-            android:id="@+id/admin_company_manage_button"/>
-    </LinearLayout>
-
-
-
-
-
-</androidx.cardview.widget.CardView>
-
-</LinearLayout>-->
