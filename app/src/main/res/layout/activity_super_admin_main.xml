@@ -1,30 +1,82 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_body_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_white"
-    android:id="@+id/main_body_container"
     tools:context=".super_admin.SuperAdminMainActivity">
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_show_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="#E2BDBD"
+        android:clickable="true"
+        android:src="@drawable/uparrow"
+        app:fabSize="normal"
+        app:layout_anchorGravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/main_bottom_navigation_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="#D89521" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/round_corners"
+        android:backgroundTint="@color/light_white"
         android:elevation="20dp"
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/item_selector"
         app:itemRippleColor="@android:color/transparent"
-        android:backgroundTint="@color/light_white"
         app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/main_activity_menu" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/main_activity_menu"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_add_new_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fab_add_new_coordinator"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#D8C3C3"
+        android:clickable="true"
+        android:text="Add new Company"
+        app:fabSize="normal"
+        app:icon="@drawable/addcompany"
+        app:layout_constraintBottom_toTopOf="@+id/fab_add_new_coordinator"
+        app:layout_constraintEnd_toEndOf="@+id/fab_add_new_coordinator"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toStartOf="@+id/fab_add_new_coordinator"
+        app:rippleColor="@color/b2" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_add_new_coordinator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#D8C3C3"
+        android:clickable="true"
+        app:fabSize="normal"
+        android:text="Add Coordinator"
+        app:layout_constraintBottom_toTopOf="@+id/fab_show_options"
+        app:layout_constraintEnd_toEndOf="@+id/fab_show_options"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/fab_show_options"
+        app:rippleColor="@color/b2"
+        app:icon="@drawable/addcoordinator" />
 
 
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
