@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="@drawable/gradient_fill_subtle"
     tools:context=".super_admin.Super_Admin_Companies">
 
     <ImageView
@@ -13,7 +14,7 @@
         android:layout_height="50dp"
         android:layout_gravity="end"
         android:id="@+id/add_company"
-        android:src="@drawable/baseline_add_24"/>
+        android:src="@drawable/addcompanyvector"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +36,7 @@
             android:layout_height="50dp"
             android:layout_weight="0.09"
             android:id="@+id/filter_icon"
-            android:src="@drawable/baseline_filter_alt_24"
+            android:src="@drawable/filtervector"
             />
 
 

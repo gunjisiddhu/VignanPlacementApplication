@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -15,11 +18,13 @@ import java.util.ArrayList;
 
 public class adminCompanyDisplay extends AppCompatActivity {
 
-    TextView companyName,ctc,status,desc,time;
+    TextView companyName,ctc,status,desc,time, WT_Count, TR_Count, HR_Count;
     ArrayList<String> listOfBranches;
-    TextView branches;
+    ListView branches;
     Button save;
     Company company;
+    ArrayAdapter adapter;
+    ImageView status_icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +46,7 @@ public class adminCompanyDisplay extends AppCompatActivity {
 
         });
 
-        status.setOnClickListener(view ->{
+        status_icon.setOnClickListener(view ->{
             Intent intent = new Intent(getApplicationContext(), statusChanging.class);
             intent.putExtra("Company Details",company);
             startActivity(intent);
@@ -56,15 +61,12 @@ public class adminCompanyDisplay extends AppCompatActivity {
         status.setText(company.getStatus());
         desc.setText(company.getDescription());
         time.setText(company.getDateOfStart().substring(0,11));
-        System.out.println(company.getBranches()+"----------");
-        String data = "";
-        for(String branch : company.getBranches())
-            if(branch.equals(company.getBranches().size()-1))
-                data = data+".";
-            else
-                data = data+branch+", ";
+        adapter = new ArrayAdapter<String>(adminCompanyDisplay.this,R.layout.students_regdno_items_list, company.getBranches());
+        branches.setAdapter(adapter);
+        WT_Count.setText(company.getWrittenStudentsList().size()+"");
+        TR_Count.setText(company.getTRStudentsList().size()+"");
+        HR_Count.setText(company.getHRStudentsList().size()+"");
 
-        branches.setText(data);
     }
 
     private void linkingFields() {
@@ -75,7 +77,11 @@ public class adminCompanyDisplay extends AppCompatActivity {
         desc = findViewById(R.id.admin_company_description);
         time = findViewById(R.id.admin_company_startDate);
         listOfBranches = new ArrayList<>();
-        branches = findViewById(R.id.admin_branchesList);
+        status_icon = findViewById(R.id.admin_status_edit_icon);
+        branches = findViewById(R.id.admin_show_branches);
         save = findViewById(R.id.admin_company_manage_button);
+        WT_Count = findViewById(R.id.written_test_count);
+        TR_Count = findViewById(R.id.tr_count);
+        HR_Count = findViewById(R.id.hr_count);
     }
 }

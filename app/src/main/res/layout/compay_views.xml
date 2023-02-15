@@ -4,18 +4,26 @@
     android:layout_height="210dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/company_card_view"
-    android:backgroundTint="#FBD7DB"
     android:orientation="vertical"
     android:layout_marginTop="20dp"
     app:cardCornerRadius="30dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/company_display_gradient">
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/superAdmin_comapanyName_display"
         android:text="Epam Systems Private Limited."
+        android:textStyle="bold"
         android:gravity="center"
-        android:fontFamily="@font/fredoka"
+        android:fontFamily="@font/gothic"
+        android:textColor="@color/black"
         android:textSize="25dp"
         android:layout_marginTop="10dp"/>
 
@@ -26,7 +34,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="70dp"
-        android:background="@drawable/border_colour_set" />
+        android:background="#A64F03" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,6 +48,7 @@
             android:layout_weight="0.5"
             android:text="Status"
             android:textSize="20dp"
+            android:textColor="@color/black"
             android:paddingStart="20dp"
             android:layout_marginTop="80dp"/>
         <TextView
@@ -49,6 +58,7 @@
             android:layout_weight="0.5"
             android:textAlignment="viewEnd"
             android:text="Running"
+            android:textColor="@color/b3"
             android:textSize="20dp"
             android:paddingEnd="20dp"
             android:layout_marginTop="80dp"/>
@@ -75,6 +85,7 @@
             android:layout_weight="0.5"
             android:text="CTC"
             android:textSize="20dp"
+            android:textColor="@color/black"
             android:paddingStart="20dp"
             android:layout_marginTop="80dp"/>
         <TextView
@@ -85,21 +96,21 @@
             android:textAlignment="viewEnd"
             android:text="8-12lpa"
             android:textSize="20dp"
+            android:textColor="@color/b3"
             android:paddingEnd="20dp"
             android:layout_marginTop="80dp"/>
 
     </LinearLayout>
-    <TextView
+
+    <ImageView
         android:id="@+id/company_details_fetching"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="View More"
-        android:fontFamily="@font/fredoka"
-        android:textSize="20dp"
-        android:textStyle="bold"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/viewmore"
         android:layout_marginTop="170dp"
-        android:paddingRight="40dp"
-        android:textAlignment="viewEnd"/>
+        android:layout_gravity="end"
+        android:layout_marginRight="40dp"
+        />
 
 
 </androidx.cardview.widget.CardView>
