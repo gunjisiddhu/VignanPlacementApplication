@@ -19,17 +19,9 @@ public class Company implements Parcelable {
     private String description;
     private ArrayList<String> branches;
 
-    private ArrayList<String> appliedStudentsList,writtenStudentsList,TRStudentsList,HRStudentsList;
+    private ArrayList<String> writtenStudentsList,TRStudentsList,HRStudentsList;
 
     private ArrayList<PlacedStudents> finalQualifiedList;
-
-    @Override
-    public boolean equals(@Nullable Object obj) {
-        Company company = (Company) obj;
-        return this.getCompanyName().equals(company.getCompanyName()) && this.getBranches().equals(company.getBranches())
-                && this.getCtc().equals(company.getCtc()) && this.getDescription().equals(company.getDescription())
-                && this.getStatus().equals(company.getStatus());
-    }
 
     protected Company(Parcel in) {
         companyName = in.readString();
@@ -40,7 +32,6 @@ public class Company implements Parcelable {
         status = in.readString();
         description = in.readString();
         branches = in.createStringArrayList();
-        appliedStudentsList = in.createStringArrayList();
         writtenStudentsList = in.createStringArrayList();
         TRStudentsList = in.createStringArrayList();
         HRStudentsList = in.createStringArrayList();
@@ -59,7 +50,13 @@ public class Company implements Parcelable {
         }
     };
 
-
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        Company company = (Company) obj;
+        return this.getCompanyName().equals(company.getCompanyName()) && this.getBranches().equals(company.getBranches())
+                && this.getCtc().equals(company.getCtc()) && this.getDescription().equals(company.getDescription())
+                && this.getStatus().equals(company.getStatus());
+    }
 
     @Override
     public String toString() {
@@ -72,7 +69,6 @@ public class Company implements Parcelable {
                 ", status='" + status + '\'' +
                 ", description='" + description + '\'' +
                 ", branches=" + branches +
-                ", appliedStudentsList=" + appliedStudentsList +
                 ", writtenStudentsList=" + writtenStudentsList +
                 ", TRStudentsList=" + TRStudentsList +
                 ", HRStudentsList=" + HRStudentsList +
@@ -144,14 +140,6 @@ public class Company implements Parcelable {
         this.branches = branches;
     }
 
-    public ArrayList<String> getAppliedStudentsList() {
-        return appliedStudentsList;
-    }
-
-    public void setAppliedStudentsList(ArrayList<String> appliedStudentsList) {
-        this.appliedStudentsList = appliedStudentsList;
-    }
-
     public ArrayList<String> getWrittenStudentsList() {
         return writtenStudentsList;
     }
@@ -183,6 +171,76 @@ public class Company implements Parcelable {
     public void setFinalQualifiedList(ArrayList<PlacedStudents> finalQualifiedList) {
         this.finalQualifiedList = finalQualifiedList;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(companyName);
+        parcel.writeString(ctc);
+        parcel.writeString(dateOfStart);
+        parcel.writeString(endOfHiring);
+        parcel.writeString(uniqueId);
+        parcel.writeString(status);
+        parcel.writeString(description);
+        parcel.writeStringList(branches);
+        parcel.writeStringList(writtenStudentsList);
+        parcel.writeStringList(TRStudentsList);
+        parcel.writeStringList(HRStudentsList);
+        parcel.writeTypedList(finalQualifiedList);
+    }
+
+    public Company(String companyName, String ctc, String dateOfStart, String endOfHiring, String uniqueId, String status, String description, ArrayList<String> branches, ArrayList<String> writtenStudentsList, ArrayList<String> TRStudentsList, ArrayList<String> HRStudentsList, ArrayList<PlacedStudents> finalQualifiedList) {
+        this.companyName = companyName;
+        this.ctc = ctc;
+        this.dateOfStart = dateOfStart;
+        this.endOfHiring = endOfHiring;
+        this.uniqueId = uniqueId;
+        this.status = status;
+        this.description = description;
+        this.branches = branches;
+        this.writtenStudentsList = writtenStudentsList;
+        this.TRStudentsList = TRStudentsList;
+        this.HRStudentsList = HRStudentsList;
+        this.finalQualifiedList = finalQualifiedList;
+    }
+    public Company(String companyName, String ctc, String dateOfStart,String endOfHiring, String uniqueId, String status, String description, ArrayList<String> branches) {
+
+        this.companyName = companyName;
+        this.ctc = ctc;
+        this.dateOfStart = dateOfStart;
+        this.endOfHiring= endOfHiring;
+        this.uniqueId = uniqueId;
+        this.status = status;
+        this.description = description;
+        this.branches = branches;
+
+        this.writtenStudentsList = null;
+        this.TRStudentsList = null;
+        this.HRStudentsList = null;
+        this.finalQualifiedList = null;
+    }
+
+    public Company() {
+        this.companyName = null;
+        this.ctc = null;
+        this.dateOfStart = null;
+        this.endOfHiring = null;
+        this.uniqueId = null;
+        this.status = null;
+        this.description = null;
+        this.branches = null;
+        this.writtenStudentsList = null;
+        this.TRStudentsList = null;
+        this.HRStudentsList = null;
+        this.finalQualifiedList = null;
+    }
+}
+
+/*
 
     public Company(String companyName, String ctc, String dateOfStart, String endOfHiring, String uniqueId, String status, String description, ArrayList<String> branches, ArrayList<String> appliedStudentsList, ArrayList<String> writtenStudentsList, ArrayList<String> TRStudentsList, ArrayList<String> HRStudentsList, ArrayList<PlacedStudents> finalQualifiedList) {
         this.companyName = companyName;
@@ -232,26 +290,4 @@ public class Company implements Parcelable {
         this.finalQualifiedList = null;
     }
 
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel parcel, int i) {
-        parcel.writeString(companyName);
-        parcel.writeString(ctc);
-        parcel.writeString(dateOfStart);
-        parcel.writeString(endOfHiring);
-        parcel.writeString(uniqueId);
-        parcel.writeString(status);
-        parcel.writeString(description);
-        parcel.writeStringList(branches);
-        parcel.writeStringList(appliedStudentsList);
-        parcel.writeStringList(writtenStudentsList);
-        parcel.writeStringList(TRStudentsList);
-        parcel.writeStringList(HRStudentsList);
-        parcel.writeTypedList(finalQualifiedList);
-    }
-}
+*/

@@ -305,7 +305,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Branch"
+                            android:text="Password"
                             android:layout_weight="0.2"
                             android:layout_gravity="start"
                             android:textAlignment="textStart"

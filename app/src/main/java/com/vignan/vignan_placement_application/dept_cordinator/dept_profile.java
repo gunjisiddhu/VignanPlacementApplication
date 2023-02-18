@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,15 +24,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vignan.vignan_placement_application.LoginActivity;
 import com.vignan.vignan_placement_application.R;
-import com.vignan.vignan_placement_application.student.StudentCoordinators;
-import com.vignan.vignan_placement_application.super_admin.StudentData;
 
 public class dept_profile extends Fragment {
     View root;
     String current_branch;
     ImageView name,gender,email,regdno,branch,logout;
-    TextView uname,ugender,uemail,uregno,ubranch;
+    TextView uname,ugender,uemail, upassword,ubranch;
     final String MY_PREFS_NAME = "status";
+
+    Coordinator coordinator;
 
 
 
@@ -43,10 +42,8 @@ public class dept_profile extends Fragment {
 
         root = inflater.inflate(R.layout.dept_profile, container, false);
 
-
         linkingFields();
-        System.out.println(FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
-
+        System.out.println(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()+"2313131313123");
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +75,7 @@ public class dept_profile extends Fragment {
         return root;
     }
 
+
     private void linkingFields() {
 
 
@@ -85,7 +83,7 @@ public class dept_profile extends Fragment {
         uname = root.findViewById(R.id.depart_Cordinator_username);
         ugender = root.findViewById(R.id.depart_Cordinator_gender);
         uemail = root.findViewById(R.id.depart_Cordinator_email);
-        uregno = root.findViewById(R.id.depart_Cordinator_password);
+        upassword = root.findViewById(R.id.depart_Cordinator_password);
         ubranch = root.findViewById(R.id.depart_Cordinator_branch);
         logout = root.findViewById(R.id.department_cordinator_logut);
 
@@ -102,9 +100,9 @@ public class dept_profile extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                            Coordinator studentData = snapshot.getValue(Coordinator.class);
-                            if(studentData.getAuthId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid().toString())){
-                                assignDataToViews(studentData);
+                            coordinator = snapshot.getValue(Coordinator.class);
+                            if(coordinator.getAuthId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid().toString())){
+                                assignDataToViews(coordinator);
                             }
                         }
 
@@ -121,7 +119,7 @@ public class dept_profile extends Fragment {
         uname.setText(studentData.getName());
         ugender.setText(studentData.getGender());
         uemail.setText(studentData.getMail());
-        uregno.setText(studentData.getPassword());
+        upassword.setText(studentData.getPassword());
         ubranch.setText(studentData.getBranch());
         current_branch = studentData.getBranch();
     }

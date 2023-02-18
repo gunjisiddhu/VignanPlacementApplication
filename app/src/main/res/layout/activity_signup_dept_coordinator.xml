@@ -1,199 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:padding="20dp"
-    android:background="#B2E6F6"
+    android:background="@drawable/signup_cordnator_gradient_design"
     tools:context=".super_admin.signupDeptCoordinator">
 
     <LinearLayout
-        android:backgroundTint="@color/white"
-        android:background ="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:orientation="vertical">
 
-
-        <TextView
-            android:textColor="#E11B1B"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Co-ordinator Sign Up"
-            android:textSize="24dp"
-            android:fontFamily="@font/montserrat"
-            />
-
- <!--       <EditText
-            android:id="@+id/coordinator_name"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingLeft="20dp"
-            android:layout_margin="40dp"
-            android:hint="Full Name"
-            android:background="@drawable/edittextdesign"
-            android:imeOptions="actionNext"
-            android:nextFocusForward="@id/otp_collegeid"
-            />-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/coordinator_name"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:paddingLeft="20dp"
-                android:layout_margin="40dp"
-                android:hint="Full Name"
-                android:imeOptions="actionNext"
-                android:nextFocusForward="@id/otp_collegeid"
+            android:orientation="vertical">
+            <TextView
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:text="Signup Co-ordinator!!"
+                android:textAllCaps="true"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat"
+                />
+            <TextView
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="To provide administrative support for designated areas of work and activities within a Department, which may include the provision of administrative support to the Head of Department and senior members of staff"
+                android:textAllCaps="true"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/fredoka"
                 />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
-
-<!--        <EditText
-            android:id="@+id/coordinator_username"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingLeft="20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:hint="Username"
-            android:inputType="textEmailAddress"
-            android:background="@drawable/edittextdesign"
-            />-->
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="30dp"
+            android:background="@drawable/border_design"
+            android:layout_marginTop="90dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/coordinator_username"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textField"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:paddingLeft="20dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:hint="Username"
-                android:inputType="textEmailAddress"
+                android:layout_height="wrap_content"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/coordinator_name"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_height="60dp"
+                    android:hint="Full Name"
+
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@id/otp_collegeid"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textField2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/coordinator_username"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="60dp"
+                    android:hint="Username"
+                    android:inputType="textEmailAddress"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textField3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/coordinator_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/white"
+                    android:hint="Mail Address"
+                    android:inputType="textEmailAddress"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textField4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/coordinator_mobile_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/white"
+                    android:hint="MobileNumber"
+                    android:inputType="phone"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Spinner
+                android:id="@+id/coordinator_gender"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="bottom"
+                android:gravity="bottom"
+                android:entries="@array/gender"
+                android:background="@drawable/edittextdesign"
                 />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-<!--        <EditText
-            android:id="@+id/coordinator_email"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingLeft="20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:hint="Mail Address"
-            android:layout_marginTop="40dp"
-            android:inputType="textEmailAddress"
-            android:background="@drawable/edittextdesign"
-            />-->
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/coordinator_email"
+            <Spinner
+                android:id="@+id/coordinator_branch"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:paddingLeft="20dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:hint="Mail Address"
-                android:layout_marginTop="40dp"
-                android:inputType="textEmailAddress"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="bottom"
+                android:entries="@array/Branches"
+                android:gravity="bottom"
+                android:background="@drawable/edittextdesign"
                 />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-<!--        <EditText
-            android:id="@+id/coordinator_mobile_number"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingLeft="20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="40dp"
-            android:hint="MobileNumber"
-            android:inputType="phone"
-            android:background="@drawable/edittextdesign"
-            />-->
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/coordinator_mobile_number"
+            <Button
+                android:id="@+id/cooridnator_submit"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:paddingLeft="20dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="40dp"
-                android:hint="MobileNumber"
-                android:inputType="phone"
+                android:layout_height="50dp"
+                android:text="Submit"
+                android:background="@drawable/buttondesign"
+                android:layout_marginTop="30dp"
                 />
 
-        </com.google.android.material.textfield.TextInputLayout>
 
-
-        <Spinner
-            android:id="@+id/coordinator_gender"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_gravity="bottom"
-            android:gravity="bottom"
-            android:entries="@array/gender"
-            android:background="@drawable/edittextdesign"
-            android:layout_marginTop="40dp"
-
-            />
-
-        <Spinner
-            android:id="@+id/coordinator_branch"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_gravity="bottom"
-            android:entries="@array/Branches"
-            android:gravity="bottom"
-            android:background="@drawable/edittextdesign"
-            android:layout_marginTop="40dp"
-
-            />
-
-        <Button
-            android:id="@+id/cooridnator_submit"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Submit"
-            android:background="@drawable/buttondesign"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="20dp"
-            />
-
+        </LinearLayout>
     </LinearLayout>
 
+</androidx.core.widget.NestedScrollView>
 
-
-</LinearLayout>
+    <!--android:background="#B2E6F6"-->

@@ -250,6 +250,49 @@
 
                 </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2B3B77"
+                    android:textAllCaps="true"
+                    android:textSize="18dp"
+                    android:text="End of Hiring"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/superAdmin_end_date"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/change_textbox_color"
+                        android:paddingStart="15dp"
+                        android:layout_height="45dp"
+                        android:gravity="center"
+                        android:editable="false"
+                        android:textColor="#2B3B77"
+                        android:textSize="18dp" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="43dp"
+                        android:id="@+id/end_date_calendar_icon"
+                        android:src="@drawable/baseline_edit_calendar_24"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
