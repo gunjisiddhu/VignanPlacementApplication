@@ -8,6 +8,7 @@
     tools:context=".super_admin.Super_Admin_Home">
 
     <Button
+        android:visibility="gone"
         android:layout_margin="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

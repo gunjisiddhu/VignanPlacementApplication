@@ -19,6 +19,12 @@
             android:name=".DisplaySelectedStudents"
             android:exported="false" />
         <activity
+            android:name=".EdiitStudentDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StudentProfileForModificatiomActivity"
+            android:exported="false" />
+        <activity
             android:name=".AadharCardChangeActivity"
             android:exported="false" />
         <activity

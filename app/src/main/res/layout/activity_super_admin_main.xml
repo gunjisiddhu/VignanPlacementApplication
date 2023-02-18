@@ -23,7 +23,7 @@
         app:layout_anchorGravity="center"
         app:layout_constraintBottom_toTopOf="@+id/main_bottom_navigation_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="#D89521" />
+        app:rippleColor="#FFFFFF" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_bottom_navigation_view"
@@ -50,7 +50,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="40dp"
-        android:backgroundTint="#D8C3C3"
+        android:backgroundTint="#FFFFFF"
         android:clickable="true"
         android:text="Add new Company"
         app:fabSize="normal"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="@+id/fab_add_new_coordinator"
         app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="@+id/fab_add_new_coordinator"
-        app:rippleColor="@color/b2" />
+        app:rippleColor="#D8C3C3" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_add_new_coordinator"
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="40dp"
-        android:backgroundTint="#D8C3C3"
+        android:backgroundTint="#FFFFFF"
         android:clickable="true"
         app:fabSize="normal"
         android:text="Add Coordinator"
@@ -75,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="@+id/fab_show_options"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/fab_show_options"
-        app:rippleColor="@color/b2"
+        app:rippleColor="#D8C3C3"
         app:icon="@drawable/addcoordinator" />
 
 

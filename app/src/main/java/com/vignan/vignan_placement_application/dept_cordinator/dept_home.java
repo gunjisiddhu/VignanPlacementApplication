@@ -1,5 +1,6 @@
 package com.vignan.vignan_placement_application.dept_cordinator;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,8 +21,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vignan.vignan_placement_application.R;
+import com.vignan.vignan_placement_application.StudentProfileForModificatiomActivity;
 import com.vignan.vignan_placement_application.adapters.StudentApproveListAdapter;
 import com.vignan.vignan_placement_application.adapters.StudentListOnClick;
+import com.vignan.vignan_placement_application.super_admin.ShowStudentList;
 import com.vignan.vignan_placement_application.super_admin.StudentData;
 
 import java.util.ArrayList;
@@ -146,6 +149,9 @@ public class dept_home extends Fragment implements SearchView.OnQueryTextListene
     @Override
     public void getStudentDetails(StudentData studentData) {
 
+        Intent intent = new Intent(getContext(), StudentProfileForModificatiomActivity.class);
+        intent.putExtra("StudentData",studentData);
+        startActivity(intent);
 
     }
 }

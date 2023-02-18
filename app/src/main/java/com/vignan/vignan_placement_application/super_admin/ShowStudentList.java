@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -16,8 +18,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vignan.vignan_placement_application.R;
 import com.vignan.vignan_placement_application.StudentDetailsForVerification;
+import com.vignan.vignan_placement_application.StudentProfileForModificatiomActivity;
 import com.vignan.vignan_placement_application.adapters.StudentApproveListAdapter;
 import com.vignan.vignan_placement_application.adapters.StudentListOnClick;
+import com.vignan.vignan_placement_application.excel_sheet_parsing.Student;
 import com.vignan.vignan_placement_application.student.StudentCreationPOJO;
 
 import org.apache.xmlbeans.impl.soap.Text;
@@ -52,6 +56,19 @@ public class ShowStudentList extends AppCompatActivity implements SearchView.OnQ
         listView = findViewById(R.id.studentNameListView);
         searchView = findViewById(R.id.searchViewInStudentDisplay);
         listView.setAdapter(studentApproveListAdapter);
+
+
+        //onclickOpenStudentProfile
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+
+
+            }
+        });
+
         setupSearchView();
 
 
@@ -111,7 +128,11 @@ public class ShowStudentList extends AppCompatActivity implements SearchView.OnQ
 
     @Override
     public void getStudentDetails(StudentData studentData) {
+        //StudentData studentData = studentDataArrayList.get(i);
 
+        Intent intent = new Intent(ShowStudentList.this, StudentProfileForModificatiomActivity.class);
+        intent.putExtra("StudentData",studentData);
+        startActivity(intent);
 
     }
 }
