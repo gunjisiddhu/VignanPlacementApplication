@@ -21,18 +21,20 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/raleway"
             android:text="Epam Systems Private Limited"
+            android:textAllCaps="true"
             android:textSize="55dp"
             android:textStyle="bold" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/border_colour_set" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical">
 
             <TextView
@@ -50,7 +52,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
+                    android:layout_weight="2"
                     android:id="@+id/admin_status"
                     android:text="Running"
                     android:textSize="45dp"
@@ -58,10 +60,10 @@
                     android:fontFamily="@font/fredoka"/>
 
                 <ImageView
-                    android:layout_width="32dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/next_arrow"
-                    android:layout_weight="0.01"
+                    android:layout_weight="1"
                     android:id="@+id/admin_status_edit_icon"
                     />
 
@@ -73,14 +75,14 @@
             android:layout_width="300dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="30dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -102,14 +104,14 @@
             android:layout_width="300dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="30dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -131,14 +133,14 @@
             android:layout_width="300dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="30dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -160,14 +162,54 @@
             android:layout_width="300dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/final_list_display_layout"
+            android:layout_marginTop="30dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:text="Final Qualified List"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/fredoka"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.05"
+                android:id="@+id/final_list_count"
+                android:text="0"
+                android:textAlignment="center"
+                android:textSize="20dp"/>
+
+            <ImageView
+                android:id="@+id/final_list_Arrow"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.01"
+                android:src="@drawable/next_arrow" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -182,7 +224,7 @@
                 android:id="@+id/admin_company_description"
                 android:fontFamily="@font/fredoka"
                 android:text="this is for testing hello, this is epam systems private limited hyderabad, Telangana."
-                android:textSize="40dp"
+                android:textSize="30dp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -190,14 +232,14 @@
             android:layout_width="300dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="30dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -214,24 +256,24 @@
                 android:fontFamily="@font/fredoka"/>
         </LinearLayout>
 
-        <View
+  <!--      <View
             android:layout_width="300dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:background="@android:color/darker_gray" />
+            android:layout_marginTop="20dp"
+            android:background="@android:color/darker_gray" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="30dp">
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"
                 android:text="Written List Students"
-                android:textSize="25dp"
+                android:textSize="30dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/fredoka"/>
 
@@ -241,9 +283,11 @@
                 android:layout_weight="0.05"
                 android:id="@+id/written_test_count"
                 android:text="0"
+                android:textAlignment="center"
                 android:textSize="20dp"/>
 
             <ImageView
+                android:id="@+id/written_list_arrow"
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/next_arrow"
@@ -256,20 +300,20 @@
             android:layout_width="300dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="30dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="30dp">
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"
                 android:text="TR Selected Students"
-                android:textSize="25dp"
+                android:textSize="30dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/fredoka"/>
 
@@ -278,10 +322,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.05"
                 android:id="@+id/tr_count"
+                android:textAlignment="center"
                 android:text="0"
                 android:textSize="20dp"/>
 
             <ImageView
+                android:id="@+id/tr_list_arrow"
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/next_arrow"
@@ -294,20 +340,20 @@
             android:layout_width="300dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="30dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="30dp">
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"
                 android:text="HR Selected Students"
-                android:textSize="25dp"
+                android:textSize="30dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/fredoka"/>
 
@@ -316,10 +362,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.05"
                 android:id="@+id/hr_count"
+                android:textAlignment="center"
                 android:text="0"
                 android:textSize="20dp"/>
 
             <ImageView
+                android:id="@+id/hr_list_arrow"
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/next_arrow"
@@ -332,14 +380,15 @@
             android:layout_width="300dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="30dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:id="@+id/upload_final_list_layout"
+            android:layout_marginTop="30dp">
 
             <Button
                 android:layout_width="match_parent"

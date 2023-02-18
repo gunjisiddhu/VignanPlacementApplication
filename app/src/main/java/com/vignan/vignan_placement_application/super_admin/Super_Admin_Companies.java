@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vignan.vignan_placement_application.R;
 import com.vignan.vignan_placement_application.adapters.CompanyDisplayAdapter;
+import com.vignan.vignan_placement_application.dept_cordinator.dept_profile;
 
 
 import java.util.ArrayList;
@@ -189,5 +190,6 @@ public class Super_Admin_Companies extends Fragment implements CompanyDisplayAda
         Intent intent  = new Intent(getContext(),adminCompanyDisplay.class);
         intent.putExtra("Company Details",company);
         startActivity(intent);
+
     }
 }

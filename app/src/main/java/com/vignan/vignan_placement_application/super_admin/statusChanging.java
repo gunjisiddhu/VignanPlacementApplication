@@ -83,6 +83,22 @@ public class statusChanging extends AppCompatActivity {
         save.setOnClickListener(view -> {
             statusFromSpinner = status.getSelectedItem().toString();
 
+            FirebaseDatabase.getInstance().getReference().child("Companies").child(company.getUniqueId()).child("hrstudentsList").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot listOfStudents : snapshot.getChildren()) {
+                        if(finalVerifiedList.contains(listOfStudents.getValue(String.class)))
+                            finalVerifiedList.remove(listOfStudents.getValue(String.class));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
             if(statusFromSpinner.equals("Written Test")) {
 
                 writtenTest_Selected_List.addAll(finalVerifiedList);
@@ -104,7 +120,6 @@ public class statusChanging extends AppCompatActivity {
             FirebaseDatabase.getInstance().getReference().child("Companies")
                     .child(company.getUniqueId()).setValue(company);
             Toast.makeText(getApplicationContext(), "yay data saved.", Toast.LENGTH_SHORT).show();
-
 
         });
 

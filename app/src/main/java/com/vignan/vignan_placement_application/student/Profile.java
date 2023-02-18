@@ -26,7 +26,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.vignan.vignan_placement_application.AadharCardChangeActivity;
 import com.vignan.vignan_placement_application.LoginActivity;
+import com.vignan.vignan_placement_application.PanCardChangeActivity;
 import com.vignan.vignan_placement_application.R;
 import com.vignan.vignan_placement_application.adapters.LoadingDialog;
 import com.vignan.vignan_placement_application.adapters.ProfilePlacedCompaniesAdapter;
@@ -113,7 +115,7 @@ public class Profile extends Fragment {
         aadharChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(getActivity(),AadharCardChangeActivity.class));
             }
         });
 
@@ -121,7 +123,7 @@ public class Profile extends Fragment {
         panChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(getActivity(), PanCardChangeActivity.class));
             }
         });
 

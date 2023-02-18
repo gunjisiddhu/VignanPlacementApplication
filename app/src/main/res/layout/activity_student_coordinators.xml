@@ -8,6 +8,13 @@
     android:background="@drawable/gradient_fill"
     tools:context=".student.StudentCoordinators">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Department Co-ordinators"
+        android:textAllCaps="true"
+        android:textSize="45dp"
+        android:fontFamily="@font/teko"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
