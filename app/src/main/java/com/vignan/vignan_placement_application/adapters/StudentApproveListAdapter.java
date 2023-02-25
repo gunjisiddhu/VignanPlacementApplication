@@ -22,6 +22,8 @@ public class StudentApproveListAdapter extends ArrayAdapter<StudentData> {
     Context context;
     static int count = 0;
     StudentListOnClick studentListOnClick;
+
+
     public StudentApproveListAdapter(@NonNull Context context, int resource,ArrayList<StudentData> list,StudentListOnClick studentListOnClick) {
         super(context, R.layout.item_student_approve_list_row,list);
         this.context = context;

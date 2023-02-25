@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.util.Objects;
+
 public class PlacedStudents implements Parcelable {
 
     private String regdno,salary;
@@ -13,6 +15,22 @@ public class PlacedStudents implements Parcelable {
     protected PlacedStudents(Parcel in) {
         regdno = in.readString();
         salary = in.readString();
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PlacedStudents)) return false;
+        PlacedStudents that = (PlacedStudents) o;
+        return getRegdno().equals(that.getRegdno()) && getSalary().equals(that.getSalary());
+    }
+
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRegdno(), getSalary());
     }
 
     public static final Creator<PlacedStudents> CREATOR = new Creator<PlacedStudents>() {

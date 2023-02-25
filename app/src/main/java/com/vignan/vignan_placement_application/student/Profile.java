@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -47,13 +48,13 @@ public class Profile extends Fragment {
 
     TextView name, regdNum, mail, phone, gender, branch, year, stay, backlogs, currentAggregate, interMarks;
     TextView sscMarks, password, aadharId, panId, placedCompanyCount, AttemptedCompanyCount;
-    ImageView profilePic,passwordChange,aadharChange,panChange;
+    ImageView profilePic, passwordChange, aadharChange, panChange;
 
 
     List<String> attemptedCompanies;
     List<PlacedStudents> placedCompanies;
 
-    ListView attemptedCompaniesView,placedCompaniesView;
+    ListView attemptedCompaniesView, placedCompaniesView;
 
     ProfilePlacedCompaniesAdapter profilePlacedCompaniesAdapter;
     ArrayAdapter<String> attemptedCompaniesAdapter;
@@ -115,7 +116,7 @@ public class Profile extends Fragment {
         aadharChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),AadharCardChangeActivity.class));
+                startActivity(new Intent(getActivity(), AadharCardChangeActivity.class));
             }
         });
 
@@ -135,7 +136,7 @@ public class Profile extends Fragment {
         if (FirebaseAuth.getInstance().getCurrentUser().getUid() == null)
             getActivity().finish();
         else {
-            FirebaseDatabase.getInstance().getReference().child("StudentData").child("ACTIVATED").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            FirebaseDatabase.getInstance().getReference().child("StudentData").child("ACTIVATED").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     StudentData studentData = snapshot.getValue(StudentData.class);
@@ -158,11 +159,54 @@ public class Profile extends Fragment {
         attemptedCompaniesView = root.findViewById(R.id.student_profile_ListView_attmpt);
         placedCompaniesView = root.findViewById(R.id.student_profile_listView_placed);
 
-        profilePlacedCompaniesAdapter = new ProfilePlacedCompaniesAdapter(getContext(),R.layout.item_student_approve_list_row,placedCompanies);
-        attemptedCompaniesAdapter = new ArrayAdapter<>(getContext(),R.layout.drop_down_item,attemptedCompanies);
+        profilePlacedCompaniesAdapter = new ProfilePlacedCompaniesAdapter(getContext(), R.layout.item_student_approve_list_row, placedCompanies);
+        attemptedCompaniesAdapter = new ArrayAdapter<>(getContext(), R.layout.drop_down_item, attemptedCompanies);
 
         placedCompaniesView.setAdapter(profilePlacedCompaniesAdapter);
         attemptedCompaniesView.setAdapter(attemptedCompaniesAdapter);
+
+        placedCompaniesView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+
+                // Handle ListView touch events.
+                v.onTouchEvent(event);
+                return true;
+            }
+        });
+        attemptedCompaniesView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+
+                // Handle ListView touch events.
+                v.onTouchEvent(event);
+                return true;
+            }
+        });
 
         current_branch = "";
         logout = root.findViewById(R.id.department_cordinator_logut);
@@ -192,8 +236,6 @@ public class Profile extends Fragment {
         profilePic = root.findViewById(R.id.student_profile_pic);
 
 
-
-
     }
 
     private void assignDataToViews(StudentData studentData) {
@@ -204,7 +246,7 @@ public class Profile extends Fragment {
         mail.setText(studentData.getE_mail());
         phone.setText(studentData.getPhone());
         gender.setText(studentData.getGender());
-        if(studentData.getGender().equalsIgnoreCase("Female")){
+        if (studentData.getGender().equalsIgnoreCase("Female")) {
             profilePic.setImageDrawable(getResources().getDrawable(R.drawable.female_new));
         }
 
@@ -222,13 +264,17 @@ public class Profile extends Fragment {
         //AttemptedCompanyCount.setText(studentData.getAppliedCompanies().size());
 
 
-        if(studentData.getAppliedCompanies() != null)
-            attemptedCompanies = studentData.getAppliedCompanies();
-        if(studentData.getPlacedCompanies() != null)
-            placedCompanies = studentData.getPlacedCompanies();
+        if (studentData.getAppliedCompanies() != null) {
+            AttemptedCompanyCount.setText(studentData.getAppliedCompanies().size());
+            studentData.getAppliedCompanies().forEach(p -> attemptedCompanies.add(p));
+            attemptedCompaniesAdapter.notifyDataSetChanged();
+        }
+        if (studentData.getPlacedCompanies() != null) {
+            placedCompanyCount.setText(studentData.getPlacedCompanies().size() + "");
+            studentData.getPlacedCompanies().forEach(p -> placedCompanies.add(p));
+            profilePlacedCompaniesAdapter.notifyDataSetChanged();
+        }
 
-        profilePlacedCompaniesAdapter.notifyDataSetChanged();
-        attemptedCompaniesAdapter.notifyDataSetChanged();
 
     }
 }

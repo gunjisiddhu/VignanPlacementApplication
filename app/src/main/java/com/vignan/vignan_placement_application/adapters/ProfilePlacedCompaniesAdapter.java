@@ -14,6 +14,7 @@ import com.vignan.vignan_placement_application.R;
 import com.vignan.vignan_placement_application.super_admin.PlacedStudents;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ProfilePlacedCompaniesAdapter extends ArrayAdapter<PlacedStudents> {
     List<PlacedStudents> list;
@@ -33,7 +34,7 @@ public class ProfilePlacedCompaniesAdapter extends ArrayAdapter<PlacedStudents> 
         t1 = v.findViewById(R.id.free_facult_id);
         t2 = v.findViewById(R.id.free_faculty_name);
         PlacedStudents f = list.get(position);
-        t1.setText(f.getRegdno());
+        t1.setText(f.getRegdno().toUpperCase(Locale.ROOT));
         t2.setText(f.getSalary());
 
         return v;

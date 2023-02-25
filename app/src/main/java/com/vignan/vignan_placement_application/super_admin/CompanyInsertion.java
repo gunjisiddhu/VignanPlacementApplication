@@ -131,8 +131,7 @@ public class CompanyInsertion extends AppCompatActivity  implements RemoveItemsF
             companyUniqueId = companyUniqueId.replaceAll("[-+.^:, ]","");
 
 
-            newCompany = new Company(companyNamefield.getText().toString(),ctcField.getText().toString(),
-                    selectedDate.getText().toString(),selectedEndDate.getText().toString(),companyUniqueId,status.getSelectedItem().toString(),description.getText().toString(),addedBranches);
+            newCompany = new Company(companyNamefield.getText().toString(),ctcField.getText().toString(), selectedDate.getText().toString(),selectedEndDate.getText().toString(),companyUniqueId,status.getSelectedItem().toString(),description.getText().toString(),addedBranches);
 
      /*       FirebaseDatabase.getInstance().getReference().child("Companies").addValueEventListener(new ValueEventListener() {
                 @Override

@@ -33,7 +33,12 @@ public class OtpActivity extends AppCompatActivity {
         }
 
         listOfCordinators.setOnClickListener(view -> {
-            startActivity(new Intent(getApplicationContext(), StudentCoordinators.class));
+            Intent intent =  new Intent(getApplicationContext(), StudentCoordinators.class);
+            Bundle bundle = getIntent().getBundleExtra("bundle");
+            StudentCreationPOJO studentData = bundle.getParcelable("StudentData");
+            intent.putExtra("Branch",studentData.getBranch());
+            startActivity(intent);
+            ///set Data
             finish();
         });
 

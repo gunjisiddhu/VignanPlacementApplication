@@ -1,34 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="40dp"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".super_admin.UploadingPlacedSudents">
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/companyName_display_uploading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:fontFamily="@font/montserrat"
+        android:text="Epam Systems"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="35dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu"
+        android:layout_marginTop="5dp"
+        android:text="Close Placements for this company and Upload Final Qualified Students"
+        android:textSize="18dp" />
+
 
     <Button
+        android:id="@+id/uploadPlacedStudents_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Upload"
-        android:id="@+id/uploadPlacedStudents_button"/>
+        android:text="Upload" />
 
     <ListView
         android:id="@+id/listOfStudents"
         android:layout_width="match_parent"
-        android:layout_height="500dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="save"
-            android:id="@+id/saveStudents"/>
-
-    </LinearLayout>
+        android:id="@+id/saveStudents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="save" />
 
 
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>

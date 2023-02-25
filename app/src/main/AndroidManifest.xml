@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Vignan_Placement_Application"
         tools:targetApi="31">
         <activity
+            android:name=".DisplayFinalSelectedStudents"
+            android:exported="false" />
+        <activity
             android:name=".DisplaySelectedStudents"
             android:exported="false" />
         <activity

@@ -33,7 +33,10 @@ public class ShowStudentList extends AppCompatActivity implements SearchView.OnQ
 
     String branch;
     ArrayList<StudentData> studentDataArrayList;
+
     StudentApproveListAdapter studentApproveListAdapter;
+
+
     ListView listView;
     SearchView searchView;
     TextView Resultcount,branchName;

@@ -656,7 +656,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:divider="@null"
-                        android:entries="@array/Branches"/>
+                        />
                 </LinearLayout>
 
 
@@ -720,8 +720,7 @@
                         android:id="@+id/student_profile_ListView_attmpt"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
-                        android:divider="@null"
-                        android:entries="@array/Branches"/>
+                        android:divider="@null" />
                 </LinearLayout>
 
 

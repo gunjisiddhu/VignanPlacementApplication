@@ -180,13 +180,16 @@ public class SuperAdminMainActivity extends AppCompatActivity {
     }
 
     private void closeFABIfOpen() {
-        addNewCompany.startAnimation(fab_close);
-        addNewCoordinator.startAnimation(fab_close);
-        addNewCompany.setVisibility(View.GONE);
-        addNewCoordinator.setVisibility(View.GONE);
+
         showMenu.setVisibility(View.GONE);
-        showMenu.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.uparrow));
-        visibility = false;
+        if (visibility) {
+            addNewCompany.startAnimation(fab_close);
+            addNewCoordinator.startAnimation(fab_close);
+            addNewCompany.setVisibility(View.GONE);
+            addNewCoordinator.setVisibility(View.GONE);
+            showMenu.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.uparrow));
+            visibility = false;
+        }
 
 
     }

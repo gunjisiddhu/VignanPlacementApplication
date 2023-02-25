@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -87,6 +88,10 @@ public class StudentProfileForModificatiomActivity extends AppCompatActivity {
         attemptedCompanies = new ArrayList<>();
         placedCompanies = new ArrayList<>();
 
+        //placedCompanies.add(new PlacedStudents("Siddhu","1-2"));
+
+        //placedCompanies.add(new PlacedStudents("Shasank","1-2"));
+
         attemptedCompaniesView = findViewById(R.id.student_profile_ListView_attmpt);
         placedCompaniesView = findViewById(R.id.student_profile_listView_placed);
 
@@ -96,6 +101,50 @@ public class StudentProfileForModificatiomActivity extends AppCompatActivity {
         placedCompaniesView.setAdapter(profilePlacedCompaniesAdapter);
         attemptedCompaniesView.setAdapter(attemptedCompaniesAdapter);
 
+        placedCompaniesView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+
+                // Handle ListView touch events.
+                v.onTouchEvent(event);
+                return true;
+            }
+        });
+
+
+        attemptedCompaniesView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+
+                // Handle ListView touch events.
+                v.onTouchEvent(event);
+                return true;
+            }
+        });
         current_branch = "";
 
         editStudentDetails = findViewById(R.id.editStudentDetails);
@@ -151,19 +200,21 @@ public class StudentProfileForModificatiomActivity extends AppCompatActivity {
 
         if(studentData.getAppliedCompanies() != null){
             AttemptedCompanyCount.setText(studentData.getAppliedCompanies().size());
-            attemptedCompanies = studentData.getAppliedCompanies();
+            studentData.getAppliedCompanies().forEach(p -> attemptedCompanies.add(p));
+            attemptedCompaniesAdapter.notifyDataSetChanged();
         }else{
             AttemptedCompanyCount.setText(0+"");
         }
         if(studentData.getPlacedCompanies() != null){
-            placedCompanyCount.setText(studentData.getPlacedCompanies().size());
-            placedCompanies = studentData.getPlacedCompanies();
+            placedCompanyCount.setText(studentData.getPlacedCompanies().size()+"");
+            studentData.getPlacedCompanies().forEach(p -> placedCompanies.add(p));
+            profilePlacedCompaniesAdapter.notifyDataSetChanged();
         }else{
             placedCompanyCount.setText(0+"");
         }
 
-        profilePlacedCompaniesAdapter.notifyDataSetChanged();
-        attemptedCompaniesAdapter.notifyDataSetChanged();
+
+
 
     }
 }

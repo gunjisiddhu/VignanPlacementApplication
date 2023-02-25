@@ -148,6 +148,18 @@ public class EdiitStudentDetailsActivity extends AppCompatActivity {
 
                 //Branch
                 String branch = studentBranch.getSelectedItem().toString();
+                if(branch.equalsIgnoreCase("Select Branch")){
+                    new AlertDialog.Builder(EdiitStudentDetailsActivity.this)
+                            .setTitle("Error!!")
+                            .setMessage("Choose Proper Value! ")
+                            .setPositiveButton(android.R.string.yes, null)
+                            .setNegativeButton(android.R.string.no,null)
+                            .setIcon(R.drawable.warning)
+                            .setCancelable(false)
+                            .show();
+                    return;
+                }
+
                 if (!studentData.getBranch().equalsIgnoreCase(branch)) {
                     new AlertDialog.Builder(EdiitStudentDetailsActivity.this)
                             .setTitle("Warning!!")
